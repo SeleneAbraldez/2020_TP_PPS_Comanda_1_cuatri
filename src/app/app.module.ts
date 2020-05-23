@@ -12,7 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
-
+import { Vibration } from '@ionic-native/vibration/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -24,6 +24,7 @@ import { environment } from 'src/environments/environment';
   ],
   providers: [
     StatusBar,
+    Vibration,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
 

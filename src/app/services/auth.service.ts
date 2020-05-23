@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'src/app/clases/user';
 import { ToastService } from './toast.service';
+import { Vibration } from '@ionic-native/vibration/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class AuthService {
   currentUser: User;
   isLogged: any = false;
   constructor(private angularFireAuth: AngularFireAuth,
-    private toast: ToastService
+    private toast: ToastService,
+    private vibration:Vibration
   ) {
     this.angularFireAuth.authState.subscribe(user => (this.isLogged = user));
   }
@@ -21,6 +23,7 @@ export class AuthService {
     try {
       return await this.angularFireAuth.signInWithEmailAndPassword(user.email, user.password);
     } catch (error) {
+      this.vibration.vibrate(300);
       console.log(error);
       switch (error.code) {
         case "auth/user-not-found":
@@ -53,6 +56,7 @@ export class AuthService {
     try {
       return await this.angularFireAuth.createUserWithEmailAndPassword(user.email, user.password);
     } catch (error) {
+      this.vibration.vibrate(300);
       console.log(error);
       switch (error.code) {
         case "auth/weak-password":
