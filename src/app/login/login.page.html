@@ -1,0 +1,18 @@
+<ion-content>
+    <img id="gorroCocinero" src="../../assets/images/login.png" alt="login">
+    <ion-card id="cardLogin">
+      <ion-card-content>
+        <form class="centrado">
+          <ion-item>
+            <ion-input type='email' placeholder="Ingrese su correo" [(ngModel)]="user.email" name="email" required>
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type='password' placeholder="Ingrese su contraseña" [(ngModel)]="user.password" name="password"
+              required></ion-input>
+          </ion-item>
+          <ion-button ion-button type="submit" expand="full" (click)="onLogin()" block>Ingresar</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+</ion-content>

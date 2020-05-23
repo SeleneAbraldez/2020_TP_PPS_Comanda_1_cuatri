@@ -1,0 +1,126 @@
+// SPLASH---------------------------------------
+#custom-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100000;
+    width:100%;
+    background-color: #002a3e;
+  }
+  .logo{
+      z-index: -10;
+      position: absolute;
+      width: 80%;
+      top: 30%;
+      left: 9%;
+  }
+
+  .flb {
+    --background:none;
+    // background: url("IMG") no-repeat center / cover;
+    height:100%;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+//   END SPLASH-------------------------------------------
+//ANIMACION DEL SPLASH
+#cuchillo{
+animation-duration: 3s;
+animation-name: movimientoCuchillo;
+}
+#tenedor{
+animation-duration: 3s;
+animation-name: movimientoTenedor;
+}
+#rostro{
+animation-duration: 3s;
+animation-name: movimientoRostro;
+}
+#gorro{
+animation-duration: 3s;
+animation-name: movimientoGorro;
+}
+#texto{
+animation-duration: 3s;
+animation-name: aparicionTexto;    
+}
+#lazo{
+ animation-duration: 3s;
+ animation-name: animacionLazo;   
+}
+
+@keyframes movimientoCuchillo{
+    from{
+        opacity: 0;
+    }
+    30%{
+        opacity: 0;
+        transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(360deg);
+    }    
+}
+@keyframes movimientoTenedor{
+    from{
+        opacity: 0;
+    }
+    30%{
+        opacity: 0;
+        transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(-360deg);
+    }    
+}
+@keyframes movimientoRostro{
+    from{
+        transform: scale(1.8);
+    }
+    to{
+    }
+}
+@keyframes movimientoGorro{
+    from{
+    }
+    33%{
+        transform: translateY(-35px);
+    }
+    33.1%{
+        transform: rotateY(-360deg) translateY(-35px);
+    }
+    to{
+        
+    }
+}
+@keyframes aparicionTexto{
+    from{
+        opacity: 0;
+    }
+    90%{
+        opacity: 0;
+    }
+    to{ 
+        
+    }
+}
+@keyframes animacionLazo{
+    from{
+        visibility: hidden
+    }
+    80%{
+        visibility: hidden
+    }
+    80.1%{
+        opacity: 0.1;
+    }
+    to{
+        visibility: visible;
+    }
+}
+// FIN ANIMACION DEL SPLASH
