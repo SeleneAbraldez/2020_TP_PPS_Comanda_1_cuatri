@@ -4,6 +4,14 @@ Para registrar el <strong>grupo completo</strong> con todos sus integrantes: htt
 
 <br>
 
-Grupos:<br>
-<h4>Máximo 3 integrantes</h4>
-<h4>Mínimo 2 integrantes</h4>
+Grupo: Jonathan Haedo, Selene Abraldez
+
+##Primera Semana: <br>
+- [x] Charlar respecto a como organizar tiempos y tareas (ambos)
+- [x] Generar un Trello para matener organizacion por Selene 
+- [x] Icono diseñado y funcional por Jonathan
+- [x] Splash diseñado y funcional por Jonathan
+- [x] Organizacion de tareas por Selene
+- [x] Realizar un Login "mockup" por Jonathan
+- [ ] Documentar y generar todos los componentes a utilizar por Selene
+- [ ] Botones de ingreso de cuentas flotantes por Selene
