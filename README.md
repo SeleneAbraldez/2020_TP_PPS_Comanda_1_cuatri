@@ -6,7 +6,7 @@ Para registrar el <strong>grupo completo</strong> con todos sus integrantes: htt
 
 Grupo: Jonathan Haedo, Selene Abraldez
 
-##Primera Semana: <br>
+<h3>Primera Semana: <h3><br>
 - [x] Charlar respecto a como organizar tiempos y tareas (ambos)
 - [x] Generar un Trello para matener organizacion por Selene 
 - [x] Icono diseñado y funcional por Jonathan
