@@ -12,6 +12,10 @@ Grupo: Jonathan Haedo, Selene Abraldez
 - [x] Icono diseñado y funcional por Jonathan
 - [x] Splash diseñado y funcional por Jonathan
 - [x] Organizacion de tareas por Selene
-- [x] Realizar un Login "mockup" por Jonathan
-- [ ] Documentar y generar todos los componentes a utilizar por Selene
-- [ ] Botones de ingreso de cuentas flotantes por Selene
+- [x] Realizar un Login "mockup" diseño por Jonathan
+- [x] Agregar botones de Ingreso para testeo por Selene
+- [x] Ingreso Responsive por Selene
+- [x] Realizar un Alta "mockup" por Selene
+- [x] Documentar y generar todos los componentes a utilizar por Selene
+- [x] Diseñar home por Selene
+
