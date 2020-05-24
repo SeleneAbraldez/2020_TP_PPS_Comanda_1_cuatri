@@ -41,9 +41,10 @@ ion-content {
 img {
 	position: absolute;
     top: 10%;
-    margin-left: 25%;
     z-index:99;
     height: 200px;
+    left: 50%;
+    margin-left: -85px
 }
 
 ion-input {
