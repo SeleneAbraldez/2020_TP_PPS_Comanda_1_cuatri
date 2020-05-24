@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../clases/user';
-import { AuthService } from '../services/auth.service';
-import { ToastService } from '../services/toast.service';
+import { User } from '../../clases/user';
+import { AuthService } from '../../services/auth.service';
+import { ToastService } from '../../services/toast.service';
 import { Vibration } from '@ionic-native/vibration/ngx';
-import { DatabaseService } from '../services/database.service';
+import { DatabaseService } from '../../services/database.service';
 
 @Component({
   selector: 'app-login',
