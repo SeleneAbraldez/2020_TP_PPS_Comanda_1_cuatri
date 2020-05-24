@@ -5,7 +5,8 @@ import {AuthGuard} from 'src/app/guards/auth.guard';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./paginas/home/home.module').then(m => m.HomePageModule),canActivate:[AuthGuard]
+    loadChildren: () => import('./paginas/home/home.module').then(m => m.HomePageModule)
+    // ,canActivate:[AuthGuard]
   },
   {
     path: '',
@@ -15,7 +16,8 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./paginas/login/login.module').then(m => m.LoginPageModule)
-  },  {
+  },
+  {
     path: 'register',
     loadChildren: () => import('./paginas/register/register.module').then( m => m.RegisterPageModule)
   },
