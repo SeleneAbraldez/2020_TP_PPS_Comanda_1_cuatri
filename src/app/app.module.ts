@@ -13,6 +13,14 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { Vibration } from '@ionic-native/vibration/ngx';
+
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
+import { AngularFireStorage } from "@angular/fire/storage";
+import { AngularFirestore } from '@angular/fire/firestore';
+
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,8 +34,11 @@ import { Vibration } from '@ionic-native/vibration/ngx';
     StatusBar,
     Vibration,
     SplashScreen,
+    BarcodeScanner,
+    Camera,
+    AngularFireStorage,
+    AngularFirestore,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-
   ],
   bootstrap: [AppComponent]
 })
