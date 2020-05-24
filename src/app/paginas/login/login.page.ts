@@ -35,11 +35,11 @@ export class LoginPage implements OnInit {
   onLogin2() {//cambiar el sistema de registro y login por usuarios sin email.
     this.dataBase.obtenerTodos('usuarios').subscribe(listaDeUsuarios => {
       listaDeUsuarios.forEach(usuario => {
-
         console.log(usuario);
       });
     });
   }
+
   async onLogin() {
     const response = await this.authService.onLogin(this.user);
     if (response.user) {
@@ -48,14 +48,7 @@ export class LoginPage implements OnInit {
       this.router.navigateByUrl('/home');
     }
   }
-  async onRegister() {
-    const response = await this.authService.onRegister(this.user);
-    if (response.user) {
-      this.authService.currentUser = this.user;
-      this.toast.presentToast("Registro exitoso", 1500, "success", "Bienvenido");
-      this.router.navigateByUrl('/home');
-    }
-  }
+
 
   seleccionarUsuario(usuario) {
     this.user.email = usuario.email;

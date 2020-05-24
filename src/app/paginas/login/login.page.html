@@ -1,16 +1,28 @@
 <ion-content>
-  <img *ngIf="esLogin" src="../../assets/images/login.png" alt="login">
-  <img *ngIf="!esLogin" src="../../assets/images/registro.png" alt="registro">
+  <img src="../../assets/images/login.png" alt="login">
   <div id="cardLogin">
-    <form class="centrado">
-      <ion-input type='email' placeholder="Ingrese su correo" [(ngModel)]="user.email" name="email" required>
-      </ion-input>
-      <ion-input type='password' placeholder="Ingrese su contraseña" [(ngModel)]="user.password" name="password"
-        required></ion-input>
-      <ion-button *ngIf="esLogin" ion-button type="submit" expand="full" (click)="onLogin2()" block>Ingresar
-      </ion-button>
-      <ion-button *ngIf="!esLogin" ion-button type="submit" expand="full" (click)="onRegister2()" block>Registrarse
-      </ion-button>
-    </form>
+    <div class="contenedor">
+      <form class="centrado">
+        <br>
+        <br>
+        <ion-input type='email' placeholder="Ingrese su correo" [(ngModel)]="user.email" name="email" required>
+        </ion-input>
+        <ion-input type='password' placeholder="Ingrese su contraseña" [(ngModel)]="user.password" name="password"
+          required></ion-input>
+        <ion-button ion-button type="submit" expand="full" (click)="onLogin()" block>Ingresar
+        </ion-button>
+      </form>
+
+      <br>
+
+      <ion-item class="select">
+        <ion-label>Cuentas guardadas</ion-label>
+        <ion-select value="" #C [(ngModel)]="user" (ionChange)="seleccionarUsuario(C.value)">
+          <ion-select-option [value]="user" *ngFor="let user of listaUsuarios">{{user.email}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
   </div>
+
 </ion-content>

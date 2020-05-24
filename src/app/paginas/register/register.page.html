@@ -1,0 +1,18 @@
+<ion-content>
+  <img *ngIf="esLogin" src="../../assets/images/login.png" alt="login">
+  <img *ngIf="!esLogin" src="../../assets/images/registro.png" alt="registro">
+  <div id="cardLogin">
+    <form class="centrado">
+      <ion-input type='text' placeholder="Ingrese nombre" [(ngModel)]="user.nombre" name="nombre" required>
+      </ion-input>
+      <ion-input type='text' placeholder="Ingrese apellido" [(ngModel)]="user.nombre" name="nombre" required>
+      </ion-input>
+      <ion-input type='text' placeholder="Ingrese DNI" [(ngModel)]="user.nombre" name="nombre" required>
+      </ion-input>
+      <ion-input type='text' placeholder="Ingrese CUIL" [(ngModel)]="user.nombre" name="nombre" required>
+      </ion-input>
+      <ion-button ion-button type="submit" expand="full" (click)="onRegister()" block>Registrarse
+      </ion-button>
+    </form>
+  </div>
+</ion-content>
