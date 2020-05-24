@@ -1,18 +1,16 @@
 <ion-content>
-    <!-- <img id="gorroCocinero" src="../../assets/images/login.png" alt="login"> -->
-    <ion-card id="cardLogin">
-      <ion-card-content>
-        <form class="centrado">
-          <ion-item>
-            <ion-input type='email' placeholder="Ingrese su correo" [(ngModel)]="user.email" name="email" required>
-            </ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input type='password' placeholder="Ingrese su contraseña" [(ngModel)]="user.password" name="password"
-              required></ion-input>
-          </ion-item>
-          <ion-button ion-button type="submit" expand="full" (click)="onLogin()" block>Ingresar</ion-button>
-        </form>
-      </ion-card-content>
-    </ion-card>
+  <img *ngIf="esLogin" src="../../assets/images/login.png" alt="login">
+  <img *ngIf="!esLogin" src="../../assets/images/registro.png" alt="registro">
+  <div id="cardLogin">
+    <form class="centrado">
+      <ion-input type='email' placeholder="Ingrese su correo" [(ngModel)]="user.email" name="email" required>
+      </ion-input>
+      <ion-input type='password' placeholder="Ingrese su contraseña" [(ngModel)]="user.password" name="password"
+        required></ion-input>
+      <ion-button *ngIf="esLogin" ion-button type="submit" expand="full" (click)="onLogin2()" block>Ingresar
+      </ion-button>
+      <ion-button *ngIf="!esLogin" ion-button type="submit" expand="full" (click)="onRegister2()" block>Registrarse
+      </ion-button>
+    </form>
+  </div>
 </ion-content>

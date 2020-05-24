@@ -1,17 +1,30 @@
 ion-content{
-    --background:lightblue;
+    --background:url('../../assets/images/background.jpg') center center/cover no-repeat;
 }
 #cardLogin{
     background: transparent;
+    position: relative;
+    margin-left: auto;
+   margin-right: auto;
+    top: 40%;
+    max-width: 80%;
+    ion-input{
+        text-align: center;
+        position: relative;
+        margin-left: auto;
+       margin-right: auto;
+       --background: transparent !important;
+    }
+    ion-button{
+        --background: #7e6954;
+        --border-radius: 100%;
+    }
+}
+img{
     position: absolute;
-    top: 30%;
-    min-width: 95%;
-    left: 0;
+    top: 15%;
 }
 
-#gorroCocinero{
-    position: absolute;
-    top: 0%;
-    left: 15%;
-    z-index: 9;
+ion-input{
+    color: black;
 }
