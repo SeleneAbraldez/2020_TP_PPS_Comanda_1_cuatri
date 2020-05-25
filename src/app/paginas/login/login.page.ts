@@ -32,10 +32,13 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
   }
+
   onLogin2() {//cambiar el sistema de registro y login por usuarios sin email.
     this.dataBase.obtenerTodos('usuarios').subscribe(listaDeUsuarios => {
-      listaDeUsuarios.forEach(usuario => {
-        console.log(usuario);
+      listaDeUsuarios.forEach((usuario: any) => {
+        if (usuario == this.user) {
+
+        }
       });
     });
   }

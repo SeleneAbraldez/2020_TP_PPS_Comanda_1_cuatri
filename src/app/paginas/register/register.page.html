@@ -5,7 +5,7 @@
     <div class="contenedor">
       <ion-item class="select">
         <!-- aca tensdria que agarrar que tipo queres subir, ej empleado te pregunta si es mozo bartender etc -->
-        <ion-label>Tipo de X</ion-label>
+        <ion-label>Perfil</ion-label>
         <ion-select value="" #C [(ngModel)]="user" (ionChange)="seleccionarUsuario(C.value)">
           <ion-select-option [value]="user" *ngFor="let user of tipoUsuarios">{{user.tipo}}</ion-select-option>
         </ion-select>
@@ -13,11 +13,11 @@
       <form class="centrado">
         <ion-input type='text' placeholder="Ingrese nombre" [(ngModel)]="user.nombre" name="nombre" required>
         </ion-input>
-        <ion-input type='text' placeholder="Ingrese apellido" [(ngModel)]="user.nombre" name="nombre" required>
+        <ion-input type='text' placeholder="Ingrese apellido" [(ngModel)]="user.apellido" name="apellido" required>
         </ion-input>
-        <ion-input type='text' placeholder="Ingrese DNI" [(ngModel)]="user.nombre" name="nombre" required>
+        <ion-input type='text' placeholder="Ingrese DNI" [(ngModel)]="user.dni" name="dni" required>
         </ion-input>
-        <ion-input type='text' placeholder="Ingrese CUIL" [(ngModel)]="user.nombre" name="nombre" required>
+        <ion-input type='text' placeholder="Ingrese CUIL" [(ngModel)]="user.cuil" name="cuil" required>
         </ion-input>
         <ion-button ion-button class="f" type="button" expand="full" (click)="sacarFoto()" block>Subir Foto
         </ion-button>

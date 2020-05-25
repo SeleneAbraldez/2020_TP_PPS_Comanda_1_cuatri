@@ -1,0 +1,30 @@
+<form (ngSubmit)="logForm()">
+  <ion-item>
+    <ion-input type="text" [(ngModel)]="user.nombre" name="nombre" placeholder="nombre"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="text" [(ngModel)]="user.apellido" name="apellido" placeholder="apellido"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="text" [(ngModel)]="user.dni" name="dni" placeholder="dni"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="text" [(ngModel)]="user.cuil" name="cuil" placeholder="cuil"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="text" [(ngModel)]="user.perfil" name="perfil" placeholder="perfil"></ion-input>
+  </ion-item>
+  <ion-button id="btnCamera" expand="full">
+    <ion-icon name="camera"></ion-icon>
+  </ion-button>
+  <ion-button id="btnQR" expand="full" (click)="scanCode()">
+    <img src="../../../../assets/images/qr.png" alt="imagen logo QR">
+  </ion-button>
+  <ion-button *ngIf="!camera" color="success" expand="full" type="submit" [disabled]="!user.nombre || !user.apellido || !user.dni">
+    Dar de alta
+   </ion-button>
+   <ion-button  *ngIf="camera" color="success" expand="full" type="submit" [disabled]="!user.nombre || !user.apellido || !user.dni || camera">
+    Dar de alta
+   </ion-button>
+   <p>{{codigoEscaneado}}</p>
+</form>

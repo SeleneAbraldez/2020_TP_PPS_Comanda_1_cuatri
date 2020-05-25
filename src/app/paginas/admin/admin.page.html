@@ -1,0 +1,28 @@
+<ion-header class="centrado">
+  <ion-toolbar>
+    <ion-title>Panel de control</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- LEFT MENU -->
+  <p-sidebar [(visible)]="leftMenu" [baseZIndex]="10000">
+    <h1 style="font-weight:normal">Altas</h1>
+    <ion-button expand="full" (click)="mostrarForm('supervisor')">Alta de Supervisor</ion-button>
+    <ion-button expand="full" (click)="mostrarForm('empleado')">Alta de Empleado</ion-button>
+    <ion-button expand="full" (click)="mostrarForm('producto')">Alta de Producto</ion-button>
+    <ion-button expand="full" (click)="mostrarForm('cliente')">Alta de Cliente</ion-button>
+  </p-sidebar>
+  <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" (click)="leftMenu=true"></ion-icon>
+  <!-- FIN LEFT MENU -->
+
+  <!-- RIGHT MENU -->
+  <p-sidebar [(visible)]="rightMenu" position="right" [baseZIndex]="10000">
+    <h1 style="font-weight:normal">Estadisticas</h1>
+  </p-sidebar>
+  <ion-icon id="hamburgerRightMenu" class="hamburgerMenu" name="menu-outline" (click)="rightMenu=true"></ion-icon>
+  <!-- FIN RIGHT MENU -->
+
+
+  <app-form-alta></app-form-alta>
+</ion-content>

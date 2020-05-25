@@ -9,16 +9,6 @@ import { DatabaseService } from '../../services/database.service';
 export class HomePage {
 
   constructor(
-    private database:DatabaseService
-    ) {}
-
-
-  // test(){
-  //   let dato={"comida":"caca"};
-  //   this.database.crear('prueba',dato).then((res)=>{
-  //     console.log(res)
-  //   })
-  // }
-
-
+    private database: DatabaseService
+  ) { }
 }

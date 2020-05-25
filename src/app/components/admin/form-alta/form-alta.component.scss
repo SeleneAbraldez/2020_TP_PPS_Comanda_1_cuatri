@@ -1,0 +1,21 @@
+ion-input,ion-item{
+    --background: transparent;
+    max-width: 80%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: black;
+}
+
+    #btnCamera,#btnQR{
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 80%;
+        font-size: 140%;
+        --background:#7e6954; 
+        img{
+            max-width: 30px;
+        }
+    }
