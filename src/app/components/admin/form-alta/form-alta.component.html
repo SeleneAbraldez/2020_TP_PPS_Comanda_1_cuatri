@@ -1,5 +1,8 @@
 <form (ngSubmit)="logForm()">
   <ion-item>
+    <ion-input type="text" [(ngModel)]="user.usuario" name="usuario" placeholder="usuario"></ion-input>
+  </ion-item>
+  <ion-item>
     <ion-input type="text" [(ngModel)]="user.nombre" name="nombre" placeholder="nombre"></ion-input>
   </ion-item>
   <ion-item>
@@ -8,11 +11,14 @@
   <ion-item>
     <ion-input type="text" [(ngModel)]="user.dni" name="dni" placeholder="dni"></ion-input>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="user.perfil=='supervisor'||user.perfil=='empleado'">
     <ion-input type="text" [(ngModel)]="user.cuil" name="cuil" placeholder="cuil"></ion-input>
   </ion-item>
   <ion-item>
     <ion-input type="text" [(ngModel)]="user.perfil" name="perfil" placeholder="perfil"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="user.perfil=='empleado'" >
+    <ion-input  type="text" [(ngModel)]="user.tipo" name="tipo" placeholder="tipo de empleado"></ion-input>
   </ion-item>
   <ion-button id="btnCamera" expand="full">
     <ion-icon name="camera"></ion-icon>

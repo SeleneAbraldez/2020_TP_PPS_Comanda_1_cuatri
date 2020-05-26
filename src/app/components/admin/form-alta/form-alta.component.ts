@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-form-alta',
@@ -7,7 +8,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
   styleUrls: ['./form-alta.component.scss'],
 })
 export class FormAltaComponent implements OnInit {
-  codigoEscaneado:any;
+  codigoEscaneado: any;
   tipoDeForm = "";
   camera = false;
   user: any = {
@@ -17,19 +18,20 @@ export class FormAltaComponent implements OnInit {
     cuil: "",
     perfil: "",
     imagen: "",
-    qr: ""
   };
   constructor(
-    private barcodeScanner:BarcodeScanner
+    private barcodeScanner: BarcodeScanner,
+    private toast: ToastService
   ) { }
 
   ngOnInit() { }
   scanCode() {
     this.barcodeScanner.scan().then(barcodeData => {
-      this.codigoEscaneado=barcodeData;
-      alert(barcodeData);
-     }).catch(err => {
-         console.log('Error', err);
-     });
+      let auxUser = JSON.parse(barcodeData.text);
+      this.user=auxUser;
+      this.toast.presentToast("El QR corresponde a: "+auxUser.apellido+" "+auxUser.nombre, 3000, "success", "Leido");
+    }).catch(err => {
+      this.toast.presentToast("El QR no corresponde al sistema", 2000, "danger", "QR incorrecto");
+    });
   }
 }

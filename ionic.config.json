@@ -1,7 +1,8 @@
 {
   "name": "TPGrupal",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }
