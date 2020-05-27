@@ -6,8 +6,12 @@ import { AdminPageRoutingModule } from './admin-routing.module';
 import { AdminPage } from './admin.page';
 import { SidebarModule } from 'primeng/sidebar';
 import { FormAltaComponent } from 'src/app/components/admin/form-alta/form-alta.component';
+import {GraficosComponent } from 'src/app/components/admin/graficos/graficos.component';
+import {ChartModule} from 'primeng/chart';
+
 let primeNgModules = [
   SidebarModule,
+  ChartModule
 ]
 
 @NgModule({
@@ -17,10 +21,11 @@ let primeNgModules = [
     IonicModule,
     AdminPageRoutingModule,
     primeNgModules,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [AdminPage,
     FormAltaComponent,
+    GraficosComponent,
   ]
 })
 export class AdminPageModule { }

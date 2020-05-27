@@ -11,8 +11,10 @@ export class AdminPage implements OnInit {
   leftMenu = false;
   rightMenu = false;
   mostrarFormRegistro = false;
+  mostrarGraficoEstadistico = false;
   user: any = {};
   imagen: string;
+  graficoSeleccionado = "bar";
   constructor(
 
     private toast: ToastService
@@ -28,6 +30,10 @@ export class AdminPage implements OnInit {
     this.user = { 'perfil': perfil, 'imagen': '' };
     this.mostrarFormRegistro = true;
   }
-
+  mostrarGrafico(grafico) {
+    this.mostrarGraficoEstadistico=true;
+    this.graficoSeleccionado = grafico;
+    this.rightMenu = false;
+  }
 
 }
