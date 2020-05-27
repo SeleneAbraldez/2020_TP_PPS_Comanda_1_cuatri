@@ -7,7 +7,13 @@ ion-input,ion-item{
     text-align: center;
     color: black;
 }
-
+#spinner{
+    position: absolute;
+    left: 48%;
+    top: 40%;
+    --color:#7e6954;
+    transform: scale(2.5);
+}
     #btnCamera,#btnQR{
         margin-bottom: 15px;
         position: relative;

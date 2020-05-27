@@ -1,4 +1,4 @@
-<form [formGroup]="todo" (ngSubmit)="darDeAlta()">
+<form [formGroup]="todo">
   <div class="centrado">
     <img id="fotoDePerfil" *ngIf="user.imagen" src="{{user.imagen}}" alt="perfil">
   </div>
@@ -27,7 +27,7 @@
       <ion-select-option value="delivery">Delivery</ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-button id="btnCamera" expand="full" (click)="tomarFotografia()">
+  <ion-button id="btnCamera" expand="full" (click)="tomarFotografia()" [disabled]='!user.dni'>
     <ion-icon name="camera"></ion-icon>
   </ion-button>
   <ion-button id="btnQR" expand="full" (click)="scanCode()">
@@ -36,14 +36,15 @@
 
 </form>
 
-<ion-button *ngIf="user.perfil=='empleado'" color="success" expand="full" type="submit" [disabled]="!todo.valid" (click)="darDeAlta()">
+<ion-button *ngIf="user.perfil=='empleado'" color="primary" expand="full" type="submit" [disabled]="!todo.valid" (click)="darDeAlta()">
   Dar de alta a un empleado
 </ion-button>
-<ion-button *ngIf="user.perfil=='supervisor'" color="success" expand="full" type="submit"
+<ion-button *ngIf="user.perfil=='supervisor'" color="primary" expand="full" type="submit"
   [disabled]="!user.nombre || !user.apellido || !user.dni  || !user.cuil || !user.imagen" (click)="darDeAlta()">
   Dar de alta a un supervisor
 </ion-button>
-<ion-button *ngIf="user.perfil=='cliente'" color="success" expand="full" type="submit"
+<ion-button *ngIf="user.perfil=='cliente'" color="primary" expand="full" type="submit"
   [disabled]="!user.nombre || !user.apellido || !user.dni  || !user.imagen" (click)="darDeAlta()">
   Dar de alta a un cliente
 </ion-button>
+<ion-spinner *ngIf='showSpinner' id="spinner" name="bubbles"></ion-spinner>

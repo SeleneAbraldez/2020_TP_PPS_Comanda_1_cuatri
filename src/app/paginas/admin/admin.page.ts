@@ -25,7 +25,7 @@ export class AdminPage implements OnInit {
     this.leftMenu ? this.leftMenu = false : this.leftMenu = true;
   }
   mostrarForm(perfil) {
-    this.user = { 'perfil': perfil, 'foto': '' };
+    this.user = { 'perfil': perfil, 'imagen': '' };
     this.mostrarFormRegistro = true;
   }
 

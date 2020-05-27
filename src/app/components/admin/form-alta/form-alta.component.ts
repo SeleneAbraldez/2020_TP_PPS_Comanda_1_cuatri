@@ -4,6 +4,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ToastService } from 'src/app/services/toast.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-form-alta',
@@ -11,6 +12,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./form-alta.component.scss'],
 })
 export class FormAltaComponent implements OnInit {
+  showSpinner: any = false;
   codigoEscaneado: any;
   tipoDeForm = "";
   todo: FormGroup;
@@ -31,6 +33,7 @@ export class FormAltaComponent implements OnInit {
 
   constructor(
     private barcodeScanner: BarcodeScanner,
+    private dataBase: DatabaseService,
     private camera: Camera,
     private toast: ToastService,
     private angularFireStorage: AngularFireStorage, private formBuilder: FormBuilder) {
@@ -49,7 +52,7 @@ export class FormAltaComponent implements OnInit {
     this.barcodeScanner.scan().then(barcodeData => {
       let auxUser = JSON.parse(barcodeData.text);
       this.user = auxUser;
-      this.toast.presentToast("El QR corresponde a: " + auxUser.apellido + " " + auxUser.nombre, 3000, "success", "Leido");
+      this.toast.presentToast("El QR corresponde a: " + auxUser.apellido + " " + auxUser.nombre, 2000, "success", "Leido");
     }).catch(err => {
       this.toast.presentToast("El QR no corresponde al sistema", 2000, "danger", "QR incorrecto");
     });
@@ -62,29 +65,34 @@ export class FormAltaComponent implements OnInit {
 
     const options: CameraOptions = {
       quality: 50,
-      //destinationType: this.camera.DestinationType.FILE_URI,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
     this.camera.getPicture(options).then((imageData) => {
-      //  this.spinner = true;
       this.imagen = 'data:image/jpeg;base64,' + imageData;
       this.user.imagen = this.imagen;
       this.componerNombreDeImagen(this.user.dni, new Date().getTime());//le paso el usuario + fecha en milisegundos + tipo de foto
-      // this.firestoreService.crear('votaciones', { 'imagen': this.nombreDeImagen, 'votos': [] });
     }, (err) => {
       this.toast.presentToast(err, 2000, 'danger', 'ERROR');
     });
   }
   subirImagenAFireStorage() {
     this.pathDeImagen.putString(this.imagen, 'data_url').then((response) => {
-      this.toast.presentToast(response.toString(), 2000, 'warning', 'ERROR');
-      //this.toast.presentToast("La imagen se subio con exito", 2000, 'success', 'Imagen subida');
+      this.showSpinner = false;
+      this.toast.presentToast("La imagen se subio con exito", 2000, 'success', 'Imagen subida');
     });
+
   }
 
   darDeAlta() {
-    alert(JSON.stringify(this.user));
+    let auxUser = this.user;
+    auxUser.imagen = this.nombreDeImagen;
+    if (this.imagen) {
+      this.showSpinner = true;
+      this.subirImagenAFireStorage();
+    }
+    this.dataBase.crear('usuarios', auxUser);
+    this.user.imagen = '';
   }
 }
