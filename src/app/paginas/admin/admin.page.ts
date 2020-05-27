@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ToastService } from 'src/app/services/toast.service';
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.page.html',
@@ -8,12 +10,24 @@ import { Component, OnInit } from '@angular/core';
 export class AdminPage implements OnInit {
   leftMenu = false;
   rightMenu = false;
-  constructor() { }
+  mostrarFormRegistro = false;
+  user: any = {};
+  imagen: string;
+  constructor(
+
+    private toast: ToastService
+
+  ) { }
 
   ngOnInit() {
   }
-
-  mostrarForm(){
-    
+  toggleLeftMenu() {
+    this.leftMenu ? this.leftMenu = false : this.leftMenu = true;
   }
+  mostrarForm(perfil) {
+    this.user = { 'perfil': perfil, 'foto': '' };
+    this.mostrarFormRegistro = true;
+  }
+
+
 }

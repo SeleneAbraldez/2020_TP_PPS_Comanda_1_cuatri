@@ -9,6 +9,7 @@ ion-input,ion-item{
 }
 
     #btnCamera,#btnQR{
+        margin-bottom: 15px;
         position: relative;
         margin-left: auto;
         margin-right: auto;
@@ -18,4 +19,20 @@ ion-input,ion-item{
         img{
             max-width: 30px;
         }
+    }
+
+    #fotoDePerfil{
+        min-width: 95px;
+        max-height: 95px;
+        max-width: 95px;
+        min-height: 95px;
+        border-radius: 100%;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        border:3px solid #7e6954;
+        box-shadow: 0px 0px 10px 3px rgb(64, 151, 223);
+    }
+    ion-select{
+        min-width: 100%;
     }

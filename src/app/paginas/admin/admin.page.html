@@ -6,14 +6,18 @@
 
 <ion-content>
   <!-- LEFT MENU -->
-  <p-sidebar [(visible)]="leftMenu" [baseZIndex]="10000">
+  <p-sidebar [(visible)]="leftMenu" [modal]=false>
     <h1 style="font-weight:normal">Altas</h1>
-    <ion-button expand="full" (click)="mostrarForm('supervisor')">Alta de Supervisor</ion-button>
-    <ion-button expand="full" (click)="mostrarForm('empleado')">Alta de Empleado</ion-button>
-    <ion-button expand="full" (click)="mostrarForm('producto')">Alta de Producto</ion-button>
-    <ion-button expand="full" (click)="mostrarForm('cliente')">Alta de Cliente</ion-button>
+
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('supervisor')">Alta de Supervisor
+    </ion-button>
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('empleado')">Alta de Empleado</ion-button>
+    <!-- <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('producto')">Alta de Producto</ion-button> -->
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('cliente')">Alta de Cliente
+    </ion-button>
   </p-sidebar>
-  <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" (click)="leftMenu=true"></ion-icon>
+  <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"
+    (click)="leftMenu = true"></ion-icon>
   <!-- FIN LEFT MENU -->
 
   <!-- RIGHT MENU -->
@@ -24,5 +28,5 @@
   <!-- FIN RIGHT MENU -->
 
 
-  <app-form-alta></app-form-alta>
+  <app-form-alta *ngIf="mostrarFormRegistro" [user]='user'></app-form-alta>
 </ion-content>

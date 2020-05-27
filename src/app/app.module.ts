@@ -19,6 +19,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { AngularFireStorage } from "@angular/fire/storage";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SidebarModule } from 'primeng/sidebar';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
@@ -32,6 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    SidebarModule,
   ],
   providers: [
     StatusBar,
