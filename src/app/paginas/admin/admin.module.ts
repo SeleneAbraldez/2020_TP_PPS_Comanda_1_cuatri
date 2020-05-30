@@ -25,7 +25,8 @@ let primeNgModules = [
   ],
   declarations: [AdminPage,
     FormAltaComponent,
-    GraficosComponent,
+    GraficosComponent
   ]
 })
 export class AdminPageModule { }
+

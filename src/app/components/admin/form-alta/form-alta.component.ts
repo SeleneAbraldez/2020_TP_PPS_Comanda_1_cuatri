@@ -37,13 +37,13 @@ export class FormAltaComponent implements OnInit {
     private camera: Camera,
     private toast: ToastService,
     private angularFireStorage: AngularFireStorage, private formBuilder: FormBuilder) {
-    this.todo = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z]{3,10}$')]],
-      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z]{3,10}$')]],
-      dni: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
-      cuil: ['', [Validators.required, Validators.pattern('^[0-9]{2}-[0-9]{8}-[0-9]$')]],
-      perfil: ['', Validators.required],
-      tipo: ['', Validators.required],
+     this.todo = this.formBuilder.group({
+       nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z]{3,10}$')]],
+       apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z]{3,10}$')]],
+       dni: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
+       cuil: ['', [Validators.required, Validators.pattern('^[0-9]{2}-[0-9]{8}-[0-9]$')]],
+       perfil: ['', Validators.required],
+       tipo: ['', Validators.required],
     });
   }
 

@@ -42,7 +42,7 @@
                 "input": "src/global.scss"
               }
             ],
-            "scripts": [
+            "scripts": [              
               "node_modules/chart.js/dist/Chart.js",
               "node_modules/quill/dist/quill.js"
             ]
@@ -134,9 +134,7 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {

@@ -11,12 +11,11 @@
     <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('supervisor')">Alta de Supervisor
     </ion-button>
     <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('empleado')">Alta de Empleado</ion-button>
-    <!-- <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('producto')">Alta de Producto</ion-button> -->
     <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('cliente')">Alta de Cliente
     </ion-button>
   </p-sidebar>
   <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"
-    (click)="leftMenu = true" (click)="rightMenu=false"></ion-icon>
+    (click)="leftMenu = true" (click)="rightMenu=false" (click)="mostrarGraficoEstadistico=false"></ion-icon>
   <!-- FIN LEFT MENU -->
 
   <!-- RIGHT MENU -->
@@ -36,6 +35,6 @@
     (click)="leftMenu=false" (click)="mostrarFormRegistro=false"  (click)="mostrarGraficoEstadistico=false"></ion-icon>
   <!-- FIN RIGHT MENU -->
 
-  <app-graficos *ngIf="mostrarGraficoEstadistico" [tipoDeGrafico]="graficoSeleccionado"></app-graficos>
-  <app-form-alta *ngIf="mostrarFormRegistro" [user]='user'></app-form-alta>
+   <app-graficos *ngIf="mostrarGraficoEstadistico" [tipoDeGrafico]="graficoSeleccionado"></app-graficos>
+   <app-form-alta *ngIf="mostrarFormRegistro" [user]='user'></app-form-alta> 
 </ion-content>

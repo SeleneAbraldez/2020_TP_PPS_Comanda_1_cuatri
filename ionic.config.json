@@ -1,8 +1,7 @@
 {
-  "name": "TPGrupal",
+  "name": "solucionandoProblema",
   "integrations": {
-    "cordova": {},
-    "capacitor": {}
+    "cordova": {}
   },
   "type": "angular"
 }
