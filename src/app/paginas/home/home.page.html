@@ -1,28 +1,40 @@
 <ion-header>
 
-    <img [routerLink]="['/login']" id="btnIngreso" src="../../../assets/images/ingresar.png" alt="Ingresar">
-</ion-header>
-<ion-content [fullscreen]="true">
-    <div class="navar">
-        <a [routerLink]="['/admin']">ADMIN ZONE</a>
-    </div>
-    <div id="main">
-        <div class="caption">
-            <h1>Bienvenidos a La Comada! </h1>
-            Alguna descripcion falopa sobre el restaur<br>
-            The quick brown fox jumps over the lazy dog" is an English-language pangram—a
-            <br> sentence that contains all
-            of the letters of the alphabet.
-        </div>
+    <div class="topnav">
+        <!-- <a href="home"><img src="../../../assets/images/Logo-Comandita.png" height="35px"></a> -->
+        <a class="active" href="home">Inicio</a>
+        <a href="login">Ingresar cliente</a>
+        <a href="login">Ingresar empleado</a>
+        <img [routerLink]="['/login']" id="btnIngreso" src="../../../assets/images/ingresar.png" alt="Ingresar">
     </div>
 
+</ion-header>
+
+<ion-content [fullscreen]="true">
     <ion-grid>
+        <ion-row size="12">
+            <ion-col size="12">
+                <div id="main">
+                    <div class="caption">
+                        <img src="../../../assets/images/laComandita.png" height="150px"><br>
+                        Alguna descripcion falopa sobre el restaur<br>
+                        The quick brown fox jumps over the lazy dog" is an English-language pangram—a
+                        <br> sentence that contains all
+                        of the letters of the alphabet.
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
         <ion-row>
-            <ion-col size="6">
+            <ion-col size="1">
+            </ion-col>
+            <ion-col size="5">
                 <img src="https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_960_720.jpg" alt="thumb 1">
             </ion-col>
-            <ion-col size="6">
+            <ion-col size="5">
                 <img src="https://cdn.pixabay.com/photo/2014/06/16/23/10/spice-370114_960_720.jpg" alt="thumb 2">
+            </ion-col>
+            <ion-col size="1">
             </ion-col>
         </ion-row>
     </ion-grid>

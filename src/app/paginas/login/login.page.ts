@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
     { "email": "cocinero@gmail.com", "password": "cocinero" },
     { "email": "bartender@gmail.com", "password": "bartender" },
     { "email": "cliente@gmail.com", "password": "cliente" },
-    { "email": "admin@gmail.com", "password": "adminadmin" },
+    { "email": "duenio@gmail.com", "password": "dueñodueño" },
   ]
 
 
@@ -32,15 +32,15 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  onLogin2() {//cambiar el sistema de registro y login por usuarios sin email.
-    this.dataBase.obtenerTodos('usuarios').subscribe(listaDeUsuarios => {
-      listaDeUsuarios.forEach((usuario: any) => {
-        if (usuario == this.user) {
+  // onLogin2() {//cambiar el sistema de registro y login por usuarios sin email.
+  //   this.dataBase.obtenerTodos('usuarios').subscribe(listaDeUsuarios => {
+  //     listaDeUsuarios.forEach((usuario: any) => {
+  //       if (usuario == this.user) {
 
-        }
-      });
-    });
-  }
+  //       }
+  //     });
+  //   });
+  // }
 
   async onLogin() {
     const response = await this.authService.onLogin(this.user);
