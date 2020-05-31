@@ -1,0 +1,34 @@
+<form [formGroup]="todo">
+  <div class="centrado">
+    <img id="fotoDePerfil" *ngIf="user.imagen" src="{{user.imagen}}" alt="perfil">
+  </div>
+  <ion-item>
+    <ion-input type="text" [(ngModel)]="user.nombre" formControlName="nombre" placeholder="nombre"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="text" [(ngModel)]="user.perfil" readonly value="user.perfil" formControlName="perfil"
+      placeholder="perfil"></ion-input>
+  </ion-item>
+
+  <ion-button id="btnCamera" expand="full" (click)="tomarFotografia()" [disabled]='!user.nombre'>
+    <ion-icon name="camera"></ion-icon>
+  </ion-button>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Mensaje de bienvenida</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <img src="../../../../assets/images/Logo-Comandita.png" alt="Logo laComandita">
+      Bienvenido a la Comandita, al ingresar como 'anomimo' podra tener una experiencia unica con solo ingresar tu
+      nombre y una imagen y si lo desea podra registrarse para formar parte de nuestra clientela habitual para obtener
+      fabulosos beneficios.
+    </ion-card-content>
+  </ion-card>
+
+</form>
+<ion-button color="primary" expand="full" type="submit" [disabled]="!todo.valid || !user.imagen"
+  (click)="darDeAlta()">
+  Registrarse!
+</ion-button>

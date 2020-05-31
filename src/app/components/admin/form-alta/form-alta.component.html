@@ -1,6 +1,8 @@
 <form [formGroup]="todo">
   <div class="centrado">
     <img id="fotoDePerfil" *ngIf="user.imagen" src="{{user.imagen}}" alt="perfil">
+    <!-- <img id="fotoDePerfil" src="../../../../assets/images/graficoArea.png" alt="perfil"> -->
+
   </div>
   <ion-item>
     <ion-input type="text" [(ngModel)]="user.nombre" formControlName="nombre" placeholder="nombre"></ion-input>
@@ -10,6 +12,10 @@
   </ion-item>
   <ion-item>
     <ion-input type="text" [(ngModel)]="user.dni" formControlName="dni" placeholder="dni"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="text" [(ngModel)]="user.email" formControlName="email" placeholder="correo electronico">
+    </ion-input>
   </ion-item>
   <ion-item *ngIf="user.perfil=='supervisor'||user.perfil=='empleado'">
     <ion-input type="text" [(ngModel)]="user.cuil" formControlName="cuil" placeholder="cuil"></ion-input>
@@ -27,24 +33,28 @@
       <ion-select-option value="delivery">Delivery</ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-button id="btnCamera" expand="full" (click)="tomarFotografia()" [disabled]='!user.dni'>
-    <ion-icon name="camera"></ion-icon>
-  </ion-button>
-  <ion-button id="btnQR" expand="full" (click)="scanCode()">
-    <img src="../../../../assets/images/qr.png" alt="imagen logo QR">
-  </ion-button>
+  <div id="botones">
+    <ion-button id="btnCamera" (click)="tomarFotografia()" [disabled]='!user.dni'>
+      <ion-icon name="camera"></ion-icon>
+    </ion-button>
+    <ion-button id="btnQR" (click)="scanCode()">
+      <img src="../../../../assets/images/qr.png" alt="imagen logo QR">
+    </ion-button>
+  </div>
 
 </form>
 
-<ion-button *ngIf="user.perfil=='empleado'" color="primary" expand="full" type="submit" [disabled]="!todo.valid" (click)="darDeAlta()">
+<ion-button *ngIf="user.perfil=='empleado'" color="primary" expand="full" type="submit" [disabled]="!todo.valid"
+  (click)="darDeAlta()">
   Dar de alta a un empleado
 </ion-button>
 <ion-button *ngIf="user.perfil=='supervisor'" color="primary" expand="full" type="submit"
   [disabled]="!user.nombre || !user.apellido || !user.dni  || !user.cuil || !user.imagen" (click)="darDeAlta()">
   Dar de alta a un supervisor
 </ion-button>
+
 <ion-button *ngIf="user.perfil=='cliente'" color="primary" expand="full" type="submit"
   [disabled]="!user.nombre || !user.apellido || !user.dni  || !user.imagen" (click)="darDeAlta()">
   Dar de alta a un cliente
 </ion-button>
-<ion-spinner *ngIf='showSpinner' id="spinner" name="bubbles"></ion-spinner> 
+<ion-spinner *ngIf='showSpinner' id="spinner" name="bubbles"></ion-spinner>

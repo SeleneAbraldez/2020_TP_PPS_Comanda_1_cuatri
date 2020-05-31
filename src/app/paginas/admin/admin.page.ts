@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ToastService } from 'src/app/services/toast.service';
+import { InformacionCompartidaService } from 'src/app/services/informacion-compartida.service';
 
 @Component({
   selector: 'app-admin',
@@ -16,7 +17,7 @@ export class AdminPage implements OnInit {
   imagen: string;
   graficoSeleccionado = "bar";
   constructor(
-
+    private infoService:InformacionCompartidaService,
     private toast: ToastService
 
   ) { }
@@ -27,6 +28,7 @@ export class AdminPage implements OnInit {
     this.leftMenu ? this.leftMenu = false : this.leftMenu = true;
   }
   mostrarForm(perfil) {
+    this.infoService.actualizarListaDeUsuarios();
     this.user = { 'perfil': perfil, 'imagen': '' };
     this.mostrarFormRegistro = true;
   }

@@ -21,7 +21,7 @@
   <!-- RIGHT MENU -->
   <p-sidebar [(visible)]="rightMenu" position="right" [baseZIndex]="10000" [modal]=false>
     <h1 style="font-weight:normal">Estadisticas</h1>
-    <ion-button expand="full" (click)="leftMenu = false"  (click)="mostrarGrafico('pie')"><img class="imgGrafico"
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarGrafico('pie')"><img class="imgGrafico"
         src="../../../assets/images/graficoTorta.png" style="max-width: 30px; margin-right: 10px;"> Grafico de torta
     </ion-button>
     <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarGrafico('bar')"><img class="imgGrafico"
@@ -32,9 +32,9 @@
     </ion-button>
   </p-sidebar>
   <ion-icon id="hamburgerRightMenu" class="hamburgerMenu" name="menu-outline" (click)="rightMenu=true"
-    (click)="leftMenu=false" (click)="mostrarFormRegistro=false"  (click)="mostrarGraficoEstadistico=false"></ion-icon>
+    (click)="leftMenu=false" (click)="mostrarFormRegistro=false" (click)="mostrarGraficoEstadistico=false"></ion-icon>
   <!-- FIN RIGHT MENU -->
 
-   <app-graficos *ngIf="mostrarGraficoEstadistico" [tipoDeGrafico]="graficoSeleccionado"></app-graficos>
-   <app-form-alta *ngIf="mostrarFormRegistro" [user]='user'></app-form-alta> 
+  <app-graficos *ngIf="mostrarGraficoEstadistico" [tipoDeGrafico]="graficoSeleccionado"></app-graficos>
+  <app-form-alta *ngIf="mostrarFormRegistro" [user]='user'></app-form-alta>
 </ion-content>

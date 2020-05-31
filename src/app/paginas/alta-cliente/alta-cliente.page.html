@@ -1,9 +1,11 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Registrarse</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="centrado">
 
-<ion-content>
-  <app-form-alta [user]="user"></app-form-alta> 
+  <h2 *ngIf="user.tipo=='registrado'">Cliente</h2>
+  <h2 *ngIf="user.tipo=='anonimo'">Anonimo</h2>
+  <p-inputSwitch id="switch" [(ngModel)]="esAnonimo" (click)="cambiarFormulario()"></p-inputSwitch>
+
+  <app-form-alta *ngIf="user.tipo=='registrado'" [user]="user"></app-form-alta>
+
+  <app-form-alta-anonimo *ngIf="user.tipo=='anonimo'" [user]="user"></app-form-alta-anonimo>
+
 </ion-content>

@@ -24,7 +24,8 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./paginas/admin/admin.module').then( m => m.AdminPageModule)
-  },  {
+  },
+  {
     path: 'alta-cliente',
     loadChildren: () => import('./paginas/alta-cliente/alta-cliente.module').then( m => m.AltaClientePageModule)
   },

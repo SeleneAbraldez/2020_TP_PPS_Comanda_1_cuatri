@@ -1,6 +1,5 @@
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Component, OnInit, Input } from '@angular/core';
-import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { ToastService } from 'src/app/services/toast.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -8,17 +7,13 @@ import { DatabaseService } from 'src/app/services/database.service';
 import { InformacionCompartidaService } from 'src/app/services/informacion-compartida.service';
 
 @Component({
-  selector: 'app-form-alta',
-  templateUrl: './form-alta.component.html',
-  styleUrls: ['./form-alta.component.scss'],
+  selector: 'app-form-alta-anonimo',
+  templateUrl: './form-alta-anonimo.component.html',
+  styleUrls: ['./form-alta-anonimo.component.scss'],
 })
-export class FormAltaComponent implements OnInit {
-  private optionsQrScanner: BarcodeScannerOptions = {
-    formats: "PDF_417,QR_CODE"
-  };
+export class FormAltaAnonimoComponent implements OnInit {
+
   showSpinner: any = false;
-  codigoEscaneado: any;
-  tipoDeForm = "";
   todo: FormGroup;
   @Input() user = {
     nombre: "",
@@ -37,7 +32,6 @@ export class FormAltaComponent implements OnInit {
   //fin TomarFotografia
 
   constructor(
-    private barcodeScanner: BarcodeScanner,
     private dataBase: DatabaseService,
     private camera: Camera,
     private toast: ToastService,
@@ -45,30 +39,24 @@ export class FormAltaComponent implements OnInit {
     private angularFireStorage: AngularFireStorage, private formBuilder: FormBuilder) {
     this.todo = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]{3,20}$')]],
-      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z]{3,10}$')]],
-      dni: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
-      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z-._]{3,30}@[a-zA-Z.]{3,15}\.[a-zA-Z]{3,4}$')]],
-      cuil: ['', [Validators.required, Validators.pattern('^[0-9]{2}-[0-9]{8}-[0-9]$')]],
       perfil: ['', Validators.required],
-      tipo: ['', Validators.required],
     });
   }
 
-  ngOnInit() { }
-  scanCode() {
-
-  //  let regexDni = /[0-9]{8}/;
-  // if (dato.match(regexDni))
-    this.barcodeScanner.scan(this.optionsQrScanner).then(barcodeData => {
-      let datosDelDni = barcodeData.text.split('@');
-      this.user.nombre = datosDelDni[2];
-      this.user.apellido = datosDelDni[1];
-      this.user.dni = datosDelDni[4];
-      // this.toast.presentToast("El QR corresponde a: " + auxUser.apellido + " " + auxUser.nombre, 2000, "success", "Leido");
-    }).catch(err => {
-      this.toast.presentToast("El QR no corresponde al sistema", 2000, "danger", "QR incorrecto");
-    });
+  generarCodigoAlfaNumerico(longitud) {
+    let patron = 'abcdefghijkmlnopqrstuvwxyz0123456789';
+    let codigo = "";
+    for (let i = 0; i < longitud; i++) {
+      codigo += patron[Math.floor(Math.random() * (patron.length - 0)) + 0];
+    }
+    return codigo;
   }
+  ngOnInit() {
+    this.user.email = this.generarCodigoAlfaNumerico(5) + "@gmail.com";
+    this.infoService.actualizarListaDeUsuariosAnonimos();
+    console.log(this.user.email);
+  }
+
   componerNombreDeImagen(usuario: string, fecha: number) {
     this.nombreDeImagen = usuario + '_' + fecha + '.jpg';
     this.pathDeImagen = this.storageRef.child(usuario + '_' + fecha + '.jpg');
@@ -96,32 +84,18 @@ export class FormAltaComponent implements OnInit {
     });
 
   }
-  verificarExistenciaDeUsuario() {
-    let retorno = false;
-    this.infoService.listaDeUsuarios.forEach(usuario => {
-      if (usuario.dni == this.user.dni) {
-        this.toast.presentToast("Un usuario ya fue creado con ese DNI", 2000, 'danger', 'Usuario existente');
-        retorno = true;
-      }
-      else if (usuario.email == this.user.email) {
-        this.toast.presentToast("Un usuario ya fue creado con ese Correo", 2000, 'danger', 'Usuario existente');
-        retorno = true;
-      }
-    });
-    return retorno;
 
-  }
   darDeAlta() {
-    if (!this.verificarExistenciaDeUsuario()) {
-
-      let auxUser = this.user;
-      auxUser.imagen = this.nombreDeImagen;
-      if (this.imagen) {
-        this.showSpinner = true;
-        this.subirImagenAFireStorage();
-      }
-      this.dataBase.crear('usuarios', auxUser);
-      this.user.imagen = '';
-    }
+    let auxUser = this.user;
+    auxUser.imagen = this.nombreDeImagen;
+    this.showSpinner = true;
+    alert(this.user.email);
+    alert(this.user.nombre);
+    alert(this.user.imagen);
+    //this.subirImagenAFireStorage();
+   // this.dataBase.crear('usuarios', auxUser);
+    this.user.imagen = '';
   }
 }
+
+
