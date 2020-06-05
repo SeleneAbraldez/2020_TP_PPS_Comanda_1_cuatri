@@ -7,11 +7,11 @@ import { AdminPage } from './admin.page';
 import { SidebarModule } from 'primeng/sidebar';
 import { FormAltaComponent } from 'src/app/components/admin/form-alta/form-alta.component';
 import {GraficosComponent } from 'src/app/components/admin/graficos/graficos.component';
+import {SalaDeEsperaComponent } from 'src/app/components/admin/sala-de-espera/sala-de-espera.component';
 import {ChartModule} from 'primeng/chart';
-
 let primeNgModules = [
   SidebarModule,
-  ChartModule
+  ChartModule,
 ]
 
 @NgModule({
@@ -25,7 +25,8 @@ let primeNgModules = [
   ],
   declarations: [AdminPage,
     FormAltaComponent,
-    GraficosComponent
+    GraficosComponent,
+    SalaDeEsperaComponent
   ]
 })
 export class AdminPageModule { }

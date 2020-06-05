@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./paginas/home/home.module').then(m => m.HomePageModule)
-    // ,canActivate:[AuthGuard]
+     
   },
   {
     path: '',
@@ -23,13 +23,27 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./paginas/admin/admin.module').then( m => m.AdminPageModule)
+    loadChildren: () => import('./paginas/admin/admin.module').then( m => m.AdminPageModule),canActivate:[AuthGuard]
   },
   {
     path: 'alta-cliente',
     loadChildren: () => import('./paginas/alta-cliente/alta-cliente.module').then( m => m.AltaClientePageModule)
   },
-
+  {
+    path: 'principal',
+    loadChildren: () => import('./paginas/principal/principal.module').then( m => m.PrincipalPageModule),canActivate:[AuthGuard]
+  },  {
+    path: 'mozo',
+    loadChildren: () => import('./paginas/mozo/mozo.module').then( m => m.MozoPageModule)
+  },
+  {
+    path: 'bartender',
+    loadChildren: () => import('./paginas/bartender/bartender.module').then( m => m.BartenderPageModule)
+  },
+  {
+    path: 'cocinero',
+    loadChildren: () => import('./paginas/cocinero/cocinero.module').then( m => m.CocineroPageModule)
+  },
 
 
 ];

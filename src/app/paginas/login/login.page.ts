@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
     { "email": "cocinero@gmail.com", "password": "cocinero" },
     { "email": "bartender@gmail.com", "password": "bartender" },
     { "email": "cliente@gmail.com", "password": "cliente" },
-    { "email": "duenio@gmail.com", "password": "dueñodueño" },
+    { "email": "admin@gmail.com", "password": "adminadmin" },
   ]
 
 
@@ -31,16 +31,52 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
   }
+  redirigirPorTipoDeEmpleado(tipoDeEmpleado) {
+    switch (tipoDeEmpleado) {
+      case "mozo":
+        this.router.navigateByUrl('/mozo');
+        break;
+      case "cocinero":
+        this.router.navigateByUrl('/cocinero');
+        break;
+      case "bartender":
+        this.router.navigateByUrl('/bartender');
+        break;
+    }
+  }
+  redirigirUsuario() {
+    switch (this.authService.currentUser.perfil) {
+      case "empleado":
+        this.redirigirPorTipoDeEmpleado(this.authService.currentUser.tipo);
+        break;
+      case "cliente"://ingresar a sala de espera
+        this.router.navigateByUrl('/principal');
+        break;
+      case "supervisor":
+      case "admin":
+        this.router.navigateByUrl('/admin');
+        break;
+    }
+  }
 
-  // onLogin2() {//cambiar el sistema de registro y login por usuarios sin email.
-  //   this.dataBase.obtenerTodos('usuarios').subscribe(listaDeUsuarios => {
-  //     listaDeUsuarios.forEach((usuario: any) => {
-  //       if (usuario == this.user) {
-
-  //       }
-  //     });
-  //   });
-  // }
+  onLogin2() {//cambiar el sistema de registro y login por usuarios sin email.
+    let existe = false;
+    this.dataBase.obtenerTodos('usuarios').subscribe(listaDeUsuarios => {
+      listaDeUsuarios.forEach((response: any) => {
+        let usuario = response.payload.doc.data();
+        if (usuario.email == this.user.email && usuario.password == this.user.password) {
+          console.log(usuario);
+          this.authService.currentUser = usuario;
+          existe = true;
+          this.toast.presentToast("", 1500, "success", "Bienvenido");
+          this.redirigirUsuario();
+        }
+      });
+      if (!existe) {
+        this.toast.presentToast("", 1500, "danger", "Usuario incorrecto");
+      }
+    });
+  }
 
   async onLogin() {
     const response = await this.authService.onLogin(this.user);

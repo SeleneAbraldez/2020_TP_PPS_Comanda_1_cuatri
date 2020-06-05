@@ -1,0 +1,23 @@
+*{
+    color: black;
+}
+ion-row{
+    border: 2px solid blue;
+    border-bottom: none;
+    border-radius: 10px;
+}
+ion-row:last-child{
+    border-bottom:2px solid blue;
+    border-radius: 10px;
+}
+img{
+    min-width: 60px;
+    min-height: 60px;
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: 10px;
+}
+ion-spinner{
+    transform: scale(1.5) translateY(5px);
+    margin: 0px;
+}

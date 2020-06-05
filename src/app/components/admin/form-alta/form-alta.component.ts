@@ -13,6 +13,7 @@ import { InformacionCompartidaService } from 'src/app/services/informacion-compa
   styleUrls: ['./form-alta.component.scss'],
 })
 export class FormAltaComponent implements OnInit {
+  mostrarImgen = false;
   private optionsQrScanner: BarcodeScannerOptions = {
     formats: "PDF_417,QR_CODE"
   };
@@ -27,6 +28,7 @@ export class FormAltaComponent implements OnInit {
     cuil: "",
     perfil: "",
     imagen: "",
+    password: "",
     email: ""
   };
   //tomarFotografia
@@ -46,6 +48,7 @@ export class FormAltaComponent implements OnInit {
     this.todo = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]{3,20}$')]],
       apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z]{3,10}$')]],
+      password: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{3,30}$')]],
       dni: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z-._]{3,30}@[a-zA-Z.]{3,15}\.[a-zA-Z]{3,4}$')]],
       cuil: ['', [Validators.required, Validators.pattern('^[0-9]{2}-[0-9]{8}-[0-9]$')]],
@@ -56,15 +59,15 @@ export class FormAltaComponent implements OnInit {
 
   ngOnInit() { }
   scanCode() {
-
-  //  let regexDni = /[0-9]{8}/;
-  // if (dato.match(regexDni))
     this.barcodeScanner.scan(this.optionsQrScanner).then(barcodeData => {
       let datosDelDni = barcodeData.text.split('@');
       this.user.nombre = datosDelDni[2];
       this.user.apellido = datosDelDni[1];
       this.user.dni = datosDelDni[4];
-      // this.toast.presentToast("El QR corresponde a: " + auxUser.apellido + " " + auxUser.nombre, 2000, "success", "Leido");
+      this.user.email = this.user.apellido.toLocaleLowerCase() + "@gmail.com";
+      this.user.cuil = "20-" + this.user.dni + "-" + Math.floor(Math.random() * (9 - 0)) + 0;
+      //  this.user=JSON.parse(barcodeData.text);
+      this.toast.presentToast("QR de: " + this.user.apellido + " " + this.user.nombre, 2000, "success", "Leido");
     }).catch(err => {
       this.toast.presentToast("El QR no corresponde al sistema", 2000, "danger", "QR incorrecto");
     });
@@ -85,6 +88,8 @@ export class FormAltaComponent implements OnInit {
       this.imagen = 'data:image/jpeg;base64,' + imageData;
       this.user.imagen = this.imagen;
       this.componerNombreDeImagen(this.user.email, new Date().getTime());//le paso el usuario + fecha en milisegundos + tipo de foto
+
+      this.mostrarImgen = true;
     }, (err) => {
       this.toast.presentToast(err, 2000, 'danger', 'ERROR');
     });
@@ -112,16 +117,19 @@ export class FormAltaComponent implements OnInit {
 
   }
   darDeAlta() {
-    if (!this.verificarExistenciaDeUsuario()) {
-
-      let auxUser = this.user;
-      auxUser.imagen = this.nombreDeImagen;
-      if (this.imagen) {
-        this.showSpinner = true;
-        this.subirImagenAFireStorage();
+    this.mostrarImgen = false;
+    this.infoService.actualizarListaDeUsuarios();
+    setTimeout(() => {
+      if (!this.verificarExistenciaDeUsuario()) {
+        let auxUser = this.user;
+        if (this.imagen) {
+          auxUser.imagen = this.nombreDeImagen;
+          this.showSpinner = true;
+          this.subirImagenAFireStorage();
+        }
+        this.dataBase.crear('usuarios', auxUser);
+        this.user.imagen = '';
       }
-      this.dataBase.crear('usuarios', auxUser);
-      this.user.imagen = '';
-    }
+    }, 220);
   }
 }

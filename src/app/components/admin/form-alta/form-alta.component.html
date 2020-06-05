@@ -1,6 +1,6 @@
 <form [formGroup]="todo">
   <div class="centrado">
-    <img id="fotoDePerfil" *ngIf="user.imagen" src="{{user.imagen}}" alt="perfil">
+    <img id="fotoDePerfil" *ngIf="user.imagen && mostrarImgen" src="{{user.imagen}}" alt="perfil">
     <!-- <img id="fotoDePerfil" src="../../../../assets/images/graficoArea.png" alt="perfil"> -->
 
   </div>
@@ -14,10 +14,13 @@
     <ion-input type="text" [(ngModel)]="user.dni" formControlName="dni" placeholder="dni"></ion-input>
   </ion-item>
   <ion-item>
+    <ion-input type="password" [(ngModel)]="user.password" formControlName="password" placeholder="contraseña"></ion-input>
+  </ion-item>
+  <ion-item>
     <ion-input type="text" [(ngModel)]="user.email" formControlName="email" placeholder="correo electronico">
     </ion-input>
   </ion-item>
-  <ion-item *ngIf="user.perfil=='supervisor'||user.perfil=='empleado'">
+  <ion-item *ngIf="user.perfil=='supervisor'||user.perfil=='empleado' || user.perfil=='admin'">
     <ion-input type="text" [(ngModel)]="user.cuil" formControlName="cuil" placeholder="cuil"></ion-input>
   </ion-item>
   <ion-item>
@@ -26,7 +29,7 @@
   </ion-item>
   <ion-item *ngIf="user.perfil=='empleado'">
     <ion-select interface='action-sheet' [(ngModel)]="user.tipo" formControlName="tipo" placeholder="tipo de empleado">
-      <ion-select-option value="mesero">Mesero</ion-select-option>
+      <ion-select-option value="mozo">Mozo</ion-select-option>
       <ion-select-option value="cocinero">Cocinero</ion-select-option>
       <ion-select-option value="bartender">Bartender</ion-select-option>
       <ion-select-option value="cervecero">Cervecero</ion-select-option>
@@ -49,12 +52,16 @@
   Dar de alta a un empleado
 </ion-button>
 <ion-button *ngIf="user.perfil=='supervisor'" color="primary" expand="full" type="submit"
-  [disabled]="!user.nombre || !user.apellido || !user.dni  || !user.cuil || !user.imagen" (click)="darDeAlta()">
+  [disabled]="!user.nombre || !user.apellido || !user.dni  || !user.cuil || !user.imagen|| !user.password" (click)="darDeAlta()">
   Dar de alta a un supervisor
+</ion-button>
+<ion-button *ngIf="user.perfil=='admin                                                                                         '" color="primary" expand="full" type="submit"
+  [disabled]="!user.nombre || !user.apellido || !user.dni  || !user.cuil || !user.imagen || !user.password" (click)="darDeAlta()">
+  Dar de alta a un admin
 </ion-button>
 
 <ion-button *ngIf="user.perfil=='cliente'" color="primary" expand="full" type="submit"
-  [disabled]="!user.nombre || !user.apellido || !user.dni  || !user.imagen" (click)="darDeAlta()">
+  [disabled]="!user.nombre || !user.apellido || !user.dni  || !user.imagen || !user.password" (click)="darDeAlta()">
   Dar de alta a un cliente
 </ion-button>
 <ion-spinner *ngIf='showSpinner' id="spinner" name="bubbles"></ion-spinner>

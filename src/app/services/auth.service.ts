@@ -8,7 +8,7 @@ import { Vibration } from '@ionic-native/vibration/ngx';
   providedIn: 'root'
 })
 export class AuthService {
-  currentUser: User;
+  currentUser: any;
   isLogged: any = false;
   constructor(private angularFireAuth: AngularFireAuth,
     private toast: ToastService,

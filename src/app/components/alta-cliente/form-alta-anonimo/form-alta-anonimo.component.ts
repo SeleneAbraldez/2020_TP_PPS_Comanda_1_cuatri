@@ -5,6 +5,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { DatabaseService } from 'src/app/services/database.service';
 import { InformacionCompartidaService } from 'src/app/services/informacion-compartida.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-form-alta-anonimo',
@@ -25,7 +27,7 @@ export class FormAltaAnonimoComponent implements OnInit {
     email: ""
   };
   //tomarFotografia
-  storageRef = this.angularFireStorage.storage.ref();
+  storageRef = this.angularFireStorage.storage.ref('anonimos');
   imagen: string;
   nombreDeImagen: string;
   pathDeImagen: any;
@@ -34,6 +36,8 @@ export class FormAltaAnonimoComponent implements OnInit {
   constructor(
     private dataBase: DatabaseService,
     private camera: Camera,
+    private authService: AuthService,
+    private router: Router,
     private toast: ToastService,
     private infoService: InformacionCompartidaService,
     private angularFireStorage: AngularFireStorage, private formBuilder: FormBuilder) {
@@ -84,17 +88,20 @@ export class FormAltaAnonimoComponent implements OnInit {
     });
 
   }
-
+  //ver como separo las imagenes en firestorage para no tener una sola lista sino se hace mas lento
   darDeAlta() {
     let auxUser = this.user;
     auxUser.imagen = this.nombreDeImagen;
+    auxUser['ubicado'] = 'salaDeEspera';
     this.showSpinner = true;
-    alert(this.user.email);
-    alert(this.user.nombre);
-    alert(this.user.imagen);
-    //this.subirImagenAFireStorage();
-   // this.dataBase.crear('usuarios', auxUser);
+    // alert(this.user.email);
+    // alert(this.user.nombre);
+    // alert(this.user.imagen);
+    this.subirImagenAFireStorage();
+    this.dataBase.crear('anonimos', auxUser);
+    this.authService.currentUser = auxUser;
     this.user.imagen = '';
+    this.router.navigateByUrl('/principal');
   }
 }
 
