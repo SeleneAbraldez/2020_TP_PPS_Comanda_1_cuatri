@@ -101,7 +101,7 @@ export class FormAltaAnonimoComponent implements OnInit {
     this.dataBase.crear('anonimos', auxUser);
     this.authService.currentUser = auxUser;
     this.user.imagen = '';
-    this.router.navigateByUrl('/principal');
+    this.router.navigateByUrl('/home');
   }
 }
 

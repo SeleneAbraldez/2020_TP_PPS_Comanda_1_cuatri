@@ -32,7 +32,8 @@ const routes: Routes = [
   {
     path: 'principal',
     loadChildren: () => import('./paginas/principal/principal.module').then( m => m.PrincipalPageModule),canActivate:[AuthGuard]
-  },  {
+  },
+  {
     path: 'mozo',
     loadChildren: () => import('./paginas/mozo/mozo.module').then( m => m.MozoPageModule)
   },

@@ -8,6 +8,11 @@ import { DatabaseService } from '../../services/database.service';
 })
 export class HomePage {
 
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400
+  };
+
   constructor(
     private database: DatabaseService
   ) { }
