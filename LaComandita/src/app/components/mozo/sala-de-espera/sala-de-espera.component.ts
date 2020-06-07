@@ -23,7 +23,7 @@ export class SalaDeEsperaComponent implements OnInit {
 
   AceptarIngreso(usuario) {
     usuario.ubicado = 'adentro'
-    this.dataBase.actualizar('anonimos', usuario.id, usuario);
+    this.dataBase.actualizar('usuarios', usuario.id, usuario);
     setTimeout(() => {
       this.infoService.actualizarListaDeUsuariosEnEspera();
       this.fireStore.obtenerListaDeImagenesUsuariosEnEspera();

@@ -27,7 +27,7 @@ export class FormAltaAnonimoComponent implements OnInit {
     email: ""
   };
   //tomarFotografia
-  storageRef = this.angularFireStorage.storage.ref('anonimos');
+  storageRef = this.angularFireStorage.storage.ref();
   imagen: string;
   nombreDeImagen: string;
   pathDeImagen: any;
@@ -95,10 +95,13 @@ export class FormAltaAnonimoComponent implements OnInit {
     auxUser['ubicado'] = 'salaDeEspera';
     this.showSpinner = true;
     this.subirImagenAFireStorage();
-    this.dataBase.crear('anonimos', auxUser);
+    this.dataBase.crear('usuarios', auxUser);
     this.authService.currentUser = auxUser;
     this.user.imagen = '';
-    this.router.navigateByUrl('/home');
+    setTimeout(() => {
+      
+      this.router.navigateByUrl('/principal');
+    }, 2000);
   }
 }
 

@@ -41,7 +41,7 @@ export class FirestorageService {
   obtenerListaDeImagenesUsuariosEnEspera() {
     let auxLista = [];
     this.spinner = true;
-    this.angularFireStorage.storage.ref('anonimos').listAll().then((lista) => {
+    this.angularFireStorage.storage.ref().listAll().then((lista) => {
       lista.items.forEach(item => {
         item.getDownloadURL().then((link) => {
           let archivo = this.descomponerNombreDeImagen(item.name, link);

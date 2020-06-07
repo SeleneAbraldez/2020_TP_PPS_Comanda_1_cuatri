@@ -1,4 +1,4 @@
-import { Component, OnInit,Input,EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class AsignarMesaComponent implements OnInit {
   lista = [];
   mesaSeleccionada = "";
   mostrarAdvertencia = false;
-  @Output() ingresarCliente : EventEmitter<any>=new EventEmitter<any>();
+  @Output() ingresarCliente: EventEmitter<any> = new EventEmitter<any>();
   constructor(
     private dataBase: DatabaseService
   ) { }
@@ -26,19 +26,19 @@ export class AsignarMesaComponent implements OnInit {
     })
   }
   mostrarConfirmacion(mesa) {
-    this.mesaSeleccionada=mesa;
+    this.mesaSeleccionada = mesa;
     this.mostrarAdvertencia = true;
   }
 
-  finalizarAsignacion(){
-    this.mostrarAdvertencia=false;
+  finalizarAsignacion() {
+    this.mostrarAdvertencia = false;
     this.lista.forEach(mesa => {
-      if(mesa.codigo==this.mesaSeleccionada)
-      {
-        mesa.estado='ocupado';//cambio el estado a ocupado
-        this.cliente['mesa']=mesa;
-        //this.dataBase.actualizar('mesas',this.cliente['mesa'].codigo,mesa)
-       // this.dataBase.actualizar('mesas',this.cliente['mesa'].codigo,mesa)
+      if (mesa.codigo == this.mesaSeleccionada) {
+        mesa.estado = 'ocupada';//cambio el estado a ocupado
+        this.cliente['mesa'] = mesa;
+        this.cliente['ubicado'] = "enMesa";
+        this.dataBase.actualizar('mesas', this.cliente['mesa'].id, mesa);
+        this.dataBase.actualizar('usuarios', this.cliente['id'], this.cliente);
         this.ingresarCliente.emit(this.cliente);
       }
     });

@@ -16,7 +16,7 @@ export class InformacionCompartidaService {
   ) { }
   public actualizarListaDeUsuariosEnEspera() {
     this.listaClienteEnEspera = [];
-    this.dataBase.obtenerTodos('anonimos').subscribe((snapShot) => {
+    this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
       snapShot.forEach((response: any) => {
         let infoUser = response.payload.doc.data();
         infoUser['id'] = response.payload.doc.id;
@@ -38,11 +38,13 @@ export class InformacionCompartidaService {
   }
   public actualizarListaDeUsuariosAnonimos() {
     this.listaDeUsuariosAnonimos = [];
-    this.dataBase.obtenerTodos('anonimos').subscribe((snapShot) => {
+    this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
       snapShot.forEach((response: any) => {
         let infoUser = response.payload.doc.data();
-        infoUser['id'] = response.payload.doc.id;
-        this.listaDeUsuariosAnonimos.push(infoUser);
+        if (infoUser.estado == "anonimo") {
+          infoUser['id'] = response.payload.doc.id;
+          this.listaDeUsuariosAnonimos.push(infoUser);
+        }
       });
     })
   }
