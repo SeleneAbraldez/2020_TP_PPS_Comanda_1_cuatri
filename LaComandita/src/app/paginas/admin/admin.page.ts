@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ToastService } from 'src/app/services/toast.service';
 import { InformacionCompartidaService } from 'src/app/services/informacion-compartida.service';
 import { DatabaseService } from 'src/app/services/database.service';
-import { FirestorageService } from 'src/app/services/firestorage.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -12,8 +10,6 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
-  spinnerSalaDeEspera = true;
-  listaEnEspera = [];
   leftMenu = false;
   rightMenu = false;
   mostrarFormRegistro = false;
@@ -24,10 +20,8 @@ export class AdminPage implements OnInit {
   graficoSeleccionado = "bar";
   constructor(
     private infoService: InformacionCompartidaService,
-    private toast: ToastService,
     private dataBase: DatabaseService,
     private authService: AuthService,
-    private fireStore: FirestorageService
 
   ) { }
 
@@ -48,19 +42,5 @@ export class AdminPage implements OnInit {
     this.mostrarGraficoEstadistico = true;
     this.graficoSeleccionado = grafico;
     this.rightMenu = false;
-  }
-  cargarListaDeEspera() {
-    this.infoService.actualizarListaDeUsuariosEnEspera();
-    this.fireStore.obtenerListaDeImagenesUsuariosEnEspera();
-    this.listaEnEspera = this.infoService.listaClienteEnEspera;
-  }
-
-
-  mostrarListaDeEspera() {
-    this.cargarListaDeEspera();
-    setTimeout(() => {
-
-      this.spinnerSalaDeEspera = false;
-    }, 2400);
   }
 }

@@ -29,7 +29,8 @@ export class FormAltaComponent implements OnInit {
     perfil: "",
     imagen: "",
     password: "",
-    email: ""
+    email: "",
+    estado: "registrado"
   };
   //tomarFotografia
   storageRef = this.angularFireStorage.storage.ref();

@@ -11,6 +11,8 @@ import { InformacionCompartidaService } from 'src/app/services/informacion-compa
 export class SalaDeEsperaComponent implements OnInit {
   @Input() lista = [];
   @Input() spinner = true;
+  usuarioSeleccionado = {};
+  mostrarFormAsignarMesa=false;
 
   constructor(private dataBase: DatabaseService,
     private infoService: InformacionCompartidaService,
@@ -18,15 +20,21 @@ export class SalaDeEsperaComponent implements OnInit {
   ) { }
 
   ngOnInit() { }
+
   AceptarIngreso(usuario) {
-    console.log(usuario);
     usuario.ubicado = 'adentro'
     this.dataBase.actualizar('anonimos', usuario.id, usuario);
     setTimeout(() => {
-      
       this.infoService.actualizarListaDeUsuariosEnEspera();
       this.fireStore.obtenerListaDeImagenesUsuariosEnEspera();
-      this.lista=this.infoService.listaClienteEnEspera;
+      this.lista = this.infoService.listaClienteEnEspera;
     }, 200);
+
+  }
+  asignarMesa(usuario) {
+    this.usuarioSeleccionado = usuario;
+    console.log("USIAROO",this.usuarioSeleccionado);
+    this.mostrarFormAsignarMesa=true;
+    
   }
 }

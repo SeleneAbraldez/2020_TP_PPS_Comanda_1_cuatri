@@ -1,9 +1,28 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="centrado">
     <ion-title>mozo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  
+  <!-- LEFT MENU -->
+  <p-sidebar [(visible)]="leftMenu" [modal]=false>
+    <h1 style="font-weight:normal">Acciones Mozo</h1>
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDeEspera()">Lista de espera
+    </ion-button>
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarFormProductos=true">Agregar Producto
+    </ion-button>
+  </p-sidebar>
+  <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"
+    (click)="leftMenu = true" (click)="mostrarFormProductos=false" (click)="mostrarSalaDeEspera=false"></ion-icon>
+  <!-- FIN LEFT MENU -->
 
+
+  <app-sala-de-espera *ngIf="mostrarSalaDeEspera" [lista]="listaEnEspera" [spinner]="spinnerSalaDeEspera">
+  </app-sala-de-espera>
+
+  <!-- ALTA DE PRODUCTOS -->
+  <app-alta-productos *ngIf="mostrarFormProductos"></app-alta-productos>
+  <!-- FIN ALTA DE PRODUCTOS -->
 </ion-content>

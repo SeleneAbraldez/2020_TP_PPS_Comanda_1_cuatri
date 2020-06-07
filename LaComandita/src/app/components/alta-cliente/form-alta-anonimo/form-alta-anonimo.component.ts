@@ -94,9 +94,6 @@ export class FormAltaAnonimoComponent implements OnInit {
     auxUser.imagen = this.nombreDeImagen;
     auxUser['ubicado'] = 'salaDeEspera';
     this.showSpinner = true;
-    // alert(this.user.email);
-    // alert(this.user.nombre);
-    // alert(this.user.imagen);
     this.subirImagenAFireStorage();
     this.dataBase.crear('anonimos', auxUser);
     this.authService.currentUser = auxUser;

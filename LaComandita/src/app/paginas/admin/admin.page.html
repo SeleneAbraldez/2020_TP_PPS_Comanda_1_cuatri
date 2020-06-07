@@ -1,18 +1,13 @@
 <ion-header class="centrado">
   <ion-toolbar>
     <ion-title>Panel de control</ion-title>
-    <ion-icon id="hamburgerTopMenu" name="arrow-down-outline" pButton type="button" (click)="topMenu = true"
-      (click)="rightMenu=false" (click)="mostrarGraficoEstadistico=false">asdsd</ion-icon>
+    
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-  <p-sidebar [(visible)]="topMenu" position="top" [baseZIndex]="10000" [modal]=false>
-    <h1 style="font-weight:normal">Acciones</h1>
-    <ion-button expand="full" (click)="topMenu = false" (click)="mostrarListaDeEspera()">Lista de espera
-    </ion-button>
-  </p-sidebar>
+
   <!-- LEFT MENU -->
   <p-sidebar [(visible)]="leftMenu" [modal]=false>
     <h1 style="font-weight:normal">Altas</h1>
@@ -45,8 +40,6 @@
   <!-- FIN RIGHT MENU -->
 
   <app-graficos *ngIf="mostrarGraficoEstadistico" [tipoDeGrafico]="graficoSeleccionado"></app-graficos>
-  <app-form-alta *ngIf="mostrarFormRegistro" [user]='user'></app-form-alta>
-  <app-sala-de-espera *ngIf="listaEnEspera" [lista]="listaEnEspera" [spinner]="spinnerSalaDeEspera">
-  </app-sala-de-espera>
+  <app-form-alta *ngIf="mostrarFormRegistro" [user]='user'></app-form-alta> 
 
 </ion-content>

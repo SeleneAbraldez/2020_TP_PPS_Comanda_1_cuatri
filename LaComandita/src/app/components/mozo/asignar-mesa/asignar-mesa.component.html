@@ -1,0 +1,35 @@
+<div id="divMesasLibres" class="centrado">
+    <h1>Mesas disponibles</h1>
+    <p-table [value]="lista">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Mesa</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-mesa>
+            <tr *ngIf="mesa.estado=='libre'">
+                <td>{{mesa.codigo}}</td>
+                <td>{{mesa.estado}}</td>
+                <td>
+                    <ion-button (click)="mostrarConfirmacion(mesa.codigo)">Asignar</ion-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <ion-card id="divAdvertencia" *ngIf="mostrarAdvertencia">
+        <ion-card-header>
+            <ion-card-title>Confirmacion</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            Quiere asignar la mesa:
+            <label style="font-weight: bold; font-size: 120%;">{{mesaSeleccionada}}</label> a
+            <label style="font-weight: bold; font-size: 120%;">{{cliente.nombre}}</label>?
+            <ion-button color="primary" (click)="finalizarAsignacion()">Si</ion-button>
+            <ion-button color="warning" (click)="mostrarAdvertencia=false">Cancelar</ion-button>
+        </ion-card-content>
+    </ion-card>
+</div>

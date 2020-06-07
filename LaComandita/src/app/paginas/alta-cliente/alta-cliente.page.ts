@@ -7,15 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AltaClientePage implements OnInit {
   esAnonimo = true;
-  user = { 'perfil': 'cliente', 'imagen': '', 'tipo': 'anonimo' };
+  user = { 'perfil': 'cliente', 'imagen': '', 'estado': 'anonimo' };
 
   constructor() { }
 
   ngOnInit() {
   }
   cambiarFormulario() {
-    this.esAnonimo ? this.user.tipo = 'anonimo' : this.user.tipo = 'registrado';
-    this.user.tipo == 'registrado' ? this.user['email'] = "" : null;
+    this.esAnonimo ? this.user.estado = 'anonimo' : this.user.estado = 'registrado';
+    this.user.estado == 'registrado' ? this.user['email'] = "" : null;
 
   }
 }

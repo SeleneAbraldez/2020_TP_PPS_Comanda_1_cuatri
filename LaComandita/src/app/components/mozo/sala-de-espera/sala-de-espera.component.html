@@ -1,5 +1,6 @@
 <div class="centrado">
   <h1>Sala de espera</h1>
+  <h5 *ngIf="lista.length<=0">SIN CLIENTES EN ESPERA</h5>
   <ion-grid>
     <ion-row *ngFor="let usuario of lista" class="ion-align-items-start">
       <ion-col *ngIf="usuario.link">
@@ -8,12 +9,13 @@
       </ion-col>
       <ion-col>
         {{usuario.nombre}}
-        <br>
-        {{usuario.email}}
+        <!-- <br> -->
+        <!-- {{usuario.email}} -->
       </ion-col>
       <ion-col>
-        <ion-button color="primary" (click)="AceptarIngreso(usuario)">Aceptar</ion-button>
+        <ion-button color="primary" (click)="asignarMesa(usuario)">Asignar mesa</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
 </div>
+<app-asignar-mesa *ngIf="mostrarFormAsignarMesa" (ingresarCliente)="mostrarFormAsignarMesa=false" [cliente]="usuarioSeleccionado"></app-asignar-mesa>

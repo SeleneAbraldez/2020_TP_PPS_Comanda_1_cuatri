@@ -1,0 +1,36 @@
+#botones{
+    text-align: center;
+    #btnCamera,#btnQR{
+        width: 40%;
+        margin-bottom: 15px;
+        max-width: 80%;
+        font-size: 140%;
+        --background:#7e6954; 
+        img{
+            max-width: 30px;
+        }
+    }
+}
+ion-input,ion-item{
+    --background: transparent;
+    max-width: 80%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: black;
+}
+textarea{
+    min-width: 80%;
+    margin: 10px 0 10px;
+}
+ion-select{
+    min-width: 100%;
+}
+#spinner{
+    position: absolute;
+    left: 48%;
+    top: 40%;
+    --color:#7e6954;
+    transform: scale(2.5);
+}
