@@ -5,13 +5,15 @@
 </ion-header>
 
 <ion-content>
-  
+
   <!-- LEFT MENU -->
   <p-sidebar [(visible)]="leftMenu" [modal]=false>
     <h1 style="font-weight:normal">Acciones Mozo</h1>
     <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDeEspera()">Lista de espera
     </ion-button>
-    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarFormProductos=true">Agregar Producto
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarFormProductos=true">Agregar producto
+    </ion-button>
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDeConsultas()">Revisar consultas
     </ion-button>
   </p-sidebar>
   <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"
@@ -25,4 +27,8 @@
   <!-- ALTA DE PRODUCTOS -->
   <app-alta-productos *ngIf="mostrarFormProductos"></app-alta-productos>
   <!-- FIN ALTA DE PRODUCTOS -->
+
+  <!-- LISTA DE CONSULTAS -->
+  <app-lista-de-consultas [lista]="listaDeconsultas"></app-lista-de-consultas>
+  <!-- FIN LISTA DE CONSULTAS -->
 </ion-content>

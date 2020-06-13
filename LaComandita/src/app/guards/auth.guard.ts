@@ -19,8 +19,10 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isLogged) {
       return true;
     }
-    this.presentToast("", 3000, "danger", "Acceso restringido");
-    this.router.navigateByUrl("/login");
+    else {
+      this.presentToast("", 3000, "danger", "Acceso restringido");
+      this.router.navigateByUrl("/login");
+    }
   }
 
   async presentToast(mensaje: string, duracion: number, color: string, titulo: string, boton?: boolean,

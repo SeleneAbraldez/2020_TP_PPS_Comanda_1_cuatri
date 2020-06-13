@@ -24,7 +24,7 @@ export class AuthService {
       return await this.angularFireAuth.signInWithEmailAndPassword(user.email, user.password);
     } catch (error) {
       this.vibration.vibrate(300);
-      console.log(error);
+      // console.log(error);
       switch (error.code) {
         case "auth/user-not-found":
           this.toast.presentToast("La cuenta no esta registrada", 2000, "warning", "Cuenta inexistente");

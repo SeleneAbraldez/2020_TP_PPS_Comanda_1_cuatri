@@ -92,7 +92,7 @@ export class FormAltaAnonimoComponent implements OnInit {
   darDeAlta() {
     let auxUser = this.user;
     auxUser.imagen = this.nombreDeImagen;
-    auxUser['ubicado'] = 'salaDeEspera';
+    // auxUser['ubicado'] = 'salaDeEspera';
     this.showSpinner = true;
     this.subirImagenAFireStorage();
     this.dataBase.crear('usuarios', auxUser);

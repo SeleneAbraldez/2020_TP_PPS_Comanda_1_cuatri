@@ -1,0 +1,29 @@
+<ion-card class="centrado">
+  <ion-card-header>
+    <h2><b>Consulta al mozo</b></h2>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="todo">
+      <p><b>Cliente:</b> {{user.apellido}} {{user.nombre}}</p>
+      <p><b>Mesa:</b> {{user.mesa.codigo}}</p>
+      <p *ngIf="user.perfil=='empleado'"><b>Estado:</b> {{user.estado}}</p>
+      <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize" [(ngModel)]="todo.mensaje" formControlName="mensaje" placeholder="ingrese su consulta"></textarea>
+      <ion-button color="primary" (click)="consultarAlMozo()" [disabled]="!todo.valid">Preguntar!</ion-button>
+      <ion-button color="medium" (click)="cancelarConsulta()">Cancelar</ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>
+
+<!-- FORM CONFIRMACION -->
+<ion-card id="divAdvertencia" *ngIf="mostrarAdvertencia">
+  <ion-card-header>
+    <ion-card-title>Confirmacion</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    Esta seguro de enviar la consulta?
+    <ion-button color="primary" (click)="EnviarConsulta()">Si</ion-button>
+    <ion-button color="warning" (click)="mostrarAdvertencia=false">Cancelar</ion-button>
+  </ion-card-content>
+</ion-card>
+<!-- FIN FORM CONFIRMACION -->

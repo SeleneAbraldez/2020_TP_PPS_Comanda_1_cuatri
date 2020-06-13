@@ -1,0 +1,16 @@
+ion-card{
+position: absolute;
+top: 25%;
+min-width: 80%;
+max-width: 80%;
+margin-left: 10%;
+z-index: 9998;
+}
+#divAdvertencia{
+    position: absolute;
+    top: 20%;
+    z-index: 9999;
+}
+textarea{
+    min-width: 200px;
+}

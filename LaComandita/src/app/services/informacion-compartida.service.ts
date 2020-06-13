@@ -8,12 +8,28 @@ import { ToastService } from './toast.service';
 export class InformacionCompartidaService {
   listaDeUsuarios = [];
   listaClienteEnEspera = [];
+  listaDeConsultasMozo = [];
   listaDeUsuariosAnonimos = [];
   spinnerSalaDeEspera = true;
   constructor(
     private dataBase: DatabaseService,
     private toast: ToastService
   ) { }
+
+
+  public actualizarListaDeConsultasMozo() {
+    this.listaDeConsultasMozo = [];//lista de consulta mozo sin respuesta
+    this.dataBase.obtenerTodos('consultas').subscribe((snapShot) => {
+      snapShot.forEach((response: any) => {
+        let infoConsulta = response.payload.doc.data();
+        infoConsulta['id'] = response.payload.doc.id;
+        if (infoConsulta.estado != 'respondido') {//si aun no se respondio se agrega
+          this.listaDeConsultasMozo.push(infoConsulta);
+        }
+      });
+    })
+  }
+
   public actualizarListaDeUsuariosEnEspera() {
     this.listaClienteEnEspera = [];
     this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {

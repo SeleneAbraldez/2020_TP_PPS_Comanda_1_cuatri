@@ -11,17 +11,18 @@ import { DatabaseService } from 'src/app/services/database.service';
 export class MozoPage implements OnInit {
   spinnerSalaDeEspera = true;
   listaEnEspera = [];
-  mostrarFormProductos=false;
-  mostrarSalaDeEspera=false;
-  
+  listaDeconsultas = [];
+  mostrarFormProductos = false;
+  mostrarSalaDeEspera = false;
+
   constructor(
     private infoService: InformacionCompartidaService,
     private fireStore: FirestorageService,
-    private dataBase:DatabaseService
+    private dataBase: DatabaseService
   ) { }
 
   ngOnInit() {
-    
+
   }
   cargarListaDeEspera() {
     this.infoService.actualizarListaDeUsuariosEnEspera();
@@ -31,10 +32,16 @@ export class MozoPage implements OnInit {
 
 
   mostrarListaDeEspera() {
-    this.mostrarSalaDeEspera=true;
+    this.mostrarSalaDeEspera = true;
     this.cargarListaDeEspera();
     setTimeout(() => {
       this.spinnerSalaDeEspera = false;
     }, 2400);
+  }
+
+  mostrarListaDeConsultas() {
+    this.infoService.actualizarListaDeConsultasMozo();
+
+    this.listaDeconsultas = this.infoService.listaDeConsultasMozo;//obtengo la lista de consultas sin respuesta.
   }
 }

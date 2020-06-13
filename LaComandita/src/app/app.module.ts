@@ -20,6 +20,7 @@ import { AngularFireStorage } from "@angular/fire/storage";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarModule } from 'primeng/sidebar';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
@@ -39,6 +40,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     StatusBar,
     Vibration,
     SplashScreen,
+    EmailComposer,
     BarcodeScanner,
     Camera,
     AngularFireStorage,

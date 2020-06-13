@@ -1,0 +1,20 @@
+<div class="centrado">
+  <h1>Listado de consultas</h1>
+  <h5 *ngIf="lista.length<=0">SIN CONSULTAS PENDIENTES</h5>
+  <ion-grid>
+    <ion-row *ngFor="let consulta of lista" class="ion-align-items-start">
+      <ion-col>
+        {{consulta.user.apellido}} {{consulta.user.nombre}}
+      </ion-col>
+      <ion-col>
+        {{consulta.user.mesa.codigo}}
+      </ion-col>
+      <ion-col>
+        {{consulta.estado}}
+      </ion-col>
+      <ion-col>
+        <ion-button color="primary" (click)="asignarMesa(usuario)">Asignar mesa</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

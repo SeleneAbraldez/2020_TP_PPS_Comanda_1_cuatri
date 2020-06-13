@@ -6,6 +6,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { DatabaseService } from 'src/app/services/database.service';
 import { InformacionCompartidaService } from 'src/app/services/informacion-compartida.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-form-alta',
@@ -43,6 +44,7 @@ export class FormAltaComponent implements OnInit {
     private barcodeScanner: BarcodeScanner,
     private dataBase: DatabaseService,
     private camera: Camera,
+    private authService: AuthService,
     private toast: ToastService,
     private infoService: InformacionCompartidaService,
     private angularFireStorage: AngularFireStorage, private formBuilder: FormBuilder) {
@@ -117,10 +119,12 @@ export class FormAltaComponent implements OnInit {
     return retorno;
 
   }
-  darDeAlta() {
+  async darDeAlta() {
     this.mostrarImgen = false;
     this.infoService.actualizarListaDeUsuarios();
-    setTimeout(() => {
+    const response = await this.authService.onRegister(this.user);
+    if (response) {
+      response.user.sendEmailVerification();
       if (!this.verificarExistenciaDeUsuario()) {
         let auxUser = this.user;
         if (this.imagen) {
@@ -131,6 +135,6 @@ export class FormAltaComponent implements OnInit {
         this.dataBase.crear('usuarios', auxUser);
         this.user.imagen = '';
       }
-    }, 220);
+    }
   }
 }

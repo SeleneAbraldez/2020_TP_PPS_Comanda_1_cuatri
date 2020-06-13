@@ -64,11 +64,10 @@ export class LoginPage implements OnInit {
     this.dataBase.obtenerTodos('usuarios').subscribe(listaDeUsuarios => {
       listaDeUsuarios.forEach((response: any) => {
         let usuario = response.payload.doc.data();
-        if (usuario.email == this.user.email && usuario.password == this.user.password) {
-          console.log(usuario);
+        usuario.id = response.payload.doc.id;
+        if (usuario.email.toLowerCase() == this.user.email.toLowerCase() && usuario.password == this.user.password) {
           this.authService.currentUser = usuario;
           existe = true;
-          this.toast.presentToast("", 1500, "success", "Bienvenido");
           this.redirigirUsuario();
         }
       });
