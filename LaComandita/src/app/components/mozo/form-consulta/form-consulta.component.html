@@ -1,0 +1,26 @@
+<ion-card class="centrado">
+  <ion-card-content>
+    <form [formGroup]="todo">
+      <p><b>Cliente:</b> {{consulta.user.apellido}} {{consulta.user.nombre}}</p>
+      <p><b>Mesa:</b> {{consulta.user.mesa.codigo}}</p>
+      <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize" disabled=true placeholder="{{consulta.mensaje}}"></textarea>
+      <textarea [rows]="1" [cols]="30" pInputTextarea autoResize="autoResize" [(ngModel)]="todo.mensaje" formControlName="mensaje" placeholder="ingrese su respuesta"></textarea>
+      <ion-button color="primary" (click)="responderPregunta()" [disabled]="!todo.valid">Enviar</ion-button>
+      <ion-button color="medium" (click)="cancelarConsulta()">Cancelar</ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>
+
+<!-- FORM CONFIRMACION -->
+<ion-card id="divAdvertencia" *ngIf="mostrarAdvertencia">
+  <ion-card-header>
+    <ion-card-title>Confirmacion</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    Esta seguro de enviar la respuesta?
+    <ion-button color="primary" (click)="enviarRespuesta()">Si</ion-button>
+    <ion-button color="warning" (click)="mostrarAdvertencia=false">Cancelar</ion-button>
+  </ion-card-content>
+</ion-card>
+<!-- FIN FORM CONFIRMACION -->

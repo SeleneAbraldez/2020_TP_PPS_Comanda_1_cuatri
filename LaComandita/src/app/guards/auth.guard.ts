@@ -16,8 +16,8 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authService.isLogged) {
       return true;
+    if (this.authService.isLogged) {
     }
     else {
       this.presentToast("", 3000, "danger", "Acceso restringido");

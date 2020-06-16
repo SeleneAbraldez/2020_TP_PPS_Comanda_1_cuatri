@@ -5,18 +5,23 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
 const routes: Routes = [
   {
     path: 'home',
-     loadChildren: () => import('./paginas/home/home.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./paginas/home/home.module').then(m => m.HomePageModule)
     //loadChildren: () => import('./paginas/principal/principal.module').then(m => m.PrincipalPageModule)
 
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   {
     path: 'login',
     loadChildren: () => import('./paginas/login/login.module').then(m => m.LoginPageModule)
+  },
+
+  {
+    path: 'testeo',
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'register',
@@ -32,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: 'principal',
-    loadChildren: () => import('./paginas/principal/principal.module').then(m => m.PrincipalPageModule),canActivate:[AuthGuard]
+    loadChildren: () => import('./paginas/principal/principal.module').then(m => m.PrincipalPageModule), canActivate: [AuthGuard]
   },
   {
     path: 'mozo',

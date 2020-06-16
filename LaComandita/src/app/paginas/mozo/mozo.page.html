@@ -17,7 +17,7 @@
     </ion-button>
   </p-sidebar>
   <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"
-    (click)="leftMenu = true" (click)="mostrarFormProductos=false" (click)="mostrarSalaDeEspera=false"></ion-icon>
+    (click)="leftMenu = true" (click)="mostrarFormProductos=false" (click)="mostrarSalaDeEspera=false" (click)="mostrarListadoDeConsultas=false"></ion-icon>
   <!-- FIN LEFT MENU -->
 
 
@@ -25,10 +25,10 @@
   </app-sala-de-espera>
 
   <!-- ALTA DE PRODUCTOS -->
-  <app-alta-productos *ngIf="mostrarFormProductos"></app-alta-productos>
+  <app-alta-productos *ngIf="mostrarFormProductos" (cerrarFormEvent)="mostrarFormProductos=false"></app-alta-productos>
   <!-- FIN ALTA DE PRODUCTOS -->
 
   <!-- LISTA DE CONSULTAS -->
-  <app-lista-de-consultas [lista]="listaDeconsultas"></app-lista-de-consultas>
+  <app-lista-de-consultas *ngIf="mostrarListadoDeConsultas" [lista]="listaDeconsultas"></app-lista-de-consultas>
   <!-- FIN LISTA DE CONSULTAS -->
 </ion-content>

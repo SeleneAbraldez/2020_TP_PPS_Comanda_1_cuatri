@@ -1,0 +1,28 @@
+<ion-card>
+  <ion-card-header class="centrado">
+    <ion-card-title>{{producto.nombre}}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <div id="divImagenes">
+      <div class="imgPrincipal">
+        <img src="{{producto.imagenes[0].link}}">
+      </div>
+      <div class="imgSecundarias">
+        <img src="{{producto.imagenes[1].link}}">
+      </div>
+      <div class="imgSecundarias">
+        <img src="{{producto.imagenes[2].link}}">
+      </div>
+    </div>
+    <div id="descripcion" class="centrado">
+      <p>{{producto.descripcion}}</p>
+      <p id="pPrecio">{{producto.precio|precio}}</p>
+    </div>
+
+    <ion-button id="btnVolver" (click)="emitirPasoAnteriorEvent()"><i class="pi pi-arrow-circle-left"></i></ion-button>
+    <ion-button>Agregar<i class="pi pi-shopping-cart" (click)="emitirEvento()"></i></ion-button>
+    <ion-button id="btnSiguiente" (click)="emitirPasoSiguienteEvent()"><i class="pi pi-arrow-circle-right"></i>
+    </ion-button>
+  </ion-card-content>
+</ion-card>

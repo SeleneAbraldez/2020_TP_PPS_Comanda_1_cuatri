@@ -14,6 +14,7 @@ import { ConfirmationService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FormConsultasComponent } from 'src/app/components/principal/form-consultas/form-consultas.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -25,7 +26,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
     ConfirmDialogModule,
     PrincipalPageRoutingModule,
     InputTextareaModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [PrincipalPage,
     FormConsultasComponent

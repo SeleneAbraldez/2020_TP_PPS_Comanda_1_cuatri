@@ -24,7 +24,7 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ],
   entryComponents: [],
   imports: [BrowserModule,
     IonicModule.forRoot(),

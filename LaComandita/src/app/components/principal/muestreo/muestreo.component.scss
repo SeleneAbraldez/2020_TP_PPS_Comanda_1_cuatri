@@ -1,0 +1,86 @@
+#divImagenes{
+    min-width: 100%;
+}
+.imgPrincipal{
+    text-align: center;
+    min-width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 2px solid lightblue;
+    border-radius: 10px;
+    img{
+    max-height: 100px;
+    }
+}
+img{
+    border-radius: 10px;
+}
+.imgSecundarias{
+    text-align: center;
+    min-width: 50%;
+    max-width: 50%;
+    display: inline-block;
+    border-bottom: 2px solid lightblue;
+    border-radius: 10px;
+    img{
+        max-height: 100px;
+    }
+}
+.pi, pi-shopping-cart{
+    transform: scale(2);
+    padding-left: 5px;
+}
+ion-card{
+    border-radius: 10px;
+}
+#pPrecio{
+    font-size: 200%;
+    color: lightgreen;
+}
+#descripcion{
+    margin-top: 10px;
+    font-size: 120%;
+}
+#divCantidad{
+    max-width: 10px !important;
+}
+#btnMas{
+    color: green;
+    margin-bottom: 3px;
+}
+#btnMenos{
+    color: red;
+}
+#btnMas,#btnMenos
+{
+    padding: 2px;
+}
+#btnMas:active,#btnMenos:active
+{
+    transform: scale(1.5);
+    border-radius: 10px;
+    background-color: rgba(128, 128, 128, 0.582);
+}
+#btnVolver,#btnSiguiente{
+    padding: 0px;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    --border-radius: 100% !important;
+    .pi{
+        padding-right: 3px;
+        border-radius: 100%;
+    }
+}
+#btnVolver:active,#btnSiguiente:active{
+
+    .pi{
+        transform: scale(1.5);
+    }
+}
+#btnSiguiente{
+    float: right;
+}
+#btnVolver{
+    float: left;
+}

@@ -20,7 +20,7 @@ export class PrincipalPage implements OnInit {
     };
     productoSeleccionado = "comidas";
     user: any
-    comidas = ["../../../assets/images/pagPrincipal/1.png",
+    comidas = ["../../../assets/images/pagPrincipal/comidas/1.png",
         "../../../assets/images/pagPrincipal/comidas/2.jpg",
         "../../../assets/images/pagPrincipal/comidas/3.png",
         "../../../assets/images/pagPrincipal/comidas/4.jpg",
@@ -110,11 +110,11 @@ export class PrincipalPage implements OnInit {
                 //boton consulta al mozo!
             }
             else {
-                alert("ESTA no es tu mesa");
+                this.toast.presentToast("Esta mesa no corresponde a la mesa que le asignaron.", 2000, "danger", "Mesa incorrecta");
             }
         }
         else {
-            alert("el metre te asignara una mesa.");
+            this.toast.presentToast("Espere a que el metre le asigne una mesa.", 2000, "warning", "Aun no tiene mesa");
         }
         return retorno;
     }

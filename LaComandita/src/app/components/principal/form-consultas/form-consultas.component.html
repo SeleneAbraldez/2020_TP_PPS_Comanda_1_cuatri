@@ -7,7 +7,9 @@
       <p><b>Cliente:</b> {{user.apellido}} {{user.nombre}}</p>
       <p><b>Mesa:</b> {{user.mesa.codigo}}</p>
       <p *ngIf="user.perfil=='empleado'"><b>Estado:</b> {{user.estado}}</p>
-      <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize" [(ngModel)]="todo.mensaje" formControlName="mensaje" placeholder="ingrese su consulta"></textarea>
+      <textarea *ngIf="consultaActual.respuesta!=''" [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"  disabled=true placeholder="{{consultaActual.respuesta}}"></textarea>
+      <textarea [rows]="2" [cols]="30" pInputTextarea autoResize="autoResize" [(ngModel)]="todo.mensaje" formControlName="mensaje" placeholder="ingrese su consulta"></textarea>
+      
       <ion-button color="primary" (click)="consultarAlMozo()" [disabled]="!todo.valid">Preguntar!</ion-button>
       <ion-button color="medium" (click)="cancelarConsulta()">Cancelar</ion-button>
     </form>

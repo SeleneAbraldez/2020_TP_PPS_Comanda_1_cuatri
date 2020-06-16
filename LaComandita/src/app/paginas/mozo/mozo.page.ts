@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InformacionCompartidaService } from 'src/app/services/informacion-compartida.service';
 import { FirestorageService } from 'src/app/services/firestorage.service';
 import { DatabaseService } from 'src/app/services/database.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-mozo',
@@ -13,15 +14,21 @@ export class MozoPage implements OnInit {
   listaEnEspera = [];
   listaDeconsultas = [];
   mostrarFormProductos = false;
+  mostrarListadoDeConsultas=false;
   mostrarSalaDeEspera = false;
+  consultas$: Observable<any[]>;
 
   constructor(
     private infoService: InformacionCompartidaService,
     private fireStore: FirestorageService,
-    private dataBase: DatabaseService
+    private dataBase: DatabaseService,
+
   ) { }
 
   ngOnInit() {
+    this.consultas$ = this.infoService.obtenerConsultas$();
+    this.consultas$.subscribe(consulas => this.listaDeconsultas = consulas);
+    this.infoService.actualizarListaDeConsultasMozo();
 
   }
   cargarListaDeEspera() {
@@ -40,8 +47,7 @@ export class MozoPage implements OnInit {
   }
 
   mostrarListaDeConsultas() {
-    this.infoService.actualizarListaDeConsultasMozo();
-
-    this.listaDeconsultas = this.infoService.listaDeConsultasMozo;//obtengo la lista de consultas sin respuesta.
+    // this.infoService.obtenerConsultas$();
+    this.mostrarListadoDeConsultas=true;
   }
 }
