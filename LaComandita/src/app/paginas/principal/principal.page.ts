@@ -12,7 +12,10 @@ import { AuthService } from 'src/app/services/auth.service';
     styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements OnInit {
-    mostrarFormConsultas=false;
+
+    totalAcumulado = 0;
+    mostrarFormConsultas = false;
+    mostrarMenuProductos = false;
     slideOpts = {
         initialSlide: 0,
         speed: 200,
@@ -41,6 +44,26 @@ export class PrincipalPage implements OnInit {
         "../../../assets/images/pagPrincipal/postres/5.jpg",
         "../../../assets/images/pagPrincipal/postres/6.jpg"];
     msgs: Message[] = [];
+
+
+    generarCodigoAlfaNumerico(longitud) {
+        let patron = 'abcdefghijkmlnopqrstuvwxyz0123456789';
+        let codigo = "";
+        for (let i = 0; i < longitud; i++) {
+            codigo += patron[Math.floor(Math.random() * (patron.length - 0)) + 0];
+        }
+        return codigo;
+    }
+
+    darDeAltaPedido(pedido) {
+        console.log(pedido);
+        pedido["codigoPedido"] = this.generarCodigoAlfaNumerico(5);
+        pedido["cliente"] = this.authService.currentUser;
+        pedido["estado"] = "enviado"
+        pedido["facturacion"]=this.totalAcumulado;
+        this.dataBase.crear('pedidosMozo',pedido);
+        this.toast.presentToast("Solo falta que el mozo acepte su orden.",2000,"success","Pedido realizado");
+    }
     constructor(
         private barcodeScanner: BarcodeScanner,
         private toast: ToastService,
@@ -124,4 +147,17 @@ export class PrincipalPage implements OnInit {
     }
 
 
+
+    calcularCostoTotal(pedido) {
+        this.totalAcumulado = 0;
+        pedido.platos.forEach(plato => {
+            this.totalAcumulado += plato.cantidad * plato.producto.precio;
+        });
+        pedido.postres.forEach(postre => {
+            this.totalAcumulado += postre.cantidad * postre.producto.precio;
+        });
+        pedido.bebidas.forEach(bebida => {
+            this.totalAcumulado += bebida.cantidad * bebida.producto.precio;
+        });
+    }
 }

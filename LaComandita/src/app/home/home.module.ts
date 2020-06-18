@@ -8,10 +8,15 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { MuestreoComponent } from 'src/app/components/principal/muestreo/muestreo.component';
 import { PrecioPipe } from 'src/app/pipes/precio.pipe';
 import { MenuProductosComponent } from 'src/app/components/principal/menu-productos/menu-productos.component';
+import { DetalladoDelPedidoComponent } from 'src/app/components/principal/detallado-del-pedido/detallado-del-pedido.component';
+import { TablaProductosPorTipoComponent } from 'src/app/components/principal/tabla-productos-por-tipo/tabla-productos-por-tipo.component';
 import { StepsModule } from 'primeng/steps';
 import { SingularPipe } from 'src/app/pipes/singular.pipe';
 import {DialogModule} from 'primeng/dialog';
 import {SliderModule} from 'primeng/slider';
+import {AccordionModule} from 'primeng/accordion';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,12 +25,17 @@ import {SliderModule} from 'primeng/slider';
     StepsModule,
     HomePageRoutingModule,
     DialogModule,
-    SliderModule
+    SliderModule,
+    AccordionModule,
+    ConfirmDialogModule
   ],
   declarations: [HomePage,
     MuestreoComponent,
     PrecioPipe,
     SingularPipe,
-    MenuProductosComponent]
+    MenuProductosComponent,
+    DetalladoDelPedidoComponent,
+    TablaProductosPorTipoComponent],
+    providers:[ConfirmationService]
 })
 export class HomePageModule { }

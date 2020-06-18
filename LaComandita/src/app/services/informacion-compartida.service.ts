@@ -11,6 +11,8 @@ export class InformacionCompartidaService {
   private platos$ = new Subject<any[]>();
   private bebidas$ = new Subject<any[]>();
   private postres$ = new Subject<any[]>();
+  private pedidosMozo$ = new Subject<any[]>();
+
 
   listaDeUsuarios = [];
   listaClienteEnEspera = [];
@@ -20,6 +22,29 @@ export class InformacionCompartidaService {
     private dataBase: DatabaseService,
     private toast: ToastService
   ) { }
+
+  //PEDIDOS MOZO 
+  agregarPedido(pedido: any) {
+    this.dataBase.crear('pedidosMozo', pedido);
+    this.actualizarListaDePedidosMozo();
+  }
+  obtenerPedidosMozo$(): Observable<any[]> {
+    return this.pedidosMozo$.asObservable();
+  }
+  public actualizarListaDePedidosMozo() {
+    this.dataBase.obtenerTodos('pedidosMozo').subscribe((snapShot) => {
+      let auxLista = [];
+      
+      snapShot.forEach((response: any) => {
+        let infoPedido = response.payload.doc.data();
+        infoPedido['id'] = response.payload.doc.id;
+        auxLista.push(infoPedido);
+      });
+      this.pedidosMozo$.next(auxLista);
+    });
+  }
+  //FIN PEDIDOS MOZO
+
   //BEBIDAS 
   agregarBebidas(bebida: any) {
     this.dataBase.crear('bebidas', bebida);

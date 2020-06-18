@@ -1,0 +1,23 @@
+<p-accordion>
+  <p-accordionTab header="{{pedido[0].producto.tipo |uppercase }}">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center centrado">
+        <ion-col size="3">Producto </ion-col>
+        <ion-col size="3">Precio </ion-col>
+        <ion-col size="2">Cant </ion-col>
+        <ion-col size="4">Acciones</ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center centrado" *ngFor="let pedido of lista">
+        <ion-col size="3"><img src="{{pedido.producto.imagenes[0].link}}"> </ion-col>
+        <ion-col size="3">{{pedido.producto.precio | precio}} </ion-col>
+        <ion-col size="2">{{pedido.cantidad}} </ion-col>
+        <ion-col size="4">
+          <ion-button id="btnQuitar" (click)="restarUnidad(pedido)"><i class="pi pi-minus"></i></ion-button>
+          <ion-button id="btnAgregar" (click)="agregarUnidad(pedido)"><i class="pi pi-plus"></i></ion-button>
+          <ion-button id="btnBorrar" (click)="eliminarProducto(pedido)"><i class="pi pi-trash"></i></ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </p-accordionTab>
+</p-accordion>

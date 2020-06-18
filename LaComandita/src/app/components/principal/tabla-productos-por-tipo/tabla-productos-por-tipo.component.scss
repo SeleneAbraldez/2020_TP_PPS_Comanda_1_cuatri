@@ -1,0 +1,40 @@
+*{
+    color: black;
+}
+img{
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 100%;
+}
+#btnAgregar{
+    .pi{
+        color: lightgreen;
+    }
+}
+#btnQuitar{
+    .pi{
+       
+        color: lightsalmon;
+    }
+}
+#btnBorrar{
+    .pi{
+         color: red;
+    }
+}
+
+#btnAgregar,
+#btnQuitar,
+#btnBorrar{
+    --padding-bottom:0px;
+    --padding-end:4px;
+    --padding-start:4px;
+    --padding-top:0px;
+    --border-radius:100%;
+    --background:transparent ;
+    .pi{
+        border-radius: 100%;
+    }
+}

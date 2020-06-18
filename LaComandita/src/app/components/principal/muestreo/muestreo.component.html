@@ -21,7 +21,7 @@
     </div>
 
     <ion-button id="btnVolver" (click)="emitirPasoAnteriorEvent()"><i class="pi pi-arrow-circle-left"></i></ion-button>
-    <ion-button>Agregar<i class="pi pi-shopping-cart" (click)="emitirEvento()"></i></ion-button>
+    <ion-button (click)="emitirEvento()">Agregar<i class="pi pi-shopping-cart"></i></ion-button>
     <ion-button id="btnSiguiente" (click)="emitirPasoSiguienteEvent()"><i class="pi pi-arrow-circle-right"></i>
     </ion-button>
   </ion-card-content>

@@ -12,6 +12,16 @@ img{
     min-width: 15em;
     border-radius: 100%;
 }
+ion-button{
+    text-transform: none;
+    p{
+        float: left;
+    }
+    img{
+        margin-left: 5px;
+        float: right;
+    }
+}
 ion-header{
     
     --background:#fff1de;

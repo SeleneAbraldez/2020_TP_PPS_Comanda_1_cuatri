@@ -13,10 +13,12 @@ export class MozoPage implements OnInit {
   spinnerSalaDeEspera = true;
   listaEnEspera = [];
   listaDeconsultas = [];
+
   mostrarFormProductos = false;
-  mostrarListadoDeConsultas=false;
+  mostrarListadoDeConsultas = false;
   mostrarSalaDeEspera = false;
   consultas$: Observable<any[]>;
+
 
   constructor(
     private infoService: InformacionCompartidaService,
@@ -28,7 +30,7 @@ export class MozoPage implements OnInit {
   ngOnInit() {
     this.consultas$ = this.infoService.obtenerConsultas$();
     this.consultas$.subscribe(consulas => this.listaDeconsultas = consulas);
-    this.infoService.actualizarListaDeConsultasMozo();
+
 
   }
   cargarListaDeEspera() {
@@ -48,6 +50,9 @@ export class MozoPage implements OnInit {
 
   mostrarListaDeConsultas() {
     // this.infoService.obtenerConsultas$();
-    this.mostrarListadoDeConsultas=true;
+    this.mostrarListadoDeConsultas = true;
+  }
+  mostrarListaDepedidos() {
+
   }
 }

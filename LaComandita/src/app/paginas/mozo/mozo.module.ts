@@ -12,7 +12,10 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TableModule } from 'primeng/table';
 import { ListaDeConsultasComponent } from 'src/app/components/mozo/lista-de-consultas/lista-de-consultas.component';
 import { MilisecondsToDatePipe } from 'src/app/pipes/miliseconds-to-date.pipe';
-import { FormConsultaComponent} from 'src/app/components/mozo/form-consulta/form-consulta.component';
+import { FormConsultaComponent } from 'src/app/components/mozo/form-consulta/form-consulta.component';
+import { AccordionModule } from 'primeng/accordion';
+import { ListaDePedidosComponent } from 'src/app/components/mozo/lista-de-pedidos/lista-de-pedidos.component';
+import { PrecioPipe } from 'src/app/pipes/precio.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -22,14 +25,17 @@ import { FormConsultaComponent} from 'src/app/components/mozo/form-consulta/form
     SidebarModule,
     ReactiveFormsModule,
     InputTextareaModule,
+    AccordionModule,
     TableModule
   ],
   declarations: [MozoPage,
     SalaDeEsperaComponent,
+    PrecioPipe,
     AltaProductosComponent,
     AsignarMesaComponent,
     ListaDeConsultasComponent,
     MilisecondsToDatePipe,
+    ListaDePedidosComponent,
     FormConsultaComponent
   ]
 })

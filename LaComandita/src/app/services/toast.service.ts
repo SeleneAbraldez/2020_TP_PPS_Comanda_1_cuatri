@@ -49,4 +49,44 @@ export class ToastService {
     }
     toast.present();
   }
+  async presentToastPosition(mensaje: string, duracion: number, color: string, titulo: string, position: any, boton?: boolean,
+    tituloBotonUno?: string, tituloBotonDos?: string, urlUno?: string, urlDos?: string) {
+    let toast;
+    if (boton) {
+      toast = await this.toast.create({
+        message: mensaje,
+        duration: duracion,
+        color: color,
+        header: titulo,
+        position: position,
+        buttons: [
+          {
+            side: "end",
+            text: tituloBotonUno,
+            handler: () => {
+              this.router.navigateByUrl("/" + urlUno);
+            }
+          },
+          {
+            side: "end",
+            text: tituloBotonDos,
+            handler: () => {
+              this.router.navigateByUrl("/" + urlDos);
+            }
+          }
+        ]
+
+      });
+    }
+    else {
+      toast = await this.toast.create({
+        message: mensaje,
+        duration: duracion,
+        color: color,
+        position: position,
+        header: titulo
+      });
+    }
+    toast.present();
+  }
 }

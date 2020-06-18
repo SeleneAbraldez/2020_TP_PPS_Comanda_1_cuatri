@@ -1,0 +1,14 @@
+<app-tabla-productos-por-tipo *ngIf="pedido.platos.length>=1" [pedido]="pedido.platos"
+    (pedidoAlteradoEvent)="reEmitirEvento(pedido)" (productoEliminadoEvent)="verificarSiAunTienePedidos()">
+</app-tabla-productos-por-tipo>
+<app-tabla-productos-por-tipo *ngIf="pedido.postres.length>=1" [pedido]="pedido.postres"
+    (pedidoAlteradoEvent)="reEmitirEvento(pedido)" (productoEliminadoEvent)="verificarSiAunTienePedidos()">
+</app-tabla-productos-por-tipo>
+<app-tabla-productos-por-tipo *ngIf="pedido.bebidas.length>=1" [pedido]="pedido.bebidas"
+    (pedidoAlteradoEvent)="reEmitirEvento(pedido)" (productoEliminadoEvent)="verificarSiAunTienePedidos()">
+</app-tabla-productos-por-tipo>
+
+<p-confirmDialog header="Formalizar pedido" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<button id="btnConfirmar" *ngIf="(pedido.postres.length>=1||pedido.platos.length>=1 || pedido.bebidas.length>=1)"
+    type="text" (click)="confirm()" pButton icon="pi pi-check" label="Confirmar"></button>
+<!-- ver si podemos hacer dinamico el readOnly por medio de observables -->

@@ -1,15 +1,16 @@
+
 <!-- PASOS -->
-<p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="true"></p-steps>
+<p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="pSteepSoloLectura"></p-steps>
 <!-- FIN PASOS -->
 
 <ion-slides pager="false" [options]="slideOpts">
   <ion-slide *ngFor="let auxProducto of productos">
-    <app-muestreo [producto]="auxProducto" (agregarALaOrdenEvent)="mostrarDialog($event)"
-      (pasoAnteriorEvent)="cambiarPaso('anterior')" (pasoSiguienteEvent)="cambiarPaso('siguiente')"></app-muestreo>
+    <app-muestreo *ngIf="mostrarMuestreo" [producto]="auxProducto" (agregarALaOrdenEvent)="mostrarDialog($event)"
+      (pasoAnteriorEvent)="cambiarPaso('anterior')" (pasoSiguienteEvent)="cambiarPaso('siguiente')" ></app-muestreo>
   </ion-slide>
 </ion-slides>
 
-<!-- DIALOG -->
+<!-- DIALOG CANTIDAD -->
 <p-dialog *ngIf="displayDialog" header="Especifica tu pedido" [(visible)]="displayDialog" [style]="{width: '100%'}"
   [baseZIndex]="10000" class="centrado">
   <p> {{productoSeleccionado.nombre}} por {{productoSeleccionado.tipo | singular}}
@@ -22,20 +23,22 @@
   </ion-item>
   <h5 style="float: right; ">Sub total: {{productoSeleccionado.precio*cantidadPedida | precio}} </h5>
   <p-footer>
-    <ion-button type="button" (click)="displayDialog=false" color="primary" (click)="agregarAlPedido()">Listo
+    <ion-button type="button" (click)="displayDialog=false" color="primary" (click)="agregarAlPedido()" >Listo
     </ion-button>
     <ion-button type="button" (click)="displayDialog=false" color="medium">Cancelar</ion-button>
   </p-footer>
 </p-dialog>
-<!-- FIN DIALOG -->
+<!-- FIN DIALOG CANTIDAD-->
+
+<!-- DETALLADO PRODUCTO -->
+<app-detallado-del-pedido  *ngIf="!mostrarMuestreo" [pedido]="pedido" (formalizarPedidoEvent)="reEmitirEventoFormalizarPedido(pedido)" (pedidoAlteradoEvent)="reEmitirEvento(pedido)" (volverAlPasoUnoEvent)="reiniciar()"></app-detallado-del-pedido>
+<!-- FIN DETALLADO PRODUCTO -->
+
 
 
 <!-- 
-  posibilidad de skipear,
-  posibiliad de backear
   posibilidad de cancelar
   not allow to finish without menu orders
   generate a confirmation form
   work in the push notification
-
  -->
