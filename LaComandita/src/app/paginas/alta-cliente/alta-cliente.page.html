@@ -1,11 +1,14 @@
+<link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
 <ion-content class="centrado">
+  <div class="altaCL">
+    <h2 *ngIf="user.estado=='registrado'">Cliente Regular</h2>
+    <h2 *ngIf="user.estado=='anonimo'">Cliente Anónimo</h2>
 
-  <h2 *ngIf="user.estado=='registrado'">Cliente</h2>
-  <h2 *ngIf="user.estado=='anonimo'">Anonimo</h2>
-  <p-inputSwitch id="switch" [(ngModel)]="esAnonimo" (click)="cambiarFormulario()"></p-inputSwitch>
+    <img src="https://image.flaticon.com/icons/png/512/634/634741.png" height="30px"> &nbsp;&nbsp;
+     <p-inputSwitch id="switch" [(ngModel)]="esAnonimo" (click)="cambiarFormulario()"></p-inputSwitch>
 
-  <app-form-alta *ngIf="user.estado=='registrado'" [user]="user"></app-form-alta>
+    <app-form-alta *ngIf="user.estado=='registrado'" [user]="user"></app-form-alta>
 
-  <app-form-alta-anonimo *ngIf="user.estado=='anonimo'" [user]="user"></app-form-alta-anonimo>
-
+    <app-form-alta-anonimo *ngIf="user.estado=='anonimo'" [user]="user"></app-form-alta-anonimo>
+  </div>
 </ion-content>

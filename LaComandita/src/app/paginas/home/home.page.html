@@ -11,14 +11,16 @@
 
 <ion-content [fullscreen]="true">
     <div class="pantalla">
-        <div class="logo">
-            <a href="home">
-                <img class="imgLogo" src="../../../assets/images/Logo-Comandita.png">
-            </a>
-            <div class="caption">
-                ¡El mejor restaurante del mundo para comaprtir con amigos y familia un momento y sabores espectaculares!
-            </div>
-        </div>
+        <ion-card>
+            <ion-card-header>
+              <ion-card-title>¡Bienvenido!</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <img src="../../../../assets/images/Logo-Comandita.png" alt="Logo laComandita">
+              Le damos la bienvenida a la Comandita, el mejor lugar para comer de la ciudad. 
+              Puede elegir entre registrarse utilizando un perfil anónimo,  o volverse parte de nuestra clientela habitual.
+            </ion-card-content>
+          </ion-card>
         <div class="calesita">
             <ion-slides pager="true" [options]="slideOpts">
                 <ion-slide>

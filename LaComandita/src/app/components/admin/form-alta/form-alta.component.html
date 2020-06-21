@@ -1,3 +1,10 @@
+<ion-card>
+  <ion-card-content>
+    Porque nos importa la comodidad y para facilitar su registro, hemos habilitado la opción de registrase utilizando 
+    el QR de su documento para completar automáticamente sus datos.
+  </ion-card-content>
+</ion-card>
+
 <form [formGroup]="todo">
   <div class="centrado">
     <img id="fotoDePerfil" *ngIf="user.imagen && mostrarImgen" src="{{user.imagen}}" alt="perfil">
@@ -5,28 +12,28 @@
 
   </div>
   <ion-item>
-    <ion-input type="text" [(ngModel)]="user.nombre" formControlName="nombre" placeholder="nombre"></ion-input>
+    <ion-input type="text" [(ngModel)]="user.nombre" formControlName="nombre" placeholder="Nombre"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-input type="text" [(ngModel)]="user.apellido" formControlName="apellido" placeholder="apellido"></ion-input>
+    <ion-input type="text" [(ngModel)]="user.apellido" formControlName="apellido" placeholder="Apellido"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-input type="text" [(ngModel)]="user.dni" formControlName="dni" placeholder="dni"></ion-input>
+    <ion-input type="text" [(ngModel)]="user.dni" formControlName="dni" placeholder="DNI"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-input type="password" [(ngModel)]="user.password" formControlName="password" placeholder="contraseña"></ion-input>
+    <ion-input type="password" [(ngModel)]="user.password" formControlName="password" placeholder="Contraseña"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-input type="text" [(ngModel)]="user.email" formControlName="email" placeholder="correo electronico">
+    <ion-input type="text" [(ngModel)]="user.email" formControlName="email" placeholder="Correo Electrónico">
     </ion-input>
   </ion-item>
   <ion-item *ngIf="user.perfil=='supervisor'||user.perfil=='empleado' || user.perfil=='admin'">
     <ion-input type="text" [(ngModel)]="user.cuil" formControlName="cuil" placeholder="cuil"></ion-input>
   </ion-item>
-  <ion-item>
+  <!-- <ion-item>
     <ion-input type="text" [(ngModel)]="user.perfil" readonly value="user.perfil" formControlName="perfil"
       placeholder="perfil"></ion-input>
-  </ion-item>
+  </ion-item> -->
   <ion-item *ngIf="user.perfil=='empleado'">
     <ion-select interface='action-sheet' [(ngModel)]="user.tipo" formControlName="tipo" placeholder="tipo de empleado">
       <ion-select-option value="mozo">Mozo</ion-select-option>
@@ -60,8 +67,8 @@
   Dar de alta a un admin
 </ion-button>
 
-<ion-button *ngIf="user.perfil=='cliente'" color="primary" expand="full" type="submit"
+<ion-button *ngIf="user.perfil=='cliente'" color="danger" expand="block" type="submit"
   [disabled]="!user.nombre || !user.apellido || !user.dni  || !user.imagen || !user.password" (click)="darDeAlta()">
-  Dar de alta a un cliente
+  ¡Registrarse!
 </ion-button>
 <ion-spinner *ngIf='showSpinner' id="spinner" name="bubbles"></ion-spinner>

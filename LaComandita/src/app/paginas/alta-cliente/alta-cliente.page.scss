@@ -9,8 +9,20 @@ h2{
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    max-width: 80%;
+    // border-radius: 10px;
+    // border: 1px solid #7e6954;
+    // margin-bottom: 1em;
+    font-family: 'Yellowtail', cursive;
+    font-size: 50px;
+}
+
+ion-content{
+    --background: #fff url('https://www.sacher.com/en/wp-content/uploads/sites/4/fly-images/5203/Sacher_Wien_Restaurants_Sacher-Eck_1-650x9999.jpg') no-repeat center center / cover;
+}
+
+.altaCL{
+    margin: 20px;
+    padding: 10px;
+    background: rgba(241, 225, 225, 0.932);
     border-radius: 10px;
-    border: 1px solid #7e6954;
-    margin-bottom: 1em;
 }
