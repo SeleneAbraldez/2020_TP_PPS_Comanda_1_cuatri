@@ -1,6 +1,6 @@
-<ion-header>
-  <ion-toolbar class="centrado">
-    <ion-title>mozo</ion-title>
+<ion-header >
+  <ion-toolbar class="centrado" >
+    <ion-title> <img src="https://image.flaticon.com/icons/png/512/10/10542.png" height="40px"> </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,13 +9,14 @@
   <!-- LEFT MENU -->
   <p-sidebar [(visible)]="leftMenu" [modal]=false>
     <h1 style="font-weight:normal">Acciones Mozo</h1>
-    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDeEspera()">Lista de espera
+  
+  <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDeEspera()"><i class="pi pi-clock"></i> Lista de espera
     </ion-button>
-    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarFormProductos=true">Agregar producto
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarFormProductos=true"><i class="pi pi-plus"></i> Agregar producto
     </ion-button>
-    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDeConsultas()">Revisar consultas
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDeConsultas()"><i class="pi pi-check"></i> Revisar consultas
     </ion-button>
-    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDepedidos=true">Administrar pedidos
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDepedidos=true"><i class="pi pi-user-edit"></i> Administrar pedidos
     </ion-button>
 
   </p-sidebar>

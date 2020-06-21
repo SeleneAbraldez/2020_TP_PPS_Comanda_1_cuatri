@@ -2,7 +2,7 @@
   <p-accordionTab header="{{titulo}}">
     <div id="divSeparador" *ngFor="let producto of pedido">
       <p> Cantidad: {{producto.cantidad}}</p>
-      <p> Mesa: {{producto.producto.nombre}}</p>
+      <p> Pedido: {{producto.producto.nombre}}</p>
     </div>
     <ion-button *ngIf="(pedido[0].estado=='listo para preparar' && usuario.tipo!='mozo')" (click)="cambiarEstadoPedido()">Preparar</ion-button>
     <ion-button *ngIf="(pedido[0].estado=='en preparacion' && usuario.tipo!='mozo')" (click)="cambiarEstadoPedido()">Terminar</ion-button>

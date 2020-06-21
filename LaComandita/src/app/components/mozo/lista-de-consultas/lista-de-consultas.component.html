@@ -24,8 +24,8 @@
 
     </ion-row>
 
-</ion-grid>
+    <app-form-consulta *ngIf="mostrarFormConsulta" (respuestaCanceladaEvent)="mostrarFormConsulta=false"
+      [consulta]="consultaSeleccionada"></app-form-consulta>
 
-<app-form-consulta *ngIf="mostrarFormConsulta" (respuestaCanceladaEvent)="mostrarFormConsulta=false"
-  [consulta]="consultaSeleccionada"></app-form-consulta>
+</ion-grid>
 </div>

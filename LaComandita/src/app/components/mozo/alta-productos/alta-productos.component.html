@@ -6,26 +6,26 @@
     </div>
   </div>
   <ion-item>
-    <ion-input type="text" [(ngModel)]="producto.nombre" formControlName="nombre" placeholder="nombre"></ion-input>
+    <ion-input type="text" [(ngModel)]="producto.nombre" formControlName="nombre" placeholder="Nombre"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-input type="number" [(ngModel)]="producto.tiempo" formControlName="tiempo" placeholder="tiempo de elaboración">
+    <ion-input type="number" [(ngModel)]="producto.tiempo" formControlName="tiempo" placeholder="Tiempo de elaboración">
     </ion-input>
   </ion-item>
   <ion-item>
-    <ion-input type="number" [(ngModel)]="producto.precio" formControlName="precio" placeholder="precio">
+    <ion-input type="number" [(ngModel)]="producto.precio" formControlName="precio" placeholder="Precio">
     </ion-input>
   </ion-item>
   <ion-item>
     <ion-select interface='action-sheet' [(ngModel)]="producto.tipo" formControlName="tipo"
-      placeholder="tipo de producto">
+      placeholder="Tipo de producto:">
       <ion-select-option value="platos">Plato</ion-select-option>
       <ion-select-option value="postres">Postre</ion-select-option>
       <ion-select-option value="bebidas">Bebida</ion-select-option>
     </ion-select>
   </ion-item>
   <div class="centrado">
-    <textarea pInputTextarea [(ngModel)]="producto.descripcion" formControlName="descripcion" placeholder="descripcion"
+    <textarea pInputTextarea [(ngModel)]="producto.descripcion" formControlName="descripcion" placeholder="Descripción del producto"
       autoResize="autoResize" rows="5"></textarea>
   </div>
   <div id="botones">

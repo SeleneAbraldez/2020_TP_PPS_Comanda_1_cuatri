@@ -3,7 +3,7 @@
   <div class="altaCL">
     <h2 *ngIf="user.estado=='registrado'">Cliente Regular</h2>
     <h2 *ngIf="user.estado=='anonimo'">Cliente Anónimo</h2>
-
+    
     <img src="https://image.flaticon.com/icons/png/512/634/634741.png" height="30px"> &nbsp;&nbsp;
      <p-inputSwitch id="switch" [(ngModel)]="esAnonimo" (click)="cambiarFormulario()"></p-inputSwitch>
 
