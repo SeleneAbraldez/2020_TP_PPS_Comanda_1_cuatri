@@ -1,8 +1,32 @@
-#divSeparador{
-    padding-bottom: 3px;
-    border-bottom: 2px solid lightblue;
-    border-radius: 10px;
+
+ion-button{
+    --background:none;
+    .pi{
+        font-size: 140%;
+    }
 }
-p{
-    margin-left: 10px !important;
+
+#btnAceptar{
+    .pi{
+        color: lightgreen;
+    }
+}
+#btnRechazar{
+    .pi{
+        color: rgb(250, 127, 78);
+    }
+}
+    
+#divCheckBox{
+    *{
+        color: black;
+    }
+}
+.imgIcon{
+    max-width: 30px;
+    float: right;
+    margin-left: 10px;
+}
+#btnServir{
+    margin-left: 0px !important;
 }

@@ -7,14 +7,25 @@ import { IonicModule } from '@ionic/angular';
 import { CocineroPageRoutingModule } from './cocinero-routing.module';
 
 import { CocineroPage } from './cocinero.page';
+import { SidebarModule } from 'primeng/sidebar';
+import { AccordionModule } from 'primeng/accordion';
+import { ListaDeOrdenesComponent } from 'src/app/components/empleados/lista-de-ordenes/lista-de-ordenes.component';
+import { AccordionProductoComponent } from 'src/app/components/mozo/accordion-producto/accordion-producto.component';
+import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 
 @NgModule({
   imports: [
+    SidebarModule,
+    AccordionModule,
+    TriStateCheckboxModule,
     CommonModule,
     FormsModule,
     IonicModule,
     CocineroPageRoutingModule
   ],
-  declarations: [CocineroPage]
+  declarations: [CocineroPage,
+    ListaDeOrdenesComponent,
+    AccordionProductoComponent,
+]
 })
-export class CocineroPageModule {}
+export class CocineroPageModule { }
