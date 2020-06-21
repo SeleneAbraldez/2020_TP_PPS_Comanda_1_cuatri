@@ -15,7 +15,10 @@ import { MilisecondsToDatePipe } from 'src/app/pipes/miliseconds-to-date.pipe';
 import { FormConsultaComponent } from 'src/app/components/mozo/form-consulta/form-consulta.component';
 import { AccordionModule } from 'primeng/accordion';
 import { ListaDePedidosComponent } from 'src/app/components/mozo/lista-de-pedidos/lista-de-pedidos.component';
+import { AccordionProductoComponent } from 'src/app/components/mozo/accordion-producto/accordion-producto.component';
 import { PrecioPipe } from 'src/app/pipes/precio.pipe';
+import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
+import {DropdownModule} from 'primeng/dropdown';
 @NgModule({
   imports: [
     CommonModule,
@@ -26,6 +29,8 @@ import { PrecioPipe } from 'src/app/pipes/precio.pipe';
     ReactiveFormsModule,
     InputTextareaModule,
     AccordionModule,
+    TriStateCheckboxModule,
+    DropdownModule,
     TableModule
   ],
   declarations: [MozoPage,
@@ -36,7 +41,8 @@ import { PrecioPipe } from 'src/app/pipes/precio.pipe';
     ListaDeConsultasComponent,
     MilisecondsToDatePipe,
     ListaDePedidosComponent,
-    FormConsultaComponent
+    FormConsultaComponent,
+    AccordionProductoComponent
   ]
 })
 export class MozoPageModule { }

@@ -17,6 +17,7 @@ export class MozoPage implements OnInit {
   mostrarFormProductos = false;
   mostrarListadoDeConsultas = false;
   mostrarSalaDeEspera = false;
+  mostrarListaDePedidos = false;
   consultas$: Observable<any[]>;
 
 

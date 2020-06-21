@@ -15,7 +15,7 @@ export class MenuProductosComponent implements OnInit {
   @Output() pedidoAlteradoEventToPrincipal = new EventEmitter<any>();
   @Output() formalizarPedidoEventToPrincipal = new EventEmitter<any>();
 
-  pSteepSoloLectura: boolean = true;//continuar desde aca.
+  pSteepSoloLectura: boolean = true;
   mostrarMuestreo: boolean = true;
   cantidadPedida: number = 0;
   displayDialog: boolean = false;
@@ -129,8 +129,7 @@ export class MenuProductosComponent implements OnInit {
       });;
     }
     if (!existeProducto) {//si aun no pidio de este producto
-      this.pedido[tipoDeProducto].push({ producto: this.productoSeleccionado, cantidad: this.cantidadPedida });
-
+      this.pedido[tipoDeProducto].push({producto: this.productoSeleccionado, cantidad: this.cantidadPedida , estado:"listo para preparar"});
     }
   }
   agregarAlPedido() {

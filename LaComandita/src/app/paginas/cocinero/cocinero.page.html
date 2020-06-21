@@ -1,9 +1,22 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>cocinero</ion-title>
+  <ion-toolbar class="centrado">
+    <ion-title>Cocinero</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <!-- LEFT MENU -->
+  <p-sidebar [(visible)]="leftMenu" [modal]=false>
+    <h1 style="font-weight:normal">Acciones Cocinero</h1>
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDepedidos=true">Ver ordenes
+    </ion-button>
+  </p-sidebar>
+  <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"
+    (click)="leftMenu = true" (click)="mostrarListaDepedidos=false"></ion-icon>
+  <!-- FIN LEFT MENU -->
+
+  <!-- LISTA DE PEDIDOS -->
+  <app-lista-de-ordenes *ngIf="mostrarListaDepedidos"></app-lista-de-ordenes>
+  <!-- FIN LISTA DE PEDIDOS -->
 </ion-content>

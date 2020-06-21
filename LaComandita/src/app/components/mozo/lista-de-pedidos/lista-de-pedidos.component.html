@@ -1,42 +1,32 @@
-<p-accordion *ngIf="listaDePedidos.length>=1">
-  <p-accordionTab *ngFor="let pedido of listaDePedidos"
-    header="Codigo de Pedido: '{{pedido.codigoPedido | uppercase}}'">
-    <p> Cliente: {{pedido.cliente.nombre}}</p>
-    <p> Mesa: {{pedido.cliente.mesa.codigo}}</p>
-    <p> Facturacion: {{pedido.facturacion | precio}}</p>
-    <!-- PLATOS -->
-    <p-accordion *ngIf="pedido.platos.length>=1">
-      <p-accordionTab header="PLATOS">
-        <div id="divSeparador" *ngFor="let plato of pedido.platos">
-          <p> Cantidad: {{plato.cantidad}}</p>
-          <p> Mesa: {{plato.producto.nombre}}</p>
-        </div>
-      </p-accordionTab>
-    </p-accordion>
-    <!-- FIN PLATOS -->
+<div id="divCheckBox" class="centrado">
+  <ion-button (click)="hacerMagia()">{{btnEstados.label}}
+    <img class="imgIcon" src="{{btnEstados.imagen}}">
+  </ion-button>
+</div>
+<!-- continuar desde aca, ver como incorporar los pedidos listo para servir y el seguimiento del pedido a la vista del mozo -->
+<p-accordion>
+  <div *ngFor="let pedido of listaDePedidos">
+    <p-accordionTab *ngIf="(pedido.estado!='entregado' && pedido.estado==btnEstados.filtroSeleccionado)"
+      header="Codigo de Pedido: '{{pedido.codigoPedido | uppercase}}'">
+      <p> Cliente: {{pedido.cliente.nombre}}</p>
+      <p> Mesa: {{pedido.cliente.mesa.codigo}}</p>
+      <p> Facturacion: {{pedido.facturacion | precio}}</p>
 
-    <!-- POSTRES -->
-    <p-accordion *ngIf="pedido.postres.length>=1">
-      <p-accordionTab header="POSTRES">
-        <div id="divSeparador" *ngFor="let postre of pedido.postres">
-          <p> Cantidad: {{postre.cantidad}}</p>
-          <p> Mesa: {{postre.producto.nombre}}</p>
-        </div>
-      </p-accordionTab>
-    </p-accordion>
-    <!-- FIN POSTRES -->
+      <app-accordion-producto *ngIf="pedido.platos.length >=1" [pedido]="pedido.platos" [titulo]="'PLATOS'">
+      </app-accordion-producto>
+      <app-accordion-producto *ngIf="pedido.postres.length >=1" [pedido]="pedido.postres" [titulo]="'POSTRES'">
+      </app-accordion-producto>
+      <app-accordion-producto *ngIf="pedido.bebidas.length >=1" [pedido]="pedido.bebidas" [titulo]="'BEBIDAS'">
+      </app-accordion-producto>
 
-    <!-- BEBIDAS -->
-    <p-accordion *ngIf="pedido.bebidas.length>=1">
-      <p-accordionTab header="BEBIDAS">
-        <div id="divSeparador" *ngFor="let bebida of pedido.bebidas">
-          <p> Cantidad: {{bebida.cantidad}}</p>
-          <p> Mesa: {{bebida.producto.nombre}}</p>
-        </div>
 
-      </p-accordionTab>
-    </p-accordion>
-    <!-- FIN BEBIDAS -->
-
-  </p-accordionTab>
+      <ion-button *ngIf="(pedido.estado=='enviado' || pedido.estado=='rechazado') " id="btnAceptar"><i
+          class="pi pi-check" (click)="aceptarPedido(pedido)"></i></ion-button>
+      <ion-button *ngIf="pedido.estado=='enviado'" id="btnRechazar"><i class="pi pi-trash"
+          (click)="rechazarPedido(pedido)"></i></ion-button>
+      <ion-button *ngIf="pedido.estado=='listo para servir'" id="btnRechazar" (click)="servirPedido(pedido)">
+        <img id="btnServir" class="imgIcon" src="../../../../assets/images/servir.png">
+      </ion-button>
+    </p-accordionTab>
+  </div>
 </p-accordion>

@@ -15,12 +15,13 @@
     </ion-button>
     <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDeConsultas()">Revisar consultas
     </ion-button>
-    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDepedidos()">Administrar pedidos
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDepedidos=true">Administrar pedidos
     </ion-button>
+
   </p-sidebar>
   <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"
     (click)="leftMenu = true" (click)="mostrarFormProductos=false" (click)="mostrarSalaDeEspera=false"
-    (click)="mostrarListadoDeConsultas=false"></ion-icon>
+    (click)="mostrarListadoDeConsultas=false" (click)="mostrarListaDepedidos=false"></ion-icon>
   <!-- FIN LEFT MENU -->
 
 
@@ -36,6 +37,6 @@
   <!-- FIN LISTA DE CONSULTAS -->
 
   <!-- LISTA DE PEDIDOS -->
-  <app-lista-de-pedidos ></app-lista-de-pedidos>
+  <app-lista-de-pedidos *ngIf="mostrarListaDepedidos"></app-lista-de-pedidos>
   <!-- FIN LISTA DE PEDIDOS -->
 </ion-content>

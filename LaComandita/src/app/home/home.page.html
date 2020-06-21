@@ -7,11 +7,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-menu-productos (pedidoAlteradoEventToHome)="calcularCostoTotal($event)"></app-menu-productos>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-title style="float: right;">Total: {{totalAcumulado|precio}}</ion-title>
   </ion-toolbar>
 </ion-footer>
