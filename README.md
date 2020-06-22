@@ -44,6 +44,7 @@ Entregamos video de funcionamiento de login, alta usuarios, splash e icono.
 - [ ] Logica de Cliente - Consultas Selene
 - [ ] Diseñar home Selene
 - [ ] Arreglar mensaje Mozo consulta Selene
+
 Haciendo ciertos puntos nos dimos cuenta que habíamos tenido inconvenientes con la lógica y que teniamos que rearmarla, por lo que hicimos varias llamadas por meet haciendo bastante borrón y cuenta nueva a casi todo el codigo. Esto nos llevó a tener que atrasar ciertos puntos que teníamos pensados para esta semana como la mayoria de la logica del cocinero.
 
 
