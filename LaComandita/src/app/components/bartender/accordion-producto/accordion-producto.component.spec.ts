@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ListaDeOrdenesComponent } from './lista-de-ordenes.component';
+import { AccordionProductoComponent } from './accordion-producto.component';
 
-describe('ListaDeOrdenesComponent', () => {
-  let component: ListaDeOrdenesComponent;
-  let fixture: ComponentFixture<ListaDeOrdenesComponent>;
+describe('AccordionProductoComponent', () => {
+  let component: AccordionProductoComponent;
+  let fixture: ComponentFixture<AccordionProductoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListaDeOrdenesComponent ],
+      declarations: [ AccordionProductoComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ListaDeOrdenesComponent);
+    fixture = TestBed.createComponent(AccordionProductoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

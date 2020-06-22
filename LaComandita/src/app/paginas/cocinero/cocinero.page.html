@@ -4,8 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="centrado">
   <!-- LEFT MENU -->
   <p-sidebar [(visible)]="leftMenu" [modal]=false>
     <h1 style="font-weight:normal">Acciones Cocinero</h1>
@@ -16,7 +15,27 @@
     (click)="leftMenu = true" (click)="mostrarListaDepedidos=false"></ion-icon>
   <!-- FIN LEFT MENU -->
 
-  <!-- LISTA DE PEDIDOS -->
-  <app-lista-de-ordenes *ngIf="mostrarListaDepedidos"></app-lista-de-ordenes>
-  <!-- FIN LISTA DE PEDIDOS -->
+  <ion-button (click)="cambiarImagenDeBoton()">{{btnEstados.label}}
+    <img class="imgIcon" src="{{btnEstados.imagen}}">
+  </ion-button>
+
+  <p-accordion>
+    <p-accordionTab header="PLATOS">
+      <div *ngFor="let orden of listaDePlatos">
+        <app-accordion-producto *ngIf="orden.estado== btnEstados.filtroSeleccionado" [titulo]="orden.codigoPedido"
+          [pedido]="orden.lista" (terminarEvent)="cambiarEstadoOrdenPlatos($event,orden)"
+          (prepararEvent)="cambiarEstadoOrdenPlatos($event,orden)"></app-accordion-producto>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+
+  <p-accordion>
+    <p-accordionTab header="POSTRES">
+      <div *ngFor="let orden of listaDePostres">
+        <app-accordion-producto *ngIf="orden.estado== btnEstados.filtroSeleccionado" [titulo]="orden.codigoPedido"
+          [pedido]="orden.lista" (terminarEvent)="cambiarEstadoOrdenPostres($event,orden)"
+          (prepararEvent)="cambiarEstadoOrdenPostres($event,orden)"></app-accordion-producto>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
 </ion-content>

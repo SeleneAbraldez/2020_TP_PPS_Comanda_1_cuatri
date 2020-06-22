@@ -56,13 +56,12 @@ export class PrincipalPage implements OnInit {
     }
 
     darDeAltaPedido(pedido) {
-        console.log(pedido);
         pedido["codigoPedido"] = this.generarCodigoAlfaNumerico(5);
         pedido["cliente"] = this.authService.currentUser;
         pedido["estado"] = "enviado"
-        pedido["facturacion"]=this.totalAcumulado;
+        pedido["facturacion"] = this.totalAcumulado;
         this.dataBase.crear('pedidosMozo',pedido);
-        this.toast.presentToast("Solo falta que el mozo acepte su orden.",2000,"success","Pedido realizado");
+        this.toast.presentToast("Solo falta que el mozo acepte su orden.", 2000, "success", "Pedido realizado");
     }
     constructor(
         private barcodeScanner: BarcodeScanner,

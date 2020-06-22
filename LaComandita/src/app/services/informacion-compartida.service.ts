@@ -12,6 +12,9 @@ export class InformacionCompartidaService {
   private bebidas$ = new Subject<any[]>();
   private postres$ = new Subject<any[]>();
   private pedidosMozo$ = new Subject<any[]>();
+  private pedidosPlatos$ = new Subject<any[]>();
+  private pedidosPostres$ = new Subject<any[]>();
+  private pedidosBebidas$ = new Subject<any[]>();
 
 
   listaDeUsuarios = [];
@@ -23,6 +26,57 @@ export class InformacionCompartidaService {
     private toast: ToastService
   ) { }
 
+    //PEDIDOS bebidas
+    obtenerPedidosBebidas$(): Observable<any[]> {
+      return this.pedidosBebidas$.asObservable();
+    }
+    public actualizarListaDePedidosBebidas() {
+      this.dataBase.obtenerTodos('pedidosBebidas').subscribe((snapShot) => {
+        let auxLista = [];
+  
+        snapShot.forEach((response: any) => {
+          let infoPedido = response.payload.doc.data();
+          infoPedido['id'] = response.payload.doc.id;
+          auxLista.push(infoPedido);
+        });
+        this.pedidosBebidas$.next(auxLista);
+      });
+    }
+    //FIN PEDIDOS BEBIDAS
+  //PEDIDOS POSTRES
+  obtenerPedidosPostres$(): Observable<any[]> {
+    return this.pedidosPostres$.asObservable();
+  }
+  public actualizarListaDePedidosPostres() {
+    this.dataBase.obtenerTodos('pedidosPostres').subscribe((snapShot) => {
+      let auxLista = [];
+
+      snapShot.forEach((response: any) => {
+        let infoPedido = response.payload.doc.data();
+        infoPedido['id'] = response.payload.doc.id;
+        auxLista.push(infoPedido);
+      });
+      this.pedidosPostres$.next(auxLista);
+    });
+  }
+  //FIN PEDIDOS POSTRES
+  //PEDIDOS Platos 
+  obtenerPedidosPlatos$(): Observable<any[]> {
+    return this.pedidosPlatos$.asObservable();
+  }
+  public actualizarListaDePedidosPlatos() {
+    this.dataBase.obtenerTodos('pedidosPlatos').subscribe((snapShot) => {
+      let auxLista = [];
+
+      snapShot.forEach((response: any) => {
+        let infoPedido = response.payload.doc.data();
+        infoPedido['id'] = response.payload.doc.id;
+        auxLista.push(infoPedido);
+      });
+      this.pedidosPlatos$.next(auxLista);
+    });
+  }
+  //FIN PEDIDOS platos
   //PEDIDOS MOZO 
   agregarPedido(pedido: any) {
     this.dataBase.crear('pedidosMozo', pedido);
@@ -34,7 +88,7 @@ export class InformacionCompartidaService {
   public actualizarListaDePedidosMozo() {
     this.dataBase.obtenerTodos('pedidosMozo').subscribe((snapShot) => {
       let auxLista = [];
-      
+
       snapShot.forEach((response: any) => {
         let infoPedido = response.payload.doc.data();
         infoPedido['id'] = response.payload.doc.id;

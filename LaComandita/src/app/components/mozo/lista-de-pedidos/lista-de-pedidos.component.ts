@@ -31,6 +31,28 @@ export class ListaDePedidosComponent implements OnInit {
   }
   aceptarPedido(pedido) {
     pedido.estado = "aceptado";
+    pedido.estadoPlatos = "listo para servir";//default ya esta listo
+    pedido.estadoPostres = "listo para servir";//default ya esta listo
+    pedido.estadoBebidas = "listo para servir";//default ya esta listo
+    let auxPedidoPlatos;
+    let auxPedidoPostres;
+    let auxPedidoBebidas;
+
+    if (pedido['platos'].length >= 1) {
+      pedido.estadoPlatos = "aceptado";//en caso de haber pedido se cambia a aceptado
+      auxPedidoPlatos = { idPedidoMozo: pedido.id, lista: pedido['platos'], codigoPedido: pedido.codigoPedido, estado: "aceptado" }//JSON
+      this.dataBase.crear('pedidosPlatos', auxPedidoPlatos);
+    }
+    if (pedido['postres'].length >= 1) {
+      pedido.estadoPostres = "aceptado";//en caso de haber pedido se cambia a aceptado
+      auxPedidoPostres = { idPedidoMozo: pedido.id, lista: pedido['postres'], codigoPedido: pedido.codigoPedido, estado: "aceptado" }//JSON
+      this.dataBase.crear('pedidosPostres', auxPedidoPostres);
+    }
+    if (pedido['bebidas'].length >= 1) {
+      pedido.estadoBebidas = "aceptado";//en caso de haber pedido se cambia a aceptado
+      auxPedidoBebidas = { idPedidoMozo: pedido.id, lista: pedido['bebidas'], codigoPedido: pedido.codigoPedido, estado: "aceptado" }//JSON
+      this.dataBase.crear('pedidosBebidas', auxPedidoBebidas);
+    }
     this.dataBase.actualizar('pedidosMozo', pedido.id, pedido);
     this.toast.presentToast("El pedido fue aceptado y enviado a preparacion.", 2000, "success", "Pedido aceptado");
   }
@@ -41,7 +63,7 @@ export class ListaDePedidosComponent implements OnInit {
     this.toast.presentToast("El pedido fue rechazado ", 2000, "warning", "Pedido rechazado");
 
   }
-  hacerMagia() {
+  cambiarImagenDeBoton() {
     this.btnEstados.value += 1;
     switch (this.btnEstados.value) {
       case 0:

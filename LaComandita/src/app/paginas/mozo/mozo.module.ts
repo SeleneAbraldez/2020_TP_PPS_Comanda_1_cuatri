@@ -19,6 +19,8 @@ import { AccordionProductoComponent } from 'src/app/components/mozo/accordion-pr
 import { PrecioPipe } from 'src/app/pipes/precio.pipe';
 import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
 import {DropdownModule} from 'primeng/dropdown';
+import { TransformarTextoPipe } from 'src/app/pipes/transformar-texto.pipe';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import {DropdownModule} from 'primeng/dropdown';
     AsignarMesaComponent,
     ListaDeConsultasComponent,
     MilisecondsToDatePipe,
+    TransformarTextoPipe,
     ListaDePedidosComponent,
     FormConsultaComponent,
     AccordionProductoComponent

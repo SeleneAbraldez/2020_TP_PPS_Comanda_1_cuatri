@@ -17,7 +17,7 @@ export class DatabaseService {
   }
   //Obtiene un datoS
   public obtenerById(collection: string, documentId: string) {
-    return this.firestore.collection(collection).doc(documentId).snapshotChanges();
+    return this.firestore.collection(collection).doc(documentId).get();
   }
   //Obtiene todos los datos
   public obtenerTodos(collection) {
