@@ -25,6 +25,5 @@ export class ListaDeConsultasComponent implements OnInit {
     this.consultaSeleccionada = consulta;
     this.consultaSeleccionada.estado="leido";
     this.dataBase.actualizar('consultas',this.consultaSeleccionada.id,this.consultaSeleccionada);
-    
   }
 }
