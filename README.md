@@ -41,6 +41,7 @@ Entregamos video de funcionamiento de login, alta usuarios, splash e icono.
 - [x] Logica de Cliente - Agregar Confirmación y envio a Mozo Jonathan
 - [x] Logica de Cliente - Escanear QR Jonathan
 - [x] Logica de Supervisor Altas - productos Selene
+- [x] Mail automatico de la Comandita Jonathan
 - [ ] Logica de Cliente - Consultas Selene
 - [ ] Diseñar home Selene
 - [ ] Arreglar mensaje Mozo consulta Selene
