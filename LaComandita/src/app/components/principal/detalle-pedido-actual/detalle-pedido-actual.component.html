@@ -1,0 +1,10 @@
+<app-tabla-pedido-actual-por-tipo *ngIf="pedido.platos.length>=1" [pedido]="pedido.platos">
+</app-tabla-pedido-actual-por-tipo>
+<app-tabla-pedido-actual-por-tipo *ngIf="pedido.postres.length>=1" [pedido]="pedido.postres">
+</app-tabla-pedido-actual-por-tipo>
+<app-tabla-pedido-actual-por-tipo *ngIf="pedido.bebidas.length>=1" [pedido]="pedido.bebidas">
+</app-tabla-pedido-actual-por-tipo>
+
+<!-- <app-encuesta-de-satisfaccion [mostrarEncuesta]="mostrarEncuestaDeSatisfaccion" (dialogCerradoEvent)="mostrarEncuestaDeSatisfaccion=false" [pedidoActual]="pedido">
+</app-encuesta-de-satisfaccion>
+<ion-button *ngIf="pedido.estadoEncuesta!='enviada'" (click)="mostrarEncuestaDeSatisfaccion=true">Responder encuesta</ion-button> -->

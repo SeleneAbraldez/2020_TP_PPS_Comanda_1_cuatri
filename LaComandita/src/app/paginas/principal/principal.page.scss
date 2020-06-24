@@ -6,7 +6,7 @@
     border: none;
 }
 img{
-    max-height:15em ;
+    max-height:15em;
     max-width: 15em;
     min-height:15em ;
     min-width: 15em;
@@ -41,4 +41,17 @@ ion-select{
         border-radius: 0%;
         min-width: 30px;
     }
+}
+
+#pedirCuenta{
+margin-left: 3px;
+max-height:40px;
+max-width: 30px;
+min-height:40px ;
+min-width: 30px;
+border-radius: 0%;
+}
+
+#pedirCuenta:active{
+    transform: scale(0.9);
 }

@@ -15,6 +15,7 @@ export class MuestreoComponent implements OnInit {
   ngOnInit() { }
 
   emitirEvento() {
+
     this.agregarALaOrdenEvent.emit(this.producto);
   }
   emitirPasoAnteriorEvent() {

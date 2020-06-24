@@ -26,7 +26,10 @@ import { DialogModule } from 'primeng/dialog';
 import { SliderModule } from 'primeng/slider';
 import { AccordionModule } from 'primeng/accordion';
 
-
+import { DetallePedidoActualComponent } from 'src/app/components/principal/detalle-pedido-actual/detalle-pedido-actual.component';
+import { TablaPedidoActualPorTipoComponent } from 'src/app/components/principal/tabla-pedido-actual-por-tipo/tabla-pedido-actual-por-tipo.component';
+import {RatingModule} from 'primeng/rating';
+import { EncuestaDeSatisfaccionComponent} from 'src/app/components/principal/encuesta-de-satisfaccion/encuesta-de-satisfaccion.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -35,6 +38,7 @@ import { AccordionModule } from 'primeng/accordion';
     MenubarModule,
     SidebarModule,
     ToolbarModule,
+    RatingModule,
     ConfirmDialogModule,
     PrincipalPageRoutingModule,
     InputTextareaModule,
@@ -50,7 +54,10 @@ import { AccordionModule } from 'primeng/accordion';
     MenuProductosComponent,
     DetalladoDelPedidoComponent,
     TablaProductosPorTipoComponent,
+    DetallePedidoActualComponent,
+    TablaPedidoActualPorTipoComponent,
     PrecioPipe,
+    EncuestaDeSatisfaccionComponent,
     SingularPipe
   ],
   providers: [ConfirmationService, EmailService]

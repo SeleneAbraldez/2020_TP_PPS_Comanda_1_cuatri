@@ -1,6 +1,6 @@
 <form [formGroup]="todo">
   <div class="centrado">
-    <img id="fotoDePerfil" *ngIf="user.imagen" src="{{user.imagen}}" alt="perfil">
+    <img id="fotoDePerfil" *ngIf="(user.imagen && showSpinner!=true)" src="{{user.imagen}}" alt="perfil">
   </div>
   <ion-item>
     <ion-input type="text" [(ngModel)]="user.nombre" formControlName="nombre" placeholder="nombre"></ion-input>
@@ -32,3 +32,4 @@
   (click)="darDeAlta()">
   Registrarse!
 </ion-button>
+<ion-spinner id="spinner" *ngIf="showSpinner" name="circles" ></ion-spinner>

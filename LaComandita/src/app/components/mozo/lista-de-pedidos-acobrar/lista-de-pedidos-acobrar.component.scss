@@ -1,0 +1,33 @@
+
+ion-button{
+    --color:black;
+    --background:none;
+    .pi{
+        font-size: 140%;
+    }
+}
+
+#btnCobrar{
+    .pi{
+        color: lightgreen;
+    }
+}
+#btnRechazar{
+    .pi{
+        color: rgb(250, 127, 78);
+    }
+}
+    
+#divCheckBox{
+    *{
+        color: black;
+    }
+}
+.imgIcon{
+    max-width: 30px;
+    float: right;
+    margin-left: 10px;
+}
+#btnServir{
+    margin-left: 0px !important;
+}

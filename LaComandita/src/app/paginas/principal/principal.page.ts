@@ -5,6 +5,8 @@ import { ConfirmationService, Message } from 'primeng/api';
 import { EmailService } from 'src/app/services/email.service';
 import { DatabaseService } from 'src/app/services/database.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { InformacionCompartidaService } from 'src/app/services/informacion-compartida.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-principal',
@@ -12,10 +14,13 @@ import { AuthService } from 'src/app/services/auth.service';
     styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements OnInit {
-
+    mostrarEncuestaDeSatisfaccion = false;
+    mostrarDialogPedirFactura = false;
+    pedidoActual: any;
     totalAcumulado = 0;
     mostrarFormConsultas = false;
     mostrarMenuProductos = false;
+    mostrarDetallesDelPedidoActual = false;
     slideOpts = {
         initialSlide: 0,
         speed: 200,
@@ -45,7 +50,49 @@ export class PrincipalPage implements OnInit {
         "../../../assets/images/pagPrincipal/postres/6.jpg"];
     msgs: Message[] = [];
 
+    anonimos$: Observable<any[]>;
+    listaAnonimos = [];
+    actualizarUsuario() {
+        this.dataBase.obtenerById('usuarios', this.authService.currentUser.id).subscribe(res => {//actualizo 
+            this.user = res.payload.data();
+            if (this.user.idPedidoMozo) {
+                this.dataBase.obtenerById('pedidosMozo', this.user.idPedidoMozo).subscribe(res => {
+                    if (res.payload.data()['estado'] != 'cerrado') {
+                        this.pedidoActual = res.payload.data();
+                    }
+                });
+            }
+        });
+    }
+    constructor(
+        private barcodeScanner: BarcodeScanner,
+        private toast: ToastService,
+        private emailService: EmailService,
+        private dataBase: DatabaseService,
+        private authService: AuthService,
+        private infoService: InformacionCompartidaService,
+        private confirmationService: ConfirmationService) {
+        this.user = this.authService.currentUser;
+    }
 
+    ngOnInit() {
+        this.anonimos$ = this.infoService.obtenerConsultas$();
+        this.anonimos$.subscribe(anonimos => this.listaAnonimos = anonimos);
+        this.infoService.actualizarListaUsuariosAnonimos();
+
+        let user = this.authService.currentUser;
+        if (user.idPedidoMozo) {
+            this.dataBase.obtenerById('pedidosMozo', user.idPedidoMozo).subscribe(res => {
+                if (res.payload.data()['estado'] != 'cerrado') {
+                    this.pedidoActual = res.payload.data();
+                }
+            });
+        }
+
+    }
+    mostrarConfirmacion() {
+        this.mostrarDialogPedirFactura = true;
+    }
     generarCodigoAlfaNumerico(longitud) {
         let patron = 'abcdefghijkmlnopqrstuvwxyz0123456789';
         let codigo = "";
@@ -54,25 +101,25 @@ export class PrincipalPage implements OnInit {
         }
         return codigo;
     }
-
+    confirmarRecepcionDelPedido() {
+        this.pedidoActual.estado = "recibido";
+        this.dataBase.actualizar('pedidosMozo', this.pedidoActual.id, this.pedidoActual);
+    }
     darDeAltaPedido(pedido) {
         pedido["codigoPedido"] = this.generarCodigoAlfaNumerico(5);
         pedido["cliente"] = this.authService.currentUser;
         pedido["estado"] = "enviado"
         pedido["facturacion"] = this.totalAcumulado;
-        this.dataBase.crear('pedidosMozo',pedido);
+        this.dataBase.crear('pedidosMozo', pedido);
         this.toast.presentToast("Solo falta que el mozo acepte su orden.", 2000, "success", "Pedido realizado");
-    }
-    constructor(
-        private barcodeScanner: BarcodeScanner,
-        private toast: ToastService,
-        private emailService: EmailService,
-        private dataBase: DatabaseService,
-        private authService: AuthService,
-        private confirmationService: ConfirmationService) {
-        this.user = this.authService.currentUser;
+        this.mostrarMenuProductos = false;
     }
 
+    pedirFactura() {
+        this.mostrarEncuestaDeSatisfaccion = true;
+        this.pedidoActual.estado = "pidiendo factura";
+        this.dataBase.actualizar('pedidosMozo', this.pedidoActual.id, this.pedidoActual);
+    }
     confirmarIngresoASalaDeEspera() {
         this.confirmationService.confirm({
             message: 'Esta por ingresar a la sala de espera, quiere continuar?',
@@ -81,9 +128,12 @@ export class PrincipalPage implements OnInit {
             acceptLabel: "Ir a sala de espera",
             accept: () => {
                 //cambiar la ubicacion a Sala de espera
+                let imagen = this.user.imagen;
                 this.user = this.authService.currentUser;
 
+
                 this.user['ubicado'] = 'salaDeEspera';
+                this.user['imagen'] = imagen;
                 this.dataBase.actualizar('usuarios', this.user.id, this.user).then(res => {
                     this.toast.presentToast("Ya estas en cola para ser atendido", 2000, "success", "");
                 }).catch(error => {
@@ -95,17 +145,15 @@ export class PrincipalPage implements OnInit {
     }
 
 
-    ngOnInit() {
-
-    }
     scanCode() {
+        this.actualizarUsuario();
+
         this.barcodeScanner.scan().then(barcodeData => {
             let infoQR = JSON.parse(barcodeData.text);
             switch (infoQR.tipo) {
                 case "ingreso":
-                    // alert(this.authService.currentUser.ubicado);
-                    if (this.authService.currentUser.ubicado == "salaDeEspera" ||
-                        this.authService.currentUser.ubicado == "enMesa") {
+                    if (this.user.ubicado == "salaDeEspera" ||
+                        this.user.ubicado == "enMesa") {
                         this.toast.presentToast("No puedes volver a ponerte en cola", 2000, "warning", "Operacion repetida");
                     }
                     else {
@@ -125,11 +173,7 @@ export class PrincipalPage implements OnInit {
         let retorno = false;
         if (this.authService.currentUser.mesa) {
             if (this.authService.currentUser.mesa.codigo == infoQR.value) {
-                this.dataBase.obtenerById('usuarios', this.authService.currentUser.id).subscribe(res => {//actualizo 
-                    this.user = res.payload.data();
-                })
-                // alert("ya tengo mesa")
-                //boton consulta al mozo!
+                this.actualizarUsuario();
             }
             else {
                 this.toast.presentToast("Esta mesa no corresponde a la mesa que le asignaron.", 2000, "danger", "Mesa incorrecta");
@@ -140,6 +184,7 @@ export class PrincipalPage implements OnInit {
         }
         return retorno;
     }
+
     test() {
 
         this.emailService.sendMail("Jonathan.n.haedo@gmail.com", "Hola como esttas?", true);

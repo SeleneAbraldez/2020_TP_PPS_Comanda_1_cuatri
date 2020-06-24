@@ -1,0 +1,20 @@
+<ion-card>
+  <p-accordion>
+    <p-accordionTab header="{{pedido[0].producto.tipo |uppercase }}">
+      <ion-grid>
+        <ion-row class="ion-justify-content-center centrado">
+          <ion-col size="4">Producto </ion-col>
+          <ion-col size="4">Precio </ion-col>
+          <ion-col size="4">Cant </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center centrado" *ngFor="let auxPedido of lista">
+          <ion-col size="4"><img src="{{auxPedido.producto.imagenes[0].link}}"> </ion-col>
+          <ion-col size="4">{{auxPedido.producto.precio | precio}} </ion-col>
+          <ion-col size="4">{{auxPedido.cantidad}} </ion-col>
+        </ion-row>
+      </ion-grid>
+    </p-accordionTab>
+  </p-accordion>
+</ion-card>
+<!-- <ion-button (click)="test()">CLICK</ion-button> -->

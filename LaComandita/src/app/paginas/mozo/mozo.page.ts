@@ -13,7 +13,7 @@ export class MozoPage implements OnInit {
   spinnerSalaDeEspera = true;
   listaEnEspera = [];
   listaDeconsultas = [];
-
+  mostrarListaDePedidosACobrar=false;
   mostrarFormProductos = false;
   mostrarListadoDeConsultas = false;
   mostrarSalaDeEspera = false;
@@ -31,9 +31,8 @@ export class MozoPage implements OnInit {
   ngOnInit() {
     this.consultas$ = this.infoService.obtenerConsultas$();
     this.consultas$.subscribe(consulas => this.listaDeconsultas = consulas);
-
-
   }
+
   cargarListaDeEspera() {
     this.infoService.actualizarListaDeUsuariosEnEspera();
     this.fireStore.obtenerListaDeImagenesUsuariosEnEspera();
