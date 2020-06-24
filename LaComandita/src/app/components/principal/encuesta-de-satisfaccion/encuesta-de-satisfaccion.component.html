@@ -1,0 +1,41 @@
+<div id="divDialog" *ngIf="mostrarEncuesta">
+
+    <p-dialog class="centrado" header="Encuesta de satisfaccion" [(visible)]="mostrarEncuesta" [closable]="false" [modal]="true"  [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
+        <div class="centrado">
+            <span *ngIf="msg && resultado<=4" style="margin-left:10px">{{msg}} <span
+                    style="font-size: 150%;">😡</span></span>
+            <span *ngIf="msg && resultado > 4 && resultado <= 12" style="margin-left:10px">{{msg}}<span
+                    style="font-size: 150%;">😠</span></span>
+            <span *ngIf="msg && resultado > 12 && resultado <= 25" style="margin-left:10px">{{msg}} <span
+                    style="font-size: 150%;">😐</span></span>
+            <span *ngIf="msg && resultado > 25 && resultado <= 35" style="margin-left:10px">{{msg}} <span
+                    style="font-size: 150%;">🙂</span></span>
+            <span *ngIf="msg && resultado > 35" style="margin-left:10px">{{msg}} <span
+                    style="font-size: 150%;">😊</span></span>
+        </div>
+        <p>Mozo:
+            <p-rating [(ngModel)]="puntosMozo" (onRate)="handleRate($event)" stars="10" [cancel]="false">
+            </p-rating>
+        </p>
+        <p>Restaurante:
+            <p-rating [(ngModel)]="puntosRestaurante" (onRate)="handleRate($event)" stars="10" [cancel]="false">
+            </p-rating>
+        </p>
+        <p>Mesa:
+            <p-rating [(ngModel)]="puntosMesa" (onRate)="handleRate($event)" stars="10" [cancel]="false">
+            </p-rating>
+        </p>
+        <p>Cocinero:
+            <p-rating [(ngModel)]="puntosCocinero" (onRate)="handleRate($event)" stars="10" [cancel]="false">
+            </p-rating>
+        </p>
+        <div id="DivExperiencia" class="centrado">
+            <h3 class="first">Describe tu experiencia</h3>
+            <textarea [(ngModel)]="experiencia" rows="5" cols="30" pInputTextarea></textarea>
+        </div>
+
+        <ion-button id="btnEnviar" class="btn btn-primary btnPropio" (click)="enviarEncuesta()">Enviar</ion-button>
+        <ion-button id="btnEnviar" class="btn btn-primary btnPropio" (click)="cancelar()">Cancelar</ion-button>
+    </p-dialog>
+
+</div>

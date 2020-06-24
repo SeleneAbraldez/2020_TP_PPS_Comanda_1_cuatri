@@ -1,6 +1,8 @@
 <ion-header>
   <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"
-    (click)="leftMenu = true" (click)="mostrarFormProductos=false" (click)="mostrarSalaDeEspera=false"></ion-icon>
+    (click)="actualizarUsuario()" (click)="leftMenu = true" (click)="mostrarFormProductos=false"
+    (click)="mostrarMenuProductos=false" (click)="mostrarSalaDeEspera=false"
+    (click)="mostrarDetallesDelPedidoActual=false" (click)="mostrarEncuestaDeSatisfaccion=false"></ion-icon>
 </ion-header>
 <ion-content>
 
@@ -15,56 +17,77 @@
   <p-sidebar [(visible)]="leftMenu" [modal]=false [baseZIndex]="10000">
     <h1 style="font-weight:normal">Acciones usuario</h1>
     <ion-button class="btnPropio" (click)="scanCode()" (click)="leftMenu = false">
-      <p>Escanear</p>
+      Escanear
       <img style="max-width: 30px;" src="../../../../assets/images/qr.png" alt="imagen logo QR">
     </ion-button>
-    <ion-button *ngIf="user.ubicado=='enMesa'" (click)="mostrarFormConsultas=true"  (click)="mostrarMenuProductos=false" class="btnPropio"
-      (click)="leftMenu = false">
-      <p>Consultar </p>
+    <ion-button *ngIf="user.ubicado=='enMesa'" (click)="mostrarFormConsultas=true" (click)="mostrarMenuProductos=false"
+      class="btnPropio" (click)="leftMenu = false">
+      Consultar
       <img style="max-width: 30px;" src="../../../../assets/images/request.png">
     </ion-button>
-    <ion-button *ngIf="user.ubicado=='enMesa'" class="btnPropio" (click)="leftMenu = false" (click)="mostrarMenuProductos=true" (click)="mostrarFormConsultas=false">
-      <p>Armar pedido </p> <img style="max-width: 30px;" src="../../../../assets/images/carrito.png">
+    <!-- boton repetido -->
+    <ion-button *ngIf="(user.ubicado=='enMesa' && !pedidoActual)" class=" btnPropio" (click)="leftMenu = false"
+      (click)="mostrarMenuProductos=true" (click)="mostrarFormConsultas=false">
+      Armar pedido <img style="max-width: 30px;" src="../../../../assets/images/carrito.png">
     </ion-button>
+    <ion-button *ngIf="(pedidoActual && pedidoActual.estado=='cerrado')" class=" btnPropio" (click)="leftMenu = false"
+      (click)="mostrarMenuProductos=true" (click)="mostrarFormConsultas=false">
+      Armar pedido <img style="max-width: 30px;" src="../../../../assets/images/carrito.png">
+    </ion-button>
+    <!--  fin boton repetido -->
+    <ion-button *ngIf="(user.ubicado=='enMesa') && pedidoActual" class=" btnPropio" (click)="leftMenu = false"
+      (click)="mostrarDetallesDelPedidoActual=true">
+      Detalle pedido <img style="max-width: 30px;" src="../../../../assets/images/detallePedido.png">
+    </ion-button>
+    <ion-button *ngIf="(pedidoActual && pedidoActual.estadoEncuesta!='enviada')"
+      (click)="mostrarEncuestaDeSatisfaccion=true" (click)="leftMenu = false">Responder
+      encuesta</ion-button>
   </p-sidebar>
   <!-- FIN LEFT MENU -->
 
   <!-- ARMAR PEDIDO -->
-  <app-menu-productos *ngIf="mostrarMenuProductos" (pedidoAlteradoEventToPrincipal)="calcularCostoTotal($event)" (formalizarPedidoEventToPrincipal)="darDeAltaPedido($event)"></app-menu-productos>
+  <app-menu-productos *ngIf="mostrarMenuProductos" (pedidoAlteradoEventToPrincipal)="calcularCostoTotal($event)"
+    (formalizarPedidoEventToPrincipal)="darDeAltaPedido($event)"></app-menu-productos>
   <!-- FIN ARMAR PEDIDO -->
+
+  <!-- DETALLE PEDIDO ACTUAL -->
+  <app-detalle-pedido-actual *ngIf="mostrarDetallesDelPedidoActual" [pedido]="pedidoActual"></app-detalle-pedido-actual>
+  <!-- FIN DETALLE PEDIDO ACTUAL -->
+
+  <!-- ENCUESTA DE SATISFACCION -->
+  <app-encuesta-de-satisfaccion [mostrarEncuesta]="mostrarEncuestaDeSatisfaccion"
+    (dialogCerradoEvent)="mostrarEncuestaDeSatisfaccion=false" [pedidoActual]="pedidoActual">
+  </app-encuesta-de-satisfaccion>
+  <!-- <ion-button *ngIf="pedidoActual.estadoEncuesta!='enviada'" (click)="mostrarEncuestaDeSatisfaccion=true">Responder encuesta</ion-button> -->
+  <!-- FIN ENCUESTA DE SATISFACCION -->
+
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-title style="float: right;">Total: {{totalAcumulado|precio}}</ion-title>
+    <ion-button *ngIf="(pedidoActual && pedidoActual.estado=='entregado')" (click)="confirmarRecepcionDelPedido()">
+      Recibi el pedido</ion-button>
+    <img *ngIf="mostrarDetallesDelPedidoActual && pedidoActual.estado=='recibido'" id="pedirCuenta"
+      src="../../../assets/images/pedirCuenta.png" style="max-width: 40px; float: left;"
+      (click)="mostrarConfirmacion()">
+    <ion-title *ngIf="pedidoActual" style="float: right;">Total: {{pedidoActual.facturacion|precio}}</ion-title>
+    <ion-title *ngIf="(!pedidoActual && totalAcumulado!=0)" style="float: right;">Total: {{totalAcumulado|precio}}
+    </ion-title>
   </ion-toolbar>
 </ion-footer>
-<!--  <ion-list>
-    <ion-item>
-      <ion-select value="comidas" [(ngModel)]="productoSeleccionado" placeholder="Select One">
-        <ion-select-option value="comidas">Comidas</ion-select-option>
-        <ion-select-option value="bebidas">Bebidas</ion-select-option>
-        <ion-select-option value="postres">Postres</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
 
- 
-  mientras esperas disfruta viendo nuestros platos bla bla bla
-  <ion-slides *ngIf="productoSeleccionado=='comidas'" pager="true" [options]="slideOpts">
-    <ion-slide *ngFor="let comida of comidas">
-      <img src="{{comida}}">
-    </ion-slide>
-  </ion-slides>
-  <ion-slides *ngIf="productoSeleccionado=='bebidas'" pager="true" [options]="slideOpts">
-    <ion-slide *ngFor="let bebida of bebidas">
-      <img src="{{bebida}}">
-    </ion-slide>
-  </ion-slides>
-  <ion-slides *ngIf="productoSeleccionado=='postres'" pager="true" [options]="slideOpts">
-    <ion-slide *ngFor="let postre of postres">
-      <img src="{{postre}}">
-    </ion-slide>
-  </ion-slides>
-  FIN CAROUSEL
-  <ion-button (click)="test()">ENVIAR EMAIL</ion-button> -->
+
+<p-dialog header="Pedir Factura" [(visible)]="mostrarDialogPedirFactura" [modal]="true" [style]="{width: '90%'}"
+  [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  <div class="centrado">
+    <p>Gracias por venir a "La Comandita" esperamos que halla tenido una linda experiencia.</p>
+    <img src="../../../assets/images/Logo-Comandita.png" style="max-width: 10px;">
+  </div>
+  <p><b> Quiere pedir la factura?</b></p>
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" (click)="mostrarDialogPedirFactura=false" (click)="pedirFactura()"
+      label="Si"></button>
+    <button type="button" pButton icon="pi pi-times" (click)="mostrarDialogPedirFactura=false" label="No"
+      class="ui-button-secondary"></button>
+  </p-footer>
+</p-dialog>

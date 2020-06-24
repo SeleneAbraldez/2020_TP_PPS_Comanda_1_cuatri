@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
+  val: number;
   leftMenu = false;
   rightMenu = false;
   mostrarFormRegistro = false;

@@ -19,7 +19,7 @@ export class DetalladoDelPedidoComponent implements OnInit {
 
  
 
-  confirm() {
+    confirmar() {
     this.confirmationService.confirm({
       acceptLabel: "Si",
       message: 'Esta seguro de formalizar el pedido? inmediatamente lo recibira el mozo.',

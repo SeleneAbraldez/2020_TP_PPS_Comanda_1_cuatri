@@ -12,17 +12,72 @@ export class InformacionCompartidaService {
   private bebidas$ = new Subject<any[]>();
   private postres$ = new Subject<any[]>();
   private pedidosMozo$ = new Subject<any[]>();
+  private pedidosPlatos$ = new Subject<any[]>();
+  private pedidosPostres$ = new Subject<any[]>();
+  private pedidosBebidas$ = new Subject<any[]>();
+  private usuariosAnonimos$ = new Subject<any[]>();
 
 
   listaDeUsuarios = [];
   listaClienteEnEspera = [];
-  listaDeUsuariosAnonimos = [];
+  // listaDeUsuariosAnonimos = [];
   spinnerSalaDeEspera = true;
   constructor(
     private dataBase: DatabaseService,
     private toast: ToastService
   ) { }
 
+  //PEDIDOS bebidas
+  obtenerPedidosBebidas$(): Observable<any[]> {
+    return this.pedidosBebidas$.asObservable();
+  }
+  public actualizarListaDePedidosBebidas() {
+    this.dataBase.obtenerTodos('pedidosBebidas').subscribe((snapShot) => {
+      let auxLista = [];
+
+      snapShot.forEach((response: any) => {
+        let infoPedido = response.payload.doc.data();
+        infoPedido['id'] = response.payload.doc.id;
+        auxLista.push(infoPedido);
+      });
+      this.pedidosBebidas$.next(auxLista);
+    });
+  }
+  //FIN PEDIDOS BEBIDAS
+  //PEDIDOS POSTRES
+  obtenerPedidosPostres$(): Observable<any[]> {
+    return this.pedidosPostres$.asObservable();
+  }
+  public actualizarListaDePedidosPostres() {
+    this.dataBase.obtenerTodos('pedidosPostres').subscribe((snapShot) => {
+      let auxLista = [];
+
+      snapShot.forEach((response: any) => {
+        let infoPedido = response.payload.doc.data();
+        infoPedido['id'] = response.payload.doc.id;
+        auxLista.push(infoPedido);
+      });
+      this.pedidosPostres$.next(auxLista);
+    });
+  }
+  //FIN PEDIDOS POSTRES
+  //PEDIDOS Platos 
+  obtenerPedidosPlatos$(): Observable<any[]> {
+    return this.pedidosPlatos$.asObservable();
+  }
+  public actualizarListaDePedidosPlatos() {
+    this.dataBase.obtenerTodos('pedidosPlatos').subscribe((snapShot) => {
+      let auxLista = [];
+
+      snapShot.forEach((response: any) => {
+        let infoPedido = response.payload.doc.data();
+        infoPedido['id'] = response.payload.doc.id;
+        auxLista.push(infoPedido);
+      });
+      this.pedidosPlatos$.next(auxLista);
+    });
+  }
+  //FIN PEDIDOS platos
   //PEDIDOS MOZO 
   agregarPedido(pedido: any) {
     this.dataBase.crear('pedidosMozo', pedido);
@@ -34,7 +89,7 @@ export class InformacionCompartidaService {
   public actualizarListaDePedidosMozo() {
     this.dataBase.obtenerTodos('pedidosMozo').subscribe((snapShot) => {
       let auxLista = [];
-      
+
       snapShot.forEach((response: any) => {
         let infoPedido = response.payload.doc.data();
         infoPedido['id'] = response.payload.doc.id;
@@ -125,7 +180,6 @@ export class InformacionCompartidaService {
     });
   }
   //FIN CONSULTAS
-
   public actualizarListaDeUsuariosEnEspera() {
     this.listaClienteEnEspera = [];
     this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
@@ -148,7 +202,7 @@ export class InformacionCompartidaService {
       });
     })
   }
-  public actualizarListaDeUsuariosAnonimos() {
+ /* public actualizarListaDeUsuariosAnonimos() {
     this.listaDeUsuariosAnonimos = [];
     this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
       snapShot.forEach((response: any) => {
@@ -159,7 +213,27 @@ export class InformacionCompartidaService {
         }
       });
     })
+  }*/
+
+  //PEDIDOS USUARIOS ANONIMOS
+  obtenerUsuariosAnonimos$(): Observable<any[]> {
+    return this.usuariosAnonimos$.asObservable();
   }
+  public actualizarListaUsuariosAnonimos() {
+    this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
+      let auxLista = [];
+      snapShot.forEach((response: any) => {
+        let infoUser = response.payload.doc.data();
+        if (infoUser.estado == "anonimo") {
+          infoUser['id'] = response.payload.doc.id;
+          auxLista.push(infoUser);
+        }
+      });
+      this.usuariosAnonimos$.next(auxLista);
+    });
+    
+  }
+  //FIN USUARIOS ANONIMOS
 
   public verificarExistenciaDeUsuario(user) {
     let retorno = false;

@@ -129,25 +129,32 @@ export class MenuProductosComponent implements OnInit {
       });;
     }
     if (!existeProducto) {//si aun no pidio de este producto
-      this.pedido[tipoDeProducto].push({producto: this.productoSeleccionado, cantidad: this.cantidadPedida , estado:"listo para preparar"});
+      this.pedido[tipoDeProducto].push({ producto: this.productoSeleccionado, cantidad: this.cantidadPedida, estado: "listo para preparar" });
     }
   }
   agregarAlPedido() {
-    let tipoDeProducto = this.productoSeleccionado['tipo'];
-    switch (tipoDeProducto) {
-      case "platos":
-        this.agregarProductoAlPedido(tipoDeProducto);
-        break;
-      case "bebidas":
-        this.agregarProductoAlPedido(tipoDeProducto);
-        break;
-      case "postres":
-        this.agregarProductoAlPedido(tipoDeProducto);
-        break;
+
+    if (this.cantidadPedida != 0) {
+      console.log(this.cantidadPedida);
+      console.log("-------");
+      let tipoDeProducto = this.productoSeleccionado['tipo'];
+      switch (tipoDeProducto) {
+        case "platos":
+          this.agregarProductoAlPedido(tipoDeProducto);
+          break;
+        case "bebidas":
+          this.agregarProductoAlPedido(tipoDeProducto);
+          break;
+        case "postres":
+          this.agregarProductoAlPedido(tipoDeProducto);
+          break;
+      }
+      this.reEmitirEvento(this.pedido);
+    }
+    else{
+      this.toast.presentToast("Seleccione la cantidad deseada moviendo la barra.",2000,'warning',"");
     }
 
-    console.log(this.pedido);
-    this.reEmitirEvento(this.pedido);
   }
 
   cambiarPaso(direccion) {

@@ -18,11 +18,15 @@
     </ion-button>
     <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDepedidos=true"><i class="pi pi-user-edit"></i> Administrar pedidos
     </ion-button>
+    <ion-button expand="full" (click)="leftMenu = false" color="success" (click)="mostrarListaDePedidosACobrar=true">
+      Cobrar a clientes </ion-button>
 
   </p-sidebar>
+
   <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"
     (click)="leftMenu = true" (click)="mostrarFormProductos=false" (click)="mostrarSalaDeEspera=false"
-    (click)="mostrarListadoDeConsultas=false" (click)="mostrarListaDepedidos=false"></ion-icon>
+    (click)="mostrarListadoDeConsultas=false" (click)="mostrarListaDepedidos=false"
+    (click)="mostrarListaDePedidosACobrar=false"></ion-icon>
   <!-- FIN LEFT MENU -->
 
 
@@ -40,4 +44,8 @@
   <!-- LISTA DE PEDIDOS -->
   <app-lista-de-pedidos *ngIf="mostrarListaDepedidos"></app-lista-de-pedidos>
   <!-- FIN LISTA DE PEDIDOS -->
+
+  <!-- LISTA DE PEDIDOS A COBRAR-->
+  <app-lista-de-pedidos-acobrar *ngIf="mostrarListaDePedidosACobrar"></app-lista-de-pedidos-acobrar>
+  <!-- FIN LISTA DE PEDIDOS  A COBRAR-->
 </ion-content>

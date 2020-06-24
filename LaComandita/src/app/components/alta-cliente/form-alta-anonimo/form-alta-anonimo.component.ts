@@ -7,6 +7,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 import { InformacionCompartidaService } from 'src/app/services/informacion-compartida.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form-alta-anonimo',
@@ -14,7 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./form-alta-anonimo.component.scss'],
 })
 export class FormAltaAnonimoComponent implements OnInit {
-
+  linkImagen = "";
   showSpinner: any = false;
   todo: FormGroup;
   @Input() user = {
@@ -32,6 +33,8 @@ export class FormAltaAnonimoComponent implements OnInit {
   nombreDeImagen: string;
   pathDeImagen: any;
   //fin TomarFotografia
+  anonimos$: Observable<any[]>;
+  listaAnonimos = [];
 
   constructor(
     private dataBase: DatabaseService,
@@ -47,6 +50,16 @@ export class FormAltaAnonimoComponent implements OnInit {
     });
   }
 
+  ngOnInit() {
+    this.anonimos$ = this.infoService.obtenerUsuariosAnonimos$();
+    this.anonimos$.subscribe(anonimos => this.listaAnonimos = anonimos);
+    this.infoService.actualizarListaUsuariosAnonimos();
+
+    this.user.email = this.generarCodigoAlfaNumerico(5) + "@gmail.com";
+    // this.infoService.actualizarListaDeUsuariosAnonimos();
+    console.log(this.user.email);
+  }
+
   generarCodigoAlfaNumerico(longitud) {
     let patron = 'abcdefghijkmlnopqrstuvwxyz0123456789';
     let codigo = "";
@@ -55,11 +68,7 @@ export class FormAltaAnonimoComponent implements OnInit {
     }
     return codigo;
   }
-  ngOnInit() {
-    this.user.email = this.generarCodigoAlfaNumerico(5) + "@gmail.com";
-    this.infoService.actualizarListaDeUsuariosAnonimos();
-    console.log(this.user.email);
-  }
+
 
   componerNombreDeImagen(usuario: string, fecha: number) {
     this.nombreDeImagen = usuario + '_' + fecha + '.jpg';
@@ -81,27 +90,47 @@ export class FormAltaAnonimoComponent implements OnInit {
       this.toast.presentToast(err, 2000, 'danger', 'ERROR');
     });
   }
-  subirImagenAFireStorage() {
+  subirImagenAFireStorage2() {
     this.pathDeImagen.putString(this.imagen, 'data_url').then((response) => {
       this.showSpinner = false;
       this.toast.presentToast("El usuario fue creado con exito", 2000, 'success', 'Usuario creado');
     });
 
   }
-  //ver como separo las imagenes en firestorage para no tener una sola lista sino se hace mas lento
+  subirImagenAFireStorage(auxUser) {
+    let algo;
+    let uploadTask = this.pathDeImagen.putString(this.imagen, 'data_url');
+    uploadTask.on('state_changed', function (snapshot) {
+    }, function (error) {
+    }, function () {
+      uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+        auxUser['link'] = downloadURL;
+      });
+    });
+
+    setTimeout(() => {
+      this.showSpinner = true;
+      this.dataBase.crear('usuarios', auxUser).then(res => {
+        this.showSpinner = false;
+        auxUser['id'] = res.id;
+        this.router.navigateByUrl('/principal');
+        this.authService.currentUser = auxUser;
+        this.toast.presentToast("El usuario fue creado con exito", 2000, 'success', 'Usuario creado');
+        this.user.imagen = '';
+      });
+    }, 5000);
+  }
+
   darDeAlta() {
+    this.showSpinner = true;
     let auxUser = this.user;
     auxUser.imagen = this.nombreDeImagen;
-    // auxUser['ubicado'] = 'salaDeEspera';
-    this.showSpinner = true;
-    this.subirImagenAFireStorage();
-    this.dataBase.crear('usuarios', auxUser);
-    this.authService.currentUser = auxUser;
-    this.user.imagen = '';
-    setTimeout(() => {
-      
-      this.router.navigateByUrl('/principal');
-    }, 2000);
+    auxUser['ubicado'] = '';
+    // this.subirImagenAFireStorage();
+    this.subirImagenAFireStorage(auxUser);
+
+
+
   }
 }
 

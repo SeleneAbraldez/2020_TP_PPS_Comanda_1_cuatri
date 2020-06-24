@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
@@ -12,11 +13,14 @@ import { DetalladoDelPedidoComponent } from 'src/app/components/principal/detall
 import { TablaProductosPorTipoComponent } from 'src/app/components/principal/tabla-productos-por-tipo/tabla-productos-por-tipo.component';
 import { StepsModule } from 'primeng/steps';
 import { SingularPipe } from 'src/app/pipes/singular.pipe';
-import {DialogModule} from 'primeng/dialog';
-import {SliderModule} from 'primeng/slider';
-import {AccordionModule} from 'primeng/accordion';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ConfirmationService} from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
+import { SliderModule } from 'primeng/slider';
+import { AccordionModule } from 'primeng/accordion';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+
+import { EncuestaDeSatisfaccionComponent} from 'src/app/components/principal/encuesta-de-satisfaccion/encuesta-de-satisfaccion.component';
+import {RatingModule} from 'primeng/rating';
 @NgModule({
   imports: [
     CommonModule,
@@ -27,7 +31,9 @@ import {ConfirmationService} from 'primeng/api';
     DialogModule,
     SliderModule,
     AccordionModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ReactiveFormsModule,
+    RatingModule
   ],
   declarations: [HomePage,
     MuestreoComponent,
@@ -35,7 +41,9 @@ import {ConfirmationService} from 'primeng/api';
     SingularPipe,
     MenuProductosComponent,
     DetalladoDelPedidoComponent,
-    TablaProductosPorTipoComponent],
-    providers:[ConfirmationService]
+    TablaProductosPorTipoComponent,
+    EncuestaDeSatisfaccionComponent
+    ],
+  providers: [ConfirmationService]
 })
 export class HomePageModule { }

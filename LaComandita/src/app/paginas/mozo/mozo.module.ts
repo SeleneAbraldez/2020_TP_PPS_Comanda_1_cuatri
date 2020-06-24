@@ -15,10 +15,14 @@ import { MilisecondsToDatePipe } from 'src/app/pipes/miliseconds-to-date.pipe';
 import { FormConsultaComponent } from 'src/app/components/mozo/form-consulta/form-consulta.component';
 import { AccordionModule } from 'primeng/accordion';
 import { ListaDePedidosComponent } from 'src/app/components/mozo/lista-de-pedidos/lista-de-pedidos.component';
+import { ListaDePedidosACobrarComponent } from 'src/app/components/mozo/lista-de-pedidos-acobrar/lista-de-pedidos-acobrar.component';
 import { AccordionProductoComponent } from 'src/app/components/mozo/accordion-producto/accordion-producto.component';
 import { PrecioPipe } from 'src/app/pipes/precio.pipe';
 import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
 import {DropdownModule} from 'primeng/dropdown';
+import { TransformarTextoPipe } from 'src/app/pipes/transformar-texto.pipe';
+import {DialogModule} from 'primeng/dialog';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -30,6 +34,7 @@ import {DropdownModule} from 'primeng/dropdown';
     InputTextareaModule,
     AccordionModule,
     TriStateCheckboxModule,
+    DialogModule,
     DropdownModule,
     TableModule
   ],
@@ -40,6 +45,8 @@ import {DropdownModule} from 'primeng/dropdown';
     AsignarMesaComponent,
     ListaDeConsultasComponent,
     MilisecondsToDatePipe,
+    ListaDePedidosACobrarComponent,
+    TransformarTextoPipe,
     ListaDePedidosComponent,
     FormConsultaComponent,
     AccordionProductoComponent

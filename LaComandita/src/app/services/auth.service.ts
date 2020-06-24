@@ -8,11 +8,20 @@ import { Vibration } from '@ionic-native/vibration/ngx';
   providedIn: 'root'
 })
 export class AuthService {
-  currentUser: any;
+  currentUser: any;/* = {
+    perfil: "cliente",
+    imagen: "ho202@gmail.com_1592920297966.jpg",
+    estado: "anonimo", 
+    email: "ho202@gmail.com",
+    id:"aBycTQyh2Uj4xlei5YdC",
+    ubicado: "",
+    nombre: "Jonathan",
+    idPedidoMozo: null
+  };*/
   isLogged: any = false;
   constructor(private angularFireAuth: AngularFireAuth,
     private toast: ToastService,
-    private vibration:Vibration
+    private vibration: Vibration
   ) {
     this.angularFireAuth.authState.subscribe(user => (this.isLogged = user));
   }

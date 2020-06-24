@@ -1,0 +1,13 @@
+<p-accordion>
+  <p-accordionTab header="Orden: {{titulo}}">
+    <div id="divSeparador" *ngFor="let producto of pedido">
+      <p> Cantidad: {{producto.cantidad}}</p>
+      <p> Mesa: {{producto.producto.nombre}}</p>
+      <ion-button *ngIf="producto.estado=='listo para preparar'" (click)="preparar(producto)">Preparar<img
+          class="imgIcon" src="../../../../assets/images/prepararBartender.png"></ion-button>
+      <ion-button *ngIf="producto.estado=='en preparacion'" (click)="terminar(producto)">Terminar<img class="imgIcon"
+          src="../../../../assets/images/terminarBartender.png"></ion-button>
+    </div>
+  </p-accordionTab>
+
+</p-accordion>

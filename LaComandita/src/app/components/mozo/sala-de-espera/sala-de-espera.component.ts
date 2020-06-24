@@ -33,7 +33,6 @@ export class SalaDeEsperaComponent implements OnInit {
   }
   asignarMesa(usuario) {
     this.usuarioSeleccionado = usuario;
-    console.log("USIAROO",this.usuarioSeleccionado);
     this.mostrarFormAsignarMesa=true;
     
   }

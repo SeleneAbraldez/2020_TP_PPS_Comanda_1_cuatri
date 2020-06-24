@@ -22,18 +22,60 @@ export class ListaDePedidosComponent implements OnInit {
   constructor(private infoService: InformacionCompartidaService,
     private dataBase: DatabaseService,
     private toast: ToastService) { }
-
+  mostrar(pedido) {
+    console.log(pedido);
+  }
   ngOnInit() {
     this.infoService.actualizarListaDeConsultasMozo();
     this.pedidosMozo$ = this.infoService.obtenerPedidosMozo$();
     this.pedidosMozo$.subscribe(pedidos => this.listaDePedidos = pedidos);
     this.infoService.actualizarListaDePedidosMozo();
+
+
+
   }
   aceptarPedido(pedido) {
+    this.dataBase.obtenerById('usuarios', pedido.cliente.id).subscribe(res => {//actualizo 
+      pedido.cliente = res.payload.data();
+
+    });
     pedido.estado = "aceptado";
-    this.dataBase.actualizar('pedidosMozo', pedido.id, pedido);
-    this.toast.presentToast("El pedido fue aceptado y enviado a preparacion.", 2000, "success", "Pedido aceptado");
+    pedido.estadoPlatos = "listo para servir";//default ya esta listo
+    pedido.estadoPostres = "listo para servir";//default ya esta listo
+    pedido.estadoBebidas = "listo para servir";//default ya esta listo
+    let auxPedidoPlatos;
+    let auxPedidoPostres;
+    let auxPedidoBebidas;
+
+    if (pedido['platos'].length >= 1) {
+      pedido.estadoPlatos = "aceptado";//en caso de haber pedido se cambia a aceptado
+      auxPedidoPlatos = { idPedidoMozo: pedido.id, lista: pedido['platos'], codigoPedido: pedido.codigoPedido, estado: "aceptado" }//JSON
+      this.dataBase.crear('pedidosPlatos', auxPedidoPlatos);
+    }
+    if (pedido['postres'].length >= 1) {
+      pedido.estadoPostres = "aceptado";//en caso de haber pedido se cambia a aceptado
+      auxPedidoPostres = { idPedidoMozo: pedido.id, lista: pedido['postres'], codigoPedido: pedido.codigoPedido, estado: "aceptado" }//JSON
+      this.dataBase.crear('pedidosPostres', auxPedidoPostres);
+    }
+    if (pedido['bebidas'].length >= 1) {
+      pedido.estadoBebidas = "aceptado";//en caso de haber pedido se cambia a aceptado
+      auxPedidoBebidas = { idPedidoMozo: pedido.id, lista: pedido['bebidas'], codigoPedido: pedido.codigoPedido, estado: "aceptado" }//JSON
+      this.dataBase.crear('pedidosBebidas', auxPedidoBebidas);
+    }
+    setTimeout(() => {
+      this.dataBase.actualizar('pedidosMozo', pedido.id, pedido);
+      this.enlazarPedidoConCliente(pedido);//guardo el idPedidoMozo en el cliente
+      this.toast.presentToast("El pedido fue aceptado y enviado a preparacion.", 2000, "success", "Pedido aceptado");
+    }, 1000);
   }
+
+  enlazarPedidoConCliente(pedido) {
+    console.log(pedido);
+
+    pedido.cliente['idPedidoMozo'] = pedido.id;
+    this.dataBase.actualizar('usuarios', pedido.cliente.id, pedido.cliente);
+  }
+
   rechazarPedido(pedido) {
     console.log("RECAZAS");
     pedido.estado = "rechazado";
@@ -41,7 +83,7 @@ export class ListaDePedidosComponent implements OnInit {
     this.toast.presentToast("El pedido fue rechazado ", 2000, "warning", "Pedido rechazado");
 
   }
-  hacerMagia() {
+  cambiarImagenDeBoton() {
     this.btnEstados.value += 1;
     switch (this.btnEstados.value) {
       case 0:
@@ -75,7 +117,10 @@ export class ListaDePedidosComponent implements OnInit {
 
   servirPedido(pedido) {
     pedido.estado = "entregado";
-    console.log(pedido);
-    // this.dataBase.actualizar('pedidosMozo', pedido.id, pedido);
+    pedido.estadoPlatos = "entregado";
+    pedido.estadoPostres = "entregado";
+    pedido.estadoBebidas = "entregado";
+    pedido.estadoEncuesta = "";
+    this.dataBase.actualizar('pedidosMozo', pedido.id, pedido);
   }
 }

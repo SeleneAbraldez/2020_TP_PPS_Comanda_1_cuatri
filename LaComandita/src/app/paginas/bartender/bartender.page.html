@@ -1,9 +1,32 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>bartender</ion-title>
+  <ion-toolbar class="centrado">
+    <ion-title>Bartender</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="centrado">
+  <!-- LEFT MENU -->
+  <p-sidebar [(visible)]="leftMenu" [modal]=false>
+    <h1 style="font-weight:normal">Acciones Bartender</h1>
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDepedidos=true">Ver ordenes
+    </ion-button>
+  </p-sidebar>
+  <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"
+    (click)="leftMenu = true" (click)="mostrarListaDepedidos=false"></ion-icon>
+  <!-- FIN LEFT MENU -->
+
+  <ion-button (click)="cambiarImagenDeBoton()">{{btnEstados.label}}
+    <img class="imgIcon" src="{{btnEstados.imagen}}">
+  </ion-button>
+
+  <p-accordion>
+    <p-accordionTab header="BEBIDAS">
+      <div *ngFor="let orden of listaDeBebidas">
+        <app-accordion-producto *ngIf="orden.estado== btnEstados.filtroSeleccionado" [titulo]="orden.codigoPedido"
+          [pedido]="orden.lista" (terminarEvent)="cambiarEstadoOrden($event,orden)"
+          (prepararEvent)="cambiarEstadoOrden($event,orden)"></app-accordion-producto>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
 
 </ion-content>

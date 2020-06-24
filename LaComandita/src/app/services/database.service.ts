@@ -27,8 +27,7 @@ export class DatabaseService {
   public actualizar(collection: string, documentId: string, data: any) {
     return this.firestore.collection(collection).doc(documentId).set(data);
   }
-
-
+  
   //#region MODO DE USO
   /*leerTodasLasVotaciones(collection) {
     this.database.obtenerTodos(collection).subscribe((snapShot) => {

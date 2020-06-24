@@ -9,10 +9,8 @@ import { CocineroPageRoutingModule } from './cocinero-routing.module';
 import { CocineroPage } from './cocinero.page';
 import { SidebarModule } from 'primeng/sidebar';
 import { AccordionModule } from 'primeng/accordion';
-import { ListaDeOrdenesComponent } from 'src/app/components/empleados/lista-de-ordenes/lista-de-ordenes.component';
-import { AccordionProductoComponent } from 'src/app/components/mozo/accordion-producto/accordion-producto.component';
 import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
-
+import { AccordionProductoComponent} from 'src/app/components/cocinero/accordion-producto/accordion-producto.component';
 @NgModule({
   imports: [
     SidebarModule,
@@ -24,8 +22,7 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
     CocineroPageRoutingModule
   ],
   declarations: [CocineroPage,
-    ListaDeOrdenesComponent,
     AccordionProductoComponent,
-]
+  ]
 })
 export class CocineroPageModule { }

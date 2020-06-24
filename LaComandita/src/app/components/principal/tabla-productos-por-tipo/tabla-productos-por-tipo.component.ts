@@ -28,24 +28,26 @@ export class TablaProductosPorTipoComponent implements OnInit {
 
       this.lista = this.pedido;
     }
-    console.log(this.lista);
   }
 
 
   buscarProducto(producto) {
+    let retorno = 0;
     for (let i = 0; i < this.lista.length; i++) {
-
-      if (producto.nombre == this.lista[i].nombre) {
-        return i;
+      if (producto.producto.nombre == this.lista[i].producto.nombre) {
+        retorno = i;
       }
     };
+    return retorno;
   }
 
   agregarUnidad(producto) {
     let indice = this.buscarProducto(producto);
     this.lista[indice].cantidad++;
     this.pedidoAlteradoEvent.emit(this.pedido);
-    console.log("AGREGAR");
+    console.log(producto);
+    console.log("AGREGAR --" + indice);
+    console.log(this.lista);
   }
   restarUnidad(producto) {
     let indice = this.buscarProducto(producto);
