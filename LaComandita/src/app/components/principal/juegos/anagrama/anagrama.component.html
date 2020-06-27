@@ -1,0 +1,37 @@
+<ion-content class="centrado" [fullscreen]="true">
+
+  <div>
+    <img *ngIf="empesarPartida" src="../../../../../assets/images/juegos/actualizar.png" id="btnActualizar" (click)=cambiarPalabraYDescontar()>
+
+    <div *ngIf="palabra && empesarPartida" class="marginBottom overflowHidden">
+      <div id="divContadorIntentos">
+        <h5>Vidas</h5>
+        <p>{{vidas}}</p>
+      </div>
+      <img *ngFor="let letra of arrayPalabra" src="../../../../../assets/images/juegos/abc/{{letra}}.png">
+    </div>
+  </div>
+
+  <ion-button *ngIf="!empesarPartida" id="btnComenzar" class="btn btn-primary col-4 buttonAnimado" (click)="comenzar()">
+    Empezar</ion-button>
+  <div *ngIf="empesarPartida">
+    <div>
+      <h1 *ngIf="mostrarPalabraSecreta">La palabra era: "{{palabra}}"</h1>
+    </div>
+
+    <div>
+      <!-- ME RINDO -->
+      <ion-button color="danger" *ngIf="!mostrar" (click)=cambiarEstado()> Me rindo</ion-button>
+      <ion-button *ngIf="mostrar" (click)=mostrarPalabra() color="warning">Mostrar palabra </ion-button>
+      <!-- FIN ME RINDO -->
+
+      <ion-button class="input-group-text " id="btnComparar" color="success" (click)="compararPalabra()">Comparar
+      </ion-button>
+    </div>
+    <form (ngSubmit)="logForm()">
+      <ion-input type="text" [(ngModel)]="palabraIngresada" name="title"></ion-input>
+    </form>
+    <!-- <input type="input" class="form-control borderTransicionColores centrado" placeholder="palabra"
+        [(ngModel)]="palabraIngresada" name="palabra ingresada" aria-label="palabra" aria-describedby="basic-addon1"> -->
+  </div>
+</ion-content>
