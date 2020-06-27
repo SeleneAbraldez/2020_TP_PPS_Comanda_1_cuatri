@@ -75,7 +75,7 @@ export class FormConsultasComponent implements OnInit {
     }
 
     this.mostrarAdvertencia = false;
-    this.cancelarConsulta();//para cerrar el form una ves enviada la respuesta
+    this.cancelarConsulta();//para cerrar el form una vez enviada la respuesta
     this.toast.presentToast("Se ha enviado la consulta, le avisaremos cuando tenga una respuesta.", 2000, "success", "Consulta enviada");
 
   }

@@ -55,15 +55,15 @@ export class EncuestaDeSatisfaccionComponent implements OnInit {
     }
     else {
       let totalDePuntos = this.puntosCocinero + this.puntosMesa + this.puntosMozo + this.puntosRestaurante;
-      alert(this.puntosCocinero);
-      alert( this.puntosMozo);
-      alert(this.puntosRestaurante);
-      alert(this.puntosRestaurante);
-      alert( this.experiencia);
-      alert(this.pedidoActual.cliente.email);
-      alert(this.pedidoActual.cliente.mesa.codigo);
-      alert(this.pedidoActual.codigoPedido);
-      alert(totalDePuntos);
+      // alert(this.puntosCocinero);
+      // alert( this.puntosMozo);
+      // alert(this.puntosRestaurante);
+      // alert(this.puntosRestaurante);
+      // alert( this.experiencia);
+      // alert(this.pedidoActual.cliente.email);
+      // alert(this.pedidoActual.cliente.mesa.codigo);
+      // alert(this.pedidoActual.codigoPedido);
+      // alert(totalDePuntos);
       informacion = {
         "puntosCocinero": this.puntosCocinero,
         "puntosMozo": this.puntosMozo,

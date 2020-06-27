@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar class="centrado">
-    <ion-title>Cocinero</ion-title>
+    <ion-title><img src="https://www.nicepng.com/png/full/432-4329176_cooking-chef-clipart-cooking-icon-png.png" height="40px"> </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,17 +8,20 @@
   <!-- LEFT MENU -->
   <p-sidebar [(visible)]="leftMenu" [modal]=false>
     <h1 style="font-weight:normal">Acciones Cocinero</h1>
-    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDepedidos=true">Ver ordenes
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDepedidos=true"><i class="pi pi-align-justify"></i>Ver ordenes
     </ion-button>
   </p-sidebar>
   <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"
     (click)="leftMenu = true" (click)="mostrarListaDepedidos=false"></ion-icon>
   <!-- FIN LEFT MENU -->
-
+  <br>
+  <br>
   <ion-button (click)="cambiarImagenDeBoton()">{{btnEstados.label}}
     <img class="imgIcon" src="{{btnEstados.imagen}}">
   </ion-button>
 
+  <br>
+  <br>
   <p-accordion>
     <p-accordionTab header="PLATOS">
       <div *ngFor="let orden of listaDePlatos">

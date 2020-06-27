@@ -22,7 +22,7 @@ export class DetalladoDelPedidoComponent implements OnInit {
     confirmar() {
     this.confirmationService.confirm({
       acceptLabel: "Si",
-      message: 'Esta seguro de formalizar el pedido? inmediatamente lo recibira el mozo.',
+      message: '¿Está seguro de enviar la consulta? Lo recibira inmediatamente el mozo.',
       accept: () => {
                this.formalizarPedidoEvent.emit(this.pedido);
                //emitir evento y completar los datos del pedido en la pag principal.

@@ -4,6 +4,13 @@
     margin-left: 10px;
 }
 
+ion-content{
+    --background: rgb(224, 175, 175);
+}
+
+ion-button{
+    --background:#da7979; 
+}
 
 #hamburgerLeftMenu{
     float: left;

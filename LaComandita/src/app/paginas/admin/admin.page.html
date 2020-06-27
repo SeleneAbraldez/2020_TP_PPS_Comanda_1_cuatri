@@ -1,7 +1,6 @@
 <ion-header class="centrado">
   <ion-toolbar>
-    <ion-title>Panel de control</ion-title>
-    
+    <ion-title><img src="https://lh3.googleusercontent.com/proxy/IluCw8u1nGBqZHMbCjxwZ3LZ_BHounqBVBrT_0qyACVrsfS70prAWAa42rItZxy3oQxiU9PEpeBXDRYRyBe-7w-KuzcWIhh0ugZR8aFNjANwhRMAiyd0ywrB10YyyMM7IAUb" height="40px"> </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,8 +13,8 @@
     <ion-button *ngIf="currentUser.perfil=='admin'" expand="full" (click)="leftMenu = false"
       (click)="mostrarForm('supervisor')">Alta de Supervisor
     </ion-button>
-    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('empleado')">Alta de Empleado</ion-button>
-    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('cliente')">Alta de Cliente
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('empleado')"><i class="pi pi-user-plus"></i>Alta de Empleado</ion-button>
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('cliente')"><i class="pi pi-users"></i>Alta de Cliente
     </ion-button>
   </p-sidebar>
   <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"

@@ -72,18 +72,18 @@ export class AuthService {
           this.toast.presentToast("La contraseña debe tener al menos 6 caracteres", 2000, "warning", "Contraseña muy debil");
           break;
         case "auth/email-already-in-use":
-          this.toast.presentToast("Ese correo ya esta en uso, escoje otra", 2000, "warning", "Cuenta existente");
+          this.toast.presentToast("Ese correo ya esta en uso, ingrese otro", 2000, "warning", "Cuenta existente");
           break;
         case "auth/invalid-email":
           this.toast.presentToast("Debe ser un correo electronico, intenta de nuevo", 2000, "warning", "Formato invalido");
           break;
         case "auth/network-request-failed":
           //sin conexion a internet
-          this.toast.presentToast("No hay conexion a internet, revisa tu conexion y vuelve a intentarlo.", 2000, "primary", "Sin conexion");
+          this.toast.presentToast("No hay conexion a internet, revisa tu conexión y vuelve a intentarlo.", 2000, "primary", "Sin conexion");
           break;
         case "auth/argument-error":
           //argumentos invalidos
-          this.toast.presentToast("Hubo un error vuelve a intentarlo", 2000, "warning", "Ups.");
+          this.toast.presentToast("Hubo un error; vuelve a intentarlo", 2000, "warning", "Ups.");
           break;
       }
     }

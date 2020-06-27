@@ -32,10 +32,10 @@ export class MenuProductosComponent implements OnInit {
   }
 
   listaDeMensajes = [
-    { texto: "Selecciona las comidas que gustes.", tiempo: 2000, color: "secondary", titulo: "Primer paso" },
-    { texto: "Selecciona los postres que gustes.", tiempo: 2000, color: "secondary", titulo: "Segundo paso" },
-    { texto: "Selecciona las bebidas que gustes.", tiempo: 2000, color: "secondary", titulo: "Tercer paso" },
-    { texto: "Esta seguro de que desea formalizar la orden?.", tiempo: 2000, color: "secondary", titulo: "Ultimo paso" }
+    { texto: "Seleccione las comidas que guste.", tiempo: 2000, color: "secondary", titulo: "Primer paso" },
+    { texto: "Seleccione los postres que guste.", tiempo: 2000, color: "secondary", titulo: "Segundo paso" },
+    { texto: "Seleccione las bebidas que guste.", tiempo: 2000, color: "secondary", titulo: "Tercer paso" },
+    { texto: "¿Está seguro de que desea formalizar la orden?.", tiempo: 2000, color: "secondary", titulo: "Último paso" }
   ]
   constructor(
     private toast: ToastService,
