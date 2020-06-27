@@ -21,6 +21,8 @@ import { ConfirmationService } from 'primeng/api';
 
 import { EncuestaDeSatisfaccionComponent} from 'src/app/components/principal/encuesta-de-satisfaccion/encuesta-de-satisfaccion.component';
 import {RatingModule} from 'primeng/rating';
+
+import {AnagramaComponent} from 'src/app/components/principal/juegos/anagrama/anagrama.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import {RatingModule} from 'primeng/rating';
     MenuProductosComponent,
     DetalladoDelPedidoComponent,
     TablaProductosPorTipoComponent,
-    EncuestaDeSatisfaccionComponent
+    EncuestaDeSatisfaccionComponent,
+    AnagramaComponent
     ],
   providers: [ConfirmationService]
 })
