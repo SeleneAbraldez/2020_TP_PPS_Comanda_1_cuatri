@@ -48,5 +48,22 @@ Entregamos video de funcionamiento de login, alta usuarios, splash e icono.
 
 Haciendo ciertos puntos nos dimos cuenta que habíamos tenido inconvenientes con la lógica y que teniamos que rearmarla, por lo que hicimos varias llamadas por meet haciendo bastante borrón y cuenta nueva a casi todo el codigo. Esto nos llevó a tener que atrasar ciertos puntos que teníamos pensados para esta semana como la mayoria de la logica del cocinero.
 
+<b>🖥 Cuarta Semana: </b> <br>
+------
+- [ ] Logica de Cliente - Consultas Selene
+- [ ] Diseñar home Selene
+- [ ] Arreglar mensaje Mozo consulta Selene
+- [x] Ajustar Entrevista Selene
+- [x] Logica de Bartender - Recibir Selene
+- [x] Logica de Cocinero - Recibir Selene
+- [x] Logica de Bartender -  Enviar Jonathan
+- [x] Logica de Cocinero -  Enviar Jonathan
+- [x] Dejar preparado el toast para los cambios para als push - Selene
+- [ ] Configurar notificaciones - Jonathan
+- [ ] Juego 1 -  Jonathan
+- [ ] Juego 2 -  Selene
+- [ ] Juego 3 -  
+
+
 
 
