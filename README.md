@@ -21,6 +21,9 @@ Grupo: Jonathan Haedo, Selene Abraldez
 Entregamos video de funcionamiento de login, alta usuarios, splash e icono. 
 
 ![Captura](https://user-images.githubusercontent.com/40859246/83945070-665a6580-a7de-11ea-9ef8-0ced3e4cc09d.JPG)
+![Captura](https://user-images.githubusercontent.com/40859246/85925092-95f40f00-b86c-11ea-9925-9c39eedac0f0.png)
+![Captura](https://user-images.githubusercontent.com/40859246/85925090-9391b500-b86c-11ea-86b1-a2bf512b3d1e.png)
+
 
 <b>🖥 Segunda Semana: </b> <br>
 ------
@@ -31,6 +34,10 @@ Entregamos video de funcionamiento de login, alta usuarios, splash e icono.
 - [x] Logica de Mozo - administrar pedidos ambos por llamada probando la app al mismo tiempo, subido al git por Jonathan
 - [x] Logica de Mozo - productos Selene
 - [x] Graficos en supervisor Jonathan
+
+![Captura](https://user-images.githubusercontent.com/40859246/85925078-88d72000-b86c-11ea-9f6c-688414e5f7ee.png)
+![Captura](https://user-images.githubusercontent.com/40859246/85925057-78bf4080-b86c-11ea-8be0-5ecaa034343b.png)
+
 
 <b>🖥 Tercera Semana: </b> <br>
 ------
@@ -45,8 +52,10 @@ Entregamos video de funcionamiento de login, alta usuarios, splash e icono.
 - [ ] Logica de Cliente - Consultas Selene
 - [ ] Diseñar home Selene
 - [ ] Arreglar mensaje Mozo consulta Selene
-
 Haciendo ciertos puntos nos dimos cuenta que habíamos tenido inconvenientes con la lógica y que teniamos que rearmarla, por lo que hicimos varias llamadas por meet haciendo bastante borrón y cuenta nueva a casi todo el codigo. Esto nos llevó a tener que atrasar ciertos puntos que teníamos pensados para esta semana como la mayoria de la logica del cocinero.
+
+![Captura](https://user-images.githubusercontent.com/40859246/85925068-81b01200-b86c-11ea-889d-3694aa86cc34.png)
+
 
 <b>🖥 Cuarta Semana: </b> <br>
 ------
@@ -63,6 +72,9 @@ Haciendo ciertos puntos nos dimos cuenta que habíamos tenido inconvenientes con
 - [ ] Juego 1 -  Jonathan
 - [ ] Juego 2 -  Selene
 - [ ] Juego 3 -  
+
+![Captura](https://user-images.githubusercontent.com/40859246/85925086-8d033d80-b86c-11ea-8202-79effc9d2d4f.png)
+
 
 
 
