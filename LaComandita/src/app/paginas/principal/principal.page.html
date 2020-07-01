@@ -9,7 +9,8 @@
   <!-- CONSULTA AL MOZO -->
   <app-form-consultas *ngIf="mostrarFormConsultas" [user]="user" (preguntaCanceladaEvent)="mostrarFormConsultas=false">
   </app-form-consultas>
-  <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+  <!-- <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog> -->
+  <p-confirmDialog></p-confirmDialog>
   <!-- FIN CONSULTA AL MOZO -->
 
 
@@ -35,11 +36,11 @@
       Armar pedido <img style="max-width: 30px;" src="../../../../assets/images/carrito.png">
     </ion-button>
     <!--  fin boton repetido -->
-    <ion-button *ngIf="(user.ubicado=='enMesa') && pedidoActual" class=" btnPropio" (click)="leftMenu = false"
+    <ion-button *ngIf="(user.ubicado=='enMesa' && pedidoActual && pedidoActual.estado=='recibido' && habilitarJuegoYEncuesta)" class=" btnPropio" (click)="leftMenu = false"
       (click)="mostrarDetallesDelPedidoActual=true">
       Detalle pedido <img style="max-width: 30px;" src="../../../../assets/images/detallePedido.png">
     </ion-button>
-    <ion-button *ngIf="(pedidoActual && pedidoActual.estadoEncuesta!='enviada')"
+    <ion-button *ngIf="(pedidoActual && pedidoActual.estadoEncuesta!='enviada' && pedidoActual.estado=='recibido' && habilitarJuegoYEncuesta)"
       (click)="mostrarEncuestaDeSatisfaccion=true" (click)="leftMenu = false">Responder
       encuesta</ion-button>
   </p-sidebar>

@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
     styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements OnInit {
+    habilitarJuegoYEncuesta = false;
     mostrarEncuestaDeSatisfaccion = false;
     mostrarDialogPedirFactura = false;
     pedidoActual: any;
@@ -130,6 +131,7 @@ export class PrincipalPage implements OnInit {
                 //cambiar la ubicacion a Sala de espera
                 let imagen = this.user.imagen;
                 this.user = this.authService.currentUser;
+                alert(JSON.stringify(this.authService.currentUser));
 
 
                 this.user['ubicado'] = 'salaDeEspera';
@@ -168,21 +170,52 @@ export class PrincipalPage implements OnInit {
             this.toast.presentToast("El QR no corresponde al sistema", 2000, "danger", "QR incorrecto");
         });
     }
-
+    mostrarEstadoDelPedido() {
+        switch (this.pedidoActual.estado) {
+            case "aceptado":
+                this.habilitarJuegoYEncuesta = false;
+                this.toast.presentToast("Estado del pedido: en preparacion.", 2000, "primary", "");
+                break;
+            case "rechazado":
+                this.habilitarJuegoYEncuesta = false;
+                this.toast.presentToast("Estado del pedido: en rechazado.", 2000, "primary", "");
+                break;
+            case "listo para servir":
+                this.habilitarJuegoYEncuesta = false;
+                this.toast.presentToast("Estado del pedido: en camino.", 2000, "primary", "");
+                break;
+            case "recibido":
+                this.toast.presentToast("Podras ver el detalle en el menu principal.", 3000, "primary", "Estado del pedido: recibido");
+                this.habilitarJuegoYEncuesta = true;
+                break;
+            default:
+                this.habilitarJuegoYEncuesta = true;
+                break;
+        }
+    }
     verificarSiTieneMesa(infoQR) {
         let retorno = false;
-        if (this.authService.currentUser.mesa) {
-            if (this.authService.currentUser.mesa.codigo == infoQR.value) {
-                this.actualizarUsuario();
+        this.dataBase.obtenerById('usuarios', this.authService.currentUser.id).subscribe(res => {//actualizo 
+            this.user = res.payload.data();
+            this.authService.currentUser = this.user;
+            if (this.user.mesa) {
+                if (this.user.mesa.codigo == infoQR.value) {
+                    this.actualizarUsuario();
+                    if (this.pedidoActual) {
+                        this.mostrarEstadoDelPedido();
+                    }
+                    // this.toast.presentToast("Tome asiento y disfrute", 2000, "success", "Bienvenido");
+                }
+                else {
+                    this.toast.presentToast("Esta mesa no corresponde a la mesa que le asignaron.", 2000, "danger", "Mesa incorrecta");
+                }
             }
             else {
-                this.toast.presentToast("Esta mesa no corresponde a la mesa que le asignaron.", 2000, "danger", "Mesa incorrecta");
+                this.toast.presentToast("Espere a que el metre le asigne una mesa.", 2000, "warning", "Aun no tiene mesa");
             }
-        }
-        else {
-            this.toast.presentToast("Espere a que el metre le asigne una mesa.", 2000, "warning", "Aun no tiene mesa");
-        }
-        return retorno;
+
+            return retorno;
+        });
     }
 
     test() {

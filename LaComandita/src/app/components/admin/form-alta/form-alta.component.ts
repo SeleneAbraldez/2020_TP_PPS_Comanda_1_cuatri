@@ -7,6 +7,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { DatabaseService } from 'src/app/services/database.service';
 import { InformacionCompartidaService } from 'src/app/services/informacion-compartida.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-alta',
@@ -41,6 +42,7 @@ export class FormAltaComponent implements OnInit {
   //fin TomarFotografia
 
   constructor(
+    private router:Router,
     private barcodeScanner: BarcodeScanner,
     private dataBase: DatabaseService,
     private camera: Camera,
@@ -132,8 +134,10 @@ export class FormAltaComponent implements OnInit {
           this.showSpinner = true;
           this.subirImagenAFireStorage();
         }
+        auxUser['verificado'] = false;
         this.dataBase.crear('usuarios', auxUser);
         this.user.imagen = '';
+        this.router.navigateByUrl('/login');
       }
     }
   }

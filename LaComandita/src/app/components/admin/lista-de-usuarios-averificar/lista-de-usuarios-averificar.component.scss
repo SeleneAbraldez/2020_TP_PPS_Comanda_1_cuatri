@@ -1,0 +1,21 @@
+img{
+    border-radius: 100%;
+    max-width: 200px;
+    max-height: 200px;
+    min-width: 200px;
+    min-height: 200px;
+    margin-bottom: 20px;
+}
+ion-card{
+    max-width: 90%;
+    max-height: 90%;
+    min-width: 90%;
+}
+ion-button{
+    --border-radius: 100%;
+}
+ion-button:active{
+    .pi{
+        transform: scale(1.5);
+    }
+}

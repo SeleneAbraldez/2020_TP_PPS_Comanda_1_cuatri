@@ -25,10 +25,40 @@ export class ListaDePedidosComponent implements OnInit {
   mostrar(pedido) {
     console.log(pedido);
   }
+  seleccionarMensajeAMostrar(pedidosListosParaServir, pedidosPendientes) {
+    let mensaje = "Tiene: "
+    if (pedidosListosParaServir) {
+      mensaje += "pedidos listo para servir\n";
+    }
+    if (pedidosPendientes) {
+      mensaje += "pedidos pendientes de aceptacion.";
+    }
+    this.toast.presentToast(mensaje, 2000, "primary", "Notificacion");
+  }
   ngOnInit() {
     this.infoService.actualizarListaDeConsultasMozo();
+
     this.pedidosMozo$ = this.infoService.obtenerPedidosMozo$();
-    this.pedidosMozo$.subscribe(pedidos => this.listaDePedidos = pedidos);
+    this.pedidosMozo$.subscribe(pedidos => {
+      let pedidosPendientes = false;//vamos a verificar si hay tareas para hacer
+      let pedidosListosParaServir = false;//vamos a verificar si hay tareas para hacer
+      this.listaDePedidos = pedidos;
+      console.log(this.listaDePedidos);
+      this.listaDePedidos.forEach(pedido => {
+        switch (pedido.estado) {
+          case "listo para servir":
+            pedidosListosParaServir = true;
+            break;
+          case "enviado":
+            pedidosPendientes = true;
+            break;
+        }
+      });
+      if (pedidosPendientes || pedidosListosParaServir)//
+      {
+        this.seleccionarMensajeAMostrar(pedidosListosParaServir, pedidosPendientes);
+      }
+    });
     this.infoService.actualizarListaDePedidosMozo();
 
 

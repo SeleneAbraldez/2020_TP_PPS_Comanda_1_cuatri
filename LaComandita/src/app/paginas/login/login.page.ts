@@ -66,9 +66,16 @@ export class LoginPage implements OnInit {
         let usuario = response.payload.doc.data();
         usuario.id = response.payload.doc.id;
         if (usuario.email.toLowerCase() == this.user.email.toLowerCase() && usuario.password == this.user.password) {
-          this.authService.currentUser = usuario;
+          console.log(usuario);
           existe = true;
-          this.redirigirUsuario();
+          if (usuario.verificado) {
+            this.authService.currentUser = usuario;
+            this.redirigirUsuario();
+          }
+          else {
+            this.toast.presentToast("Espere a que el supervisor lo verifique, intente mas tarde.", 2500, "warning", "Usuario no verificado");
+          }
+
         }
       });
       if (!existe) {

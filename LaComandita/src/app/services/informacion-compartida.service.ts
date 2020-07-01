@@ -16,10 +16,12 @@ export class InformacionCompartidaService {
   private pedidosPostres$ = new Subject<any[]>();
   private pedidosBebidas$ = new Subject<any[]>();
   private usuariosAnonimos$ = new Subject<any[]>();
+  private usuariosSinVerificar$ = new Subject<any[]>();
+  private listaSalaDeEspera$ = new Subject<any[]>();
 
 
   listaDeUsuarios = [];
-  listaClienteEnEspera = [];
+  // listaClienteEnEspera = [];
   // listaDeUsuariosAnonimos = [];
   spinnerSalaDeEspera = true;
   constructor(
@@ -27,6 +29,44 @@ export class InformacionCompartidaService {
     private toast: ToastService
   ) { }
 
+    //LISTA SALA DE ESPERA
+    obtenerListaSalaDeEspera$(): Observable<any[]> {
+      return this.listaSalaDeEspera$.asObservable();
+    }
+    public actualizarListaSalaDeEspera() {
+      this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
+        let auxLista = [];
+        snapShot.forEach((response: any) => {
+          let infoUsuario = response.payload.doc.data();
+          infoUsuario['id'] = response.payload.doc.id;
+          if(infoUsuario.ubicado == 'salaDeEspera')
+          {
+            auxLista.push(infoUsuario);
+          }
+        });
+        this.listaSalaDeEspera$.next(auxLista);
+      });
+    }
+    //FIN LISTA SALA DE ESPERA
+   //USUARIOS SIN VERIFICAR 
+   obtenerUsuariosSinVerificar$(): Observable<any[]> {
+    return this.usuariosSinVerificar$.asObservable();
+  }
+  public actualizarListaUsuariosSinVerificar() {
+    this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
+      let auxLista = [];
+      snapShot.forEach((response: any) => {
+        let infoUsuario = response.payload.doc.data();
+        infoUsuario['id'] = response.payload.doc.id;
+        if(!infoUsuario.verificado)
+        {
+          auxLista.push(infoUsuario);
+        }
+      });
+      this.usuariosSinVerificar$.next(auxLista);
+    });
+  }
+  //FIN USUARIOS SIN VERIFICAR
   //PEDIDOS bebidas
   obtenerPedidosBebidas$(): Observable<any[]> {
     return this.pedidosBebidas$.asObservable();
@@ -180,7 +220,7 @@ export class InformacionCompartidaService {
     });
   }
   //FIN CONSULTAS
-  public actualizarListaDeUsuariosEnEspera() {
+ /* public actualizarListaDeUsuariosEnEspera() {
     this.listaClienteEnEspera = [];
     this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
       snapShot.forEach((response: any) => {
@@ -191,7 +231,7 @@ export class InformacionCompartidaService {
         }
       });
     })
-  }
+  }*/
   public actualizarListaDeUsuarios() {
     this.listaDeUsuarios = [];
     this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {

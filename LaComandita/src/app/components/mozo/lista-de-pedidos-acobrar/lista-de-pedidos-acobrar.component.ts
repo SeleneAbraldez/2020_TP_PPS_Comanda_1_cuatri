@@ -29,20 +29,28 @@ export class ListaDePedidosACobrarComponent implements OnInit {
     this.pedidoActual.estado = "cobrado";
     this.mostrarDialogCerrarMesa = true;
   }
-  cerrarMesa(cerrarMesa: boolean) {
+  reiniciarCliente(cliente) {
+    delete cliente.mesa;//le borramos la mesa que se le fue asignada en su pedido
+    cliente.ubicado = "";//reiniciamos el estado para que pueda volver a escanear qr de sala de espera
+    console.log(cliente);
+    this.dataBase.actualizar('usuarios', cliente.id, cliente);
+
+  }
+  cerrarMesa() {
     let mesa = this.pedidoActual.cliente.mesa;
     mesa.usos ? mesa.usos++ : mesa.usos = 1;//aumento los usos de las mesas
+    mesa.estado = 'libre';
 
-    if (cerrarMesa) {
-      mesa.estado = 'libre';
-    }
-    //this.dataBase.actualizar('mesas', mesa.id, mesa);
+    this.dataBase.actualizar('mesas', mesa.id, mesa);
     this.pedidoActual.cliente.mesa = mesa;
     this.pedidoActual.estado = "cerrado";
-    //this.dataBase.actualizar('pedidosMozo', this.pedidoActual.id, this.pedidoActual);
+    this.reiniciarCliente(this.pedidoActual.cliente);
+
+     this.dataBase.actualizar('pedidosMozo', this.pedidoActual.id, this.pedidoActual);
+
     this.aumentarContadorALosPlatosVendidos();
-    this.aumentarContadorALosPostresVendidos();
-    this.aumentarContadorALosBebidasVendidos();
+     this.aumentarContadorALosPostresVendidos();
+     this.aumentarContadorALosBebidasVendidos();
   }
 
   aumentarContadorALosPlatosVendidos() {

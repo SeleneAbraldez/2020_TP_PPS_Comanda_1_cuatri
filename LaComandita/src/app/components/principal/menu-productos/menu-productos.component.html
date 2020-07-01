@@ -33,12 +33,3 @@
 <!-- DETALLADO PRODUCTO -->
 <app-detallado-del-pedido  *ngIf="!mostrarMuestreo" [pedido]="pedido" (formalizarPedidoEvent)="reEmitirEventoFormalizarPedido(pedido)" (pedidoAlteradoEvent)="reEmitirEvento(pedido)" (volverAlPasoUnoEvent)="reiniciar()"></app-detallado-del-pedido>
 <!-- FIN DETALLADO PRODUCTO -->
-
-
-
-<!-- 
-  posibilidad de cancelar
-  not allow to finish without menu orders
-  generate a confirmation form
-  work in the push notification
- -->

@@ -11,7 +11,6 @@
       <p> Cliente: {{pedido.cliente.nombre}}</p>
       <!-- <p> Mesa: {{pedido.cliente.mesa.codigo}}</p> -->
       <p> Facturacion: {{pedido.facturacion | precio}}</p>
-    <ion-button (click)=mostrar(pedido)> mostrar</ion-button>
       <app-accordion-producto *ngIf="pedido.platos.length >=1" [pedido]="pedido.platos" [titulo]="'PLATOS'">
       </app-accordion-producto>
       <app-accordion-producto *ngIf="pedido.postres.length >=1" [pedido]="pedido.postres" [titulo]="'POSTRES'">

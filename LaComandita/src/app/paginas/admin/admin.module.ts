@@ -8,6 +8,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { FormAltaComponent } from 'src/app/components/admin/form-alta/form-alta.component';
 import {GraficosComponent } from 'src/app/components/admin/graficos/graficos.component';
 import {ChartModule} from 'primeng/chart';
+import { ListaDeUsuariosAVerificarComponent} from 'src/app/components/admin/lista-de-usuarios-averificar/lista-de-usuarios-averificar.component';
 let primeNgModules = [
   SidebarModule,
   ChartModule,
@@ -21,9 +22,11 @@ let primeNgModules = [
     AdminPageRoutingModule,
     primeNgModules,
     ReactiveFormsModule,
+    
   ],
   declarations: [AdminPage,
     FormAltaComponent,
+    ListaDeUsuariosAVerificarComponent,
     GraficosComponent,
   ]
 })

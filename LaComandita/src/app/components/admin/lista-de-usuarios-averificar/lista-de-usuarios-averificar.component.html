@@ -1,0 +1,20 @@
+<div class="centrado">
+  <h1 *ngIf="!(lista.length>=1)">Sin usuarios a verificar</h1>
+  <ion-slides pager="false" [options]="slideOpts" *ngIf="lista.length>=1">
+    <ion-slide *ngFor="let usuario of lista">
+      <ion-card>
+        <ion-card-header>
+          <img *ngIf="usuario.link" src="{{usuario.link}}">
+        </ion-card-header>
+        <ion-card-content>
+          <p>Apellido: {{usuario.apellido}}</p>
+          <p>Nombre: {{usuario.nombre}}</p>
+          <p>Email: {{usuario.email}}</p>
+          <p>Tipo de cliente: {{usuario.estado}}</p>
+          <p>Perfil: {{usuario.perfil}}</p>
+        </ion-card-content>
+        <ion-button color="success" (click)="aceptarUsuario(usuario)"><i class="pi pi-check"></i></ion-button>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+</div>
