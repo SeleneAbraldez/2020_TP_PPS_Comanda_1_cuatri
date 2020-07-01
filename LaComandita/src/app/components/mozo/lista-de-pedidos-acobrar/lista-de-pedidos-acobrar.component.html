@@ -5,6 +5,8 @@
       <p> Cliente: {{pedido.cliente.nombre}}</p>
       <p> Mesa: {{pedido.cliente.mesa.codigo}}</p>
       <p> Facturacion: {{pedido.facturacion | precio}}</p>
+      <p *ngIf="pedido.propina"> Propina: {{pedido.propina | precio}}🤑</p>
+      <p *ngIf="pedido.propina"> Facturacion total: {{pedido.facturacion+pedido.propina | precio}}</p>
 
       <app-accordion-producto *ngIf="pedido.platos.length >=1" [pedido]="pedido.platos" [titulo]="'PLATOS'">
       </app-accordion-producto>

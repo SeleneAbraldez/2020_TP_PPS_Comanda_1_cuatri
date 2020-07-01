@@ -48,9 +48,9 @@ ion-input{
 
 
 ion-content{
-    --background: url("../../../../../assets/images/juegos/background-letras.jpg.png") center center/cover no-repeat;
     height: 400px;
     border-radius: 30px;
+    min-height: 100%;
 }
 img{
     width: 2em;

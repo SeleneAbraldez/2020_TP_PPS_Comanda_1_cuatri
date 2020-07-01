@@ -1,11 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { DatabaseService } from 'src/app/services/database.service';
+import { ToastService } from 'src/app/services/toast.service';
 @Component({
   selector: 'app-anagrama',
   templateUrl: './anagrama.component.html',
   styleUrls: ['./anagrama.component.scss'],
 })
 export class AnagramaComponent implements OnInit {
+  toggleDescuento=false;
   @Input() usuarioActual;
   puntaje: number = 0;
   @Input() palabra: string;
@@ -15,14 +18,12 @@ export class AnagramaComponent implements OnInit {
   mostrar: boolean = false;
   empesarPartida: boolean = false;
   palabraIngresada: string;
-  //---puntaje
-  esTop1: boolean = false;
-  emailUsuarioActual: string;
-  //fin puntaje
+  @Input() pedidoActual;
 
   constructor(
-    private localStorageService: LocalStorageService
-    ) {
+    private dataBase: DatabaseService,
+    private toast: ToastService
+  ) {
 
   }
   ngOnInit() {
@@ -38,6 +39,9 @@ export class AnagramaComponent implements OnInit {
     "claridad", "mouse", "triangulo", "clavel", "mueble", "tulipan", "competencia", "Nicolas", "utensilio", "computadora", "notas", "vaso", "cuerda", "Nueva York", "ventana", "Dinamarca", "telefono", "vidrio", "asiento", "pantalla", "violin", "bateria", "Paris", "visita"];
 
   comenzar() {
+
+    this.vidas = 5;
+    this.puntaje = 0;
     this.empesarPartida = !this.empesarPartida;
     this.cambiarPalabra();
   }
@@ -70,14 +74,41 @@ export class AnagramaComponent implements OnInit {
     if (this.vidas == 0) {
       this.terminarPartida();
     }
-
   }
   terminarPartida() {
-    this.localStorageService.guardarPuntuacionEnLocalStorage(this.emailUsuarioActual, 'anagrama', this.puntaje);
-    this.esTop1 = this.localStorageService.verificarSiSuperoAlTop();
     this.empesarPartida = false;
-    this.vidas = 5;
-    this.puntaje = 0;
+    let descuento = 0;
+    if (this.puntaje == 1) {
+      descuento = 5;
+    } else if (this.puntaje == 2) {
+      descuento = 10;
+    }
+    else if (this.puntaje > 2) {
+      descuento = 15;
+    }
+    else {
+      this.toast.presentToast("intenta denuevo para obtener mejores descuentos, hata un 15%",2000,"warning","Juego terminado")
+    }
+    this.guardarDescuentoEnPedido(descuento);
+
+  }
+  mejoroElDescuento(descuento) {
+    if (this.pedidoActual['descuento'] && descuento <= this.pedidoActual['descuento']) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+  guardarDescuentoEnPedido(descuento) {
+    if (this.mejoroElDescuento(descuento) == true) {
+      this.pedidoActual['descuento'] = descuento;
+      this.toast.presentToast("Genial, has mejorado tu puntuacion y con ello tu descuento, ahora podras tener un " + descuento + "% de descuento en tu pedido",
+        2000, 'success', "Descuento mejorado!");
+      this.dataBase.actualizar('pedidosMozo', this.pedidoActual.id, this.pedidoActual);
+    }
+
+
   }
   // Retorna un número aleatorio entre min (incluido) y max (excluido)
   numeroRandom(min, max) {
@@ -106,7 +137,7 @@ export class AnagramaComponent implements OnInit {
     this.cambiarPalabra();
   }
   cambiarPalabra() {
-    if (this.vidas == 0) {
+    if (this.vidas <= 0) {
       this.terminarPartida();
     }
     this.mostrarPalabraSecreta = false;
@@ -127,6 +158,4 @@ export class AnagramaComponent implements OnInit {
     }
     return arrayLetras;
   }
-
-
 }

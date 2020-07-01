@@ -25,11 +25,11 @@ import { StepsModule } from 'primeng/steps';
 import { DialogModule } from 'primeng/dialog';
 import { SliderModule } from 'primeng/slider';
 import { AccordionModule } from 'primeng/accordion';
-
 import { DetallePedidoActualComponent } from 'src/app/components/principal/detalle-pedido-actual/detalle-pedido-actual.component';
 import { TablaPedidoActualPorTipoComponent } from 'src/app/components/principal/tabla-pedido-actual-por-tipo/tabla-pedido-actual-por-tipo.component';
 import {RatingModule} from 'primeng/rating';
 import { EncuestaDeSatisfaccionComponent} from 'src/app/components/principal/encuesta-de-satisfaccion/encuesta-de-satisfaccion.component';
+import {AnagramaComponent} from 'src/app/components/principal/juegos/anagrama/anagrama.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -57,6 +57,7 @@ import { EncuestaDeSatisfaccionComponent} from 'src/app/components/principal/enc
     DetallePedidoActualComponent,
     TablaPedidoActualPorTipoComponent,
     PrecioPipe,
+    AnagramaComponent,
     EncuestaDeSatisfaccionComponent,
     SingularPipe
   ],

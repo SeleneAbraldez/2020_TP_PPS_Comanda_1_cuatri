@@ -14,7 +14,10 @@ import { Observable } from 'rxjs';
     styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements OnInit {
+    toggleDescuento = false;
+    propina: number;
     habilitarJuegoYEncuesta = false;
+    quieroJugar = false;
     mostrarEncuestaDeSatisfaccion = false;
     mostrarDialogPedirFactura = false;
     pedidoActual: any;
@@ -117,6 +120,12 @@ export class PrincipalPage implements OnInit {
     }
 
     pedirFactura() {
+        if (this.toggleDescuento) {
+            this.pedidoActual.facturacion = this.pedidoActual.facturacion - ((this.pedidoActual.facturacion / 100) * this.pedidoActual.descuento);
+        }
+        if (this.propina > 0) {
+            this.pedidoActual['propina'] = (this.pedidoActual.facturacion / 100) * this.propina;
+        }
         this.mostrarEncuestaDeSatisfaccion = true;
         this.pedidoActual.estado = "pidiendo factura";
         this.dataBase.actualizar('pedidosMozo', this.pedidoActual.id, this.pedidoActual);
@@ -131,9 +140,6 @@ export class PrincipalPage implements OnInit {
                 //cambiar la ubicacion a Sala de espera
                 let imagen = this.user.imagen;
                 this.user = this.authService.currentUser;
-                alert(JSON.stringify(this.authService.currentUser));
-
-
                 this.user['ubicado'] = 'salaDeEspera';
                 this.user['imagen'] = imagen;
                 this.dataBase.actualizar('usuarios', this.user.id, this.user).then(res => {

@@ -2,7 +2,8 @@
   <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"
     (click)="actualizarUsuario()" (click)="leftMenu = true" (click)="mostrarFormProductos=false"
     (click)="mostrarMenuProductos=false" (click)="mostrarSalaDeEspera=false"
-    (click)="mostrarDetallesDelPedidoActual=false" (click)="mostrarEncuestaDeSatisfaccion=false"></ion-icon>
+    (click)="mostrarDetallesDelPedidoActual=false" (click)="mostrarEncuestaDeSatisfaccion=false"
+    (click)="quieroJugar=false"></ion-icon>
 </ion-header>
 <ion-content>
 
@@ -36,13 +37,21 @@
       Armar pedido <img style="max-width: 30px;" src="../../../../assets/images/carrito.png">
     </ion-button>
     <!--  fin boton repetido -->
-    <ion-button *ngIf="(user.ubicado=='enMesa' && pedidoActual && pedidoActual.estado=='recibido' && habilitarJuegoYEncuesta)" class=" btnPropio" (click)="leftMenu = false"
-      (click)="mostrarDetallesDelPedidoActual=true">
+    <ion-button
+      *ngIf="(user.ubicado=='enMesa' && pedidoActual && pedidoActual.estado=='recibido' && habilitarJuegoYEncuesta)"
+      class=" btnPropio" (click)="leftMenu = false" (click)="mostrarDetallesDelPedidoActual=true">
       Detalle pedido <img style="max-width: 30px;" src="../../../../assets/images/detallePedido.png">
     </ion-button>
-    <ion-button *ngIf="(pedidoActual && pedidoActual.estadoEncuesta!='enviada' && pedidoActual.estado=='recibido' && habilitarJuegoYEncuesta)"
+    <ion-button
+      *ngIf="(pedidoActual && pedidoActual.estadoEncuesta!='enviada' && pedidoActual.estado=='recibido' && habilitarJuegoYEncuesta)"
       (click)="mostrarEncuestaDeSatisfaccion=true" (click)="leftMenu = false">Responder
-      encuesta</ion-button>
+      encuesta
+    </ion-button>
+    <ion-button
+      *ngIf="(pedidoActual && pedidoActual.estadoEncuesta!='enviada' && pedidoActual.estado=='recibido' && habilitarJuegoYEncuesta)"
+      (click)="leftMenu = false" (click)="quieroJugar=true">Quiero jugar
+    </ion-button>
+
   </p-sidebar>
   <!-- FIN LEFT MENU -->
 
@@ -61,6 +70,11 @@
   </app-encuesta-de-satisfaccion>
   <!-- <ion-button *ngIf="pedidoActual.estadoEncuesta!='enviada'" (click)="mostrarEncuestaDeSatisfaccion=true">Responder encuesta</ion-button> -->
   <!-- FIN ENCUESTA DE SATISFACCION -->
+
+  <!-- JUEGOS -->
+  <app-anagrama *ngIf="(pedidoActual && pedidoActual.estado=='recibido' && habilitarJuegoYEncuesta && quieroJugar)"
+    [pedidoActual]="pedidoActual"></app-anagrama>
+  <!-- JUEGOS -->
 
 </ion-content>
 
@@ -85,6 +99,36 @@
     <img src="../../../assets/images/Logo-Comandita.png" style="max-width: 10px;">
   </div>
   <p><b>¿Quiere pedir la factura?</b></p>
+  <p>Grado de satisfaccion(propina {{propina}}%)</p>
+  <br>
+  <p-slider [(ngModel)]="propina" [min]="0" [max]="50"></p-slider>
+  <br>
+  <!-- si NO aplica el descuento -->
+  <p *ngIf="(pedidoActual && toggleDescuento && !propina)">descuento: {{pedidoActual.descuento}}% (de los juegos)</p>
+  <p *ngIf="(pedidoActual && toggleDescuento && !propina)">Total con descuento:
+    {{pedidoActual.facturacion-((pedidoActual.facturacion/100)*pedidoActual.descuento)|precio}}</p>
+  <p *ngIf="(pedidoActual && propina && !toggleDescuento)">Propina: {{(pedidoActual.facturacion/100)*propina|precio}}
+  </p>
+  <p *ngIf="(pedidoActual && propina && !toggleDescuento)">Total con propina:
+    {{pedidoActual.facturacion+((pedidoActual.facturacion/100)*propina)|precio}}</p>
+  <!-- FIN si NO aplica el descuento -->
+  <!-- SI aplica descuento -->
+  <p *ngIf="(pedidoActual && propina && toggleDescuento)">descuento: {{pedidoActual.descuento}}% (de los juegos)</p>
+  <p *ngIf="(pedidoActual && propina && toggleDescuento)">Total con descuento:
+    {{pedidoActual.facturacion-((pedidoActual.facturacion/100)*pedidoActual.descuento)|precio}}</p>
+
+  <p *ngIf="(pedidoActual && propina && toggleDescuento)">Propina:
+    {{((pedidoActual.facturacion-((pedidoActual.facturacion/100)*pedidoActual.descuento))/100)*propina|precio}}
+  </p>
+  <p *ngIf="(pedidoActual && propina && toggleDescuento)">Total con propina:
+    {{(pedidoActual.facturacion-((pedidoActual.facturacion/100)*pedidoActual.descuento))+(((pedidoActual.facturacion-((pedidoActual.facturacion/100)*pedidoActual.descuento))/100)*propina)}}
+  </p>
+  <!-- FIN SI aplica descuento -->
+
+  <ion-item *ngIf="pedidoActual && pedidoActual.descuento>0">
+    <ion-label>Activar descuento del juego</ion-label>
+    <ion-toggle color="primary" [(ngModel)]="toggleDescuento"> </ion-toggle>
+  </ion-item>
   <p-footer>
     <button type="button" pButton icon="pi pi-check" (click)="mostrarDialogPedirFactura=false" (click)="pedirFactura()"
       label="Si"></button>
