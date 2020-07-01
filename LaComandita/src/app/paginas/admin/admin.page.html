@@ -1,6 +1,5 @@
 <ion-header class="centrado">
   <ion-toolbar>
-    <ion-title><img src="https://lh3.googleusercontent.com/proxy/IluCw8u1nGBqZHMbCjxwZ3LZ_BHounqBVBrT_0qyACVrsfS70prAWAa42rItZxy3oQxiU9PEpeBXDRYRyBe-7w-KuzcWIhh0ugZR8aFNjANwhRMAiyd0ywrB10YyyMM7IAUb" height="40px"> </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,12 +15,12 @@
     <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('empleado')"><i class="pi pi-user-plus"></i>Alta de Empleado</ion-button>
     <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarForm('cliente')"><i class="pi pi-users"></i>Alta de Cliente
     </ion-button>
-    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDeClientesAVerificar()"><i class="pi pi-users"></i>Nuevos Clientes
+    <ion-button expand="full" (click)="leftMenu = false" (click)="mostrarListaDeClientesAVerificar()" (click)="mostrarUsuariosAVerificar=true"><i class="pi pi-users"></i>Nuevos Clientes
       <ion-badge *ngIf="listaUsuariosSinVerificar.length>=1" color="secondary">{{listaUsuariosSinVerificar.length}}</ion-badge>
     </ion-button>
   </p-sidebar>
   <ion-icon id="hamburgerLeftMenu" class="hamburgerMenu" name="menu-outline" pButton type="button"
-    (click)="leftMenu = true" (click)="rightMenu=false" (click)="mostrarGraficoEstadistico=false"></ion-icon>
+    (click)="leftMenu = true" (click)="rightMenu=false" (click)="mostrarGraficoEstadistico=false" (click)="mostrarFormRegistro=false"(click)="mostrarUsuariosAVerificar=false"></ion-icon>
   <!-- FIN LEFT MENU -->
 
   <!-- RIGHT MENU -->
@@ -38,11 +37,11 @@
     </ion-button>
   </p-sidebar>
   <ion-icon id="hamburgerRightMenu" class="hamburgerMenu" name="menu-outline" (click)="rightMenu=true"
-    (click)="leftMenu=false" (click)="mostrarFormRegistro=false" (click)="mostrarGraficoEstadistico=false"></ion-icon>
+    (click)="leftMenu=false" (click)="mostrarFormRegistro=false" (click)="mostrarGraficoEstadistico=false" (click)="mostrarUsuariosAVerificar=false"></ion-icon>
   <!-- FIN RIGHT MENU -->
 
   <app-graficos *ngIf="mostrarGraficoEstadistico" [tipoDeGrafico]="graficoSeleccionado"></app-graficos>
   <app-form-alta *ngIf="mostrarFormRegistro" [user]='user'></app-form-alta> 
-  <app-lista-de-usuarios-averificar [lista]="listaUsuariosSinVerificar"></app-lista-de-usuarios-averificar>
+  <app-lista-de-usuarios-averificar *ngIf="mostrarUsuariosAVerificar" [lista]="listaUsuariosSinVerificar"></app-lista-de-usuarios-averificar>
 
 </ion-content>

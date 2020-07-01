@@ -21,7 +21,7 @@ export class InformacionCompartidaService {
 
 
   listaDeUsuarios = [];
-  // listaClienteEnEspera = [];
+  listaClienteEnEspera = [];
   // listaDeUsuariosAnonimos = [];
   spinnerSalaDeEspera = true;
   constructor(

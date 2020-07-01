@@ -17,6 +17,7 @@ export class AdminPage implements OnInit {
   rightMenu = false;
   mostrarFormRegistro = false;
   mostrarGraficoEstadistico = false;
+  mostrarUsuariosAVerificar = false;
   user: any = {};
   currentUser: any = {};
   imagen: string;
@@ -55,9 +56,9 @@ export class AdminPage implements OnInit {
       verificado: true
     };
     // this.currentUser = this.authService.currentUser;
-    this.dataBase.obtenerTodos('anonimos').subscribe(res => {
-      this.infoService.listaClienteEnEspera = res;
-    });
+    // this.dataBase.obtenerTodos('anonimos').subscribe(res => {
+    //   this.infoService.listaClienteEnEspera = res;
+    // });
   }
   mostrarForm(perfil) {
     this.infoService.actualizarListaDeUsuarios();

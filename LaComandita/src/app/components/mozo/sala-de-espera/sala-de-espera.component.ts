@@ -25,7 +25,7 @@ export class SalaDeEsperaComponent implements OnInit {
     usuario.ubicado = 'adentro'
     this.dataBase.actualizar('usuarios', usuario.id, usuario);
     setTimeout(() => {
-      this.infoService.actualizarListaDeUsuariosEnEspera();
+      // this.infoService.actualizarListaDeUsuariosEnEspera();
       this.fireStore.obtenerListaDeImagenesUsuariosEnEspera();
       this.lista = this.infoService.listaClienteEnEspera;
     }, 200);
