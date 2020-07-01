@@ -29,27 +29,26 @@ export class InformacionCompartidaService {
     private toast: ToastService
   ) { }
 
-    //LISTA SALA DE ESPERA
-    obtenerListaSalaDeEspera$(): Observable<any[]> {
-      return this.listaSalaDeEspera$.asObservable();
-    }
-    public actualizarListaSalaDeEspera() {
-      this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
-        let auxLista = [];
-        snapShot.forEach((response: any) => {
-          let infoUsuario = response.payload.doc.data();
-          infoUsuario['id'] = response.payload.doc.id;
-          if(infoUsuario.ubicado == 'salaDeEspera')
-          {
-            auxLista.push(infoUsuario);
-          }
-        });
-        this.listaSalaDeEspera$.next(auxLista);
+  //LISTA SALA DE ESPERA
+  obtenerListaSalaDeEspera$(): Observable<any[]> {
+    return this.listaSalaDeEspera$.asObservable();
+  }
+  public actualizarListaSalaDeEspera() {
+    this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
+      let auxLista = [];
+      snapShot.forEach((response: any) => {
+        let infoUsuario = response.payload.doc.data();
+        infoUsuario['id'] = response.payload.doc.id;
+        if (infoUsuario.ubicado == 'salaDeEspera') {
+          auxLista.push(infoUsuario);
+        }
       });
-    }
-    //FIN LISTA SALA DE ESPERA
-   //USUARIOS SIN VERIFICAR 
-   obtenerUsuariosSinVerificar$(): Observable<any[]> {
+      this.listaSalaDeEspera$.next(auxLista);
+    });
+  }
+  //FIN LISTA SALA DE ESPERA
+  //USUARIOS SIN VERIFICAR 
+  obtenerUsuariosSinVerificar$(): Observable<any[]> {
     return this.usuariosSinVerificar$.asObservable();
   }
   public actualizarListaUsuariosSinVerificar() {
@@ -58,8 +57,7 @@ export class InformacionCompartidaService {
       snapShot.forEach((response: any) => {
         let infoUsuario = response.payload.doc.data();
         infoUsuario['id'] = response.payload.doc.id;
-        if(!infoUsuario.verificado)
-        {
+        if (!infoUsuario.verificado && infoUsuario.estado != 'anonimo') {
           auxLista.push(infoUsuario);
         }
       });
@@ -220,18 +218,18 @@ export class InformacionCompartidaService {
     });
   }
   //FIN CONSULTAS
- /* public actualizarListaDeUsuariosEnEspera() {
-    this.listaClienteEnEspera = [];
-    this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
-      snapShot.forEach((response: any) => {
-        let infoUser = response.payload.doc.data();
-        infoUser['id'] = response.payload.doc.id;
-        if (infoUser.ubicado == 'salaDeEspera') {
-          this.listaClienteEnEspera.push(infoUser);
-        }
-      });
-    })
-  }*/
+  /* public actualizarListaDeUsuariosEnEspera() {
+     this.listaClienteEnEspera = [];
+     this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
+       snapShot.forEach((response: any) => {
+         let infoUser = response.payload.doc.data();
+         infoUser['id'] = response.payload.doc.id;
+         if (infoUser.ubicado == 'salaDeEspera') {
+           this.listaClienteEnEspera.push(infoUser);
+         }
+       });
+     })
+   }*/
   public actualizarListaDeUsuarios() {
     this.listaDeUsuarios = [];
     this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
@@ -242,18 +240,18 @@ export class InformacionCompartidaService {
       });
     })
   }
- /* public actualizarListaDeUsuariosAnonimos() {
-    this.listaDeUsuariosAnonimos = [];
-    this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
-      snapShot.forEach((response: any) => {
-        let infoUser = response.payload.doc.data();
-        if (infoUser.estado == "anonimo") {
-          infoUser['id'] = response.payload.doc.id;
-          this.listaDeUsuariosAnonimos.push(infoUser);
-        }
-      });
-    })
-  }*/
+  /* public actualizarListaDeUsuariosAnonimos() {
+     this.listaDeUsuariosAnonimos = [];
+     this.dataBase.obtenerTodos('usuarios').subscribe((snapShot) => {
+       snapShot.forEach((response: any) => {
+         let infoUser = response.payload.doc.data();
+         if (infoUser.estado == "anonimo") {
+           infoUser['id'] = response.payload.doc.id;
+           this.listaDeUsuariosAnonimos.push(infoUser);
+         }
+       });
+     })
+   }*/
 
   //PEDIDOS USUARIOS ANONIMOS
   obtenerUsuariosAnonimos$(): Observable<any[]> {
@@ -271,7 +269,7 @@ export class InformacionCompartidaService {
       });
       this.usuariosAnonimos$.next(auxLista);
     });
-    
+
   }
   //FIN USUARIOS ANONIMOS
 

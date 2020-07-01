@@ -93,19 +93,12 @@ export class FormAltaComponent implements OnInit {
       this.imagen = 'data:image/jpeg;base64,' + imageData;
       this.user.imagen = this.imagen;
       this.componerNombreDeImagen(this.user.email, new Date().getTime());//le paso el usuario + fecha en milisegundos + tipo de foto
-
       this.mostrarImgen = true;
     }, (err) => {
       this.toast.presentToast(err, 2000, 'danger', 'ERROR');
     });
   }
-  subirImagenAFireStorage() {
-    this.pathDeImagen.putString(this.imagen, 'data_url').then((response) => {
-      this.showSpinner = false;
-      this.toast.presentToast("El usuario fue creado con exito", 2000, 'success', 'Usuario creado');
-    });
-
-  }
+ 
   verificarExistenciaDeUsuario() {
     let retorno = false;
     this.infoService.listaDeUsuarios.forEach(usuario => {
@@ -121,6 +114,13 @@ export class FormAltaComponent implements OnInit {
     return retorno;
 
   }
+  // subirImagenAFireStorage() {
+  //   this.pathDeImagen.putString(this.imagen, 'data_url').then((response) => {
+  //     this.showSpinner = false;
+  //     this.toast.presentToast("El usuario fue creado con exito", 2000, 'success', 'Usuario creado');
+  //   });
+
+  // }
   async darDeAlta() {
     this.mostrarImgen = false;
     this.infoService.actualizarListaDeUsuarios();
@@ -132,13 +132,36 @@ export class FormAltaComponent implements OnInit {
         if (this.imagen) {
           auxUser.imagen = this.nombreDeImagen;
           this.showSpinner = true;
-          this.subirImagenAFireStorage();
+          this.subirImagenAFireStorage(auxUser);//ultima modificacion
         }
-        auxUser['verificado'] = false;
-        this.dataBase.crear('usuarios', auxUser);
-        this.user.imagen = '';
-        this.router.navigateByUrl('/login');
+        // auxUser['verificado'] = false;
+        // this.dataBase.crear('usuarios', auxUser);
+        // this.user.imagen = '';
       }
     }
+  }
+
+  subirImagenAFireStorage(auxUser) {
+    let uploadTask = this.pathDeImagen.putString(this.imagen, 'data_url');
+    uploadTask.on('state_changed', function (snapshot) {
+    }, function (error) {
+    }, function () {
+      uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+        auxUser['link'] = downloadURL;
+      });
+    });
+
+    setTimeout(() => {
+      this.showSpinner = true;
+      this.dataBase.crear('usuarios', auxUser).then(res => {
+        this.showSpinner = false;
+        auxUser['id'] = res.id;
+        this.authService.currentUser = auxUser;
+        this.toast.presentToast("El usuario fue creado con exito", 2000, 'success', 'Usuario creado');
+        this.user.imagen = '';
+        this.router.navigateByUrl('/login');
+
+      });
+    }, 7000);
   }
 }
