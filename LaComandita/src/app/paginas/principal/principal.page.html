@@ -22,18 +22,18 @@
       Escanear
       <img style="max-width: 30px;" src="../../../../assets/images/qr.png" alt="imagen logo QR">
     </ion-button>
-    <ion-button *ngIf="user.ubicado=='enMesa'" (click)="mostrarFormConsultas=true" (click)="mostrarMenuProductos=false"
-      class="btnPropio" (click)="leftMenu = false">
+    <ion-button *ngIf="user.ubicado=='enMesa' && escaneoMesa" (click)="mostrarFormConsultas=true"
+      (click)="mostrarMenuProductos=false" class="btnPropio" (click)="leftMenu = false">
       Consultar
       <img style="max-width: 30px;" src="../../../../assets/images/request.png">
     </ion-button>
     <!-- boton repetido -->
-    <ion-button *ngIf="(user.ubicado=='enMesa' && !pedidoActual)" class=" btnPropio" (click)="leftMenu = false"
-      (click)="mostrarMenuProductos=true" (click)="mostrarFormConsultas=false">
+    <ion-button *ngIf="(user.ubicado=='enMesa' && !pedidoActual && escaneoMesa) " class=" btnPropio"
+      (click)="leftMenu = false" (click)="mostrarMenuProductos=true" (click)="mostrarFormConsultas=false">
       Armar pedido <img style="max-width: 30px;" src="../../../../assets/images/carrito.png">
     </ion-button>
-    <ion-button *ngIf="(pedidoActual && pedidoActual.estado=='cerrado')" class=" btnPropio" (click)="leftMenu = false"
-      (click)="mostrarMenuProductos=true" (click)="mostrarFormConsultas=false">
+    <ion-button *ngIf="(pedidoActual && pedidoActual.estado=='cerrado' && escaneoMesa) " class=" btnPropio"
+      (click)="leftMenu = false" (click)="mostrarMenuProductos=true" (click)="mostrarFormConsultas=false">
       Armar pedido <img style="max-width: 30px;" src="../../../../assets/images/carrito.png">
     </ion-button>
     <!--  fin boton repetido -->

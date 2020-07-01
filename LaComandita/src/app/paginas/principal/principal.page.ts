@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
     styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements OnInit {
+    escaneoMesa=false;
     toggleDescuento = false;
     propina: number;
     habilitarJuegoYEncuesta = false;
@@ -206,6 +207,7 @@ export class PrincipalPage implements OnInit {
             this.authService.currentUser = this.user;
             if (this.user.mesa) {
                 if (this.user.mesa.codigo == infoQR.value) {
+                    this.escaneoMesa=true;
                     this.actualizarUsuario();
                     if (this.pedidoActual) {
                         this.mostrarEstadoDelPedido();

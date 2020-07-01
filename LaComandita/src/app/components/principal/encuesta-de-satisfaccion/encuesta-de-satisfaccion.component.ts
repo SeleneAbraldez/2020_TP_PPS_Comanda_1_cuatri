@@ -75,7 +75,7 @@ export class EncuestaDeSatisfaccionComponent implements OnInit {
         "orden": this.pedidoActual.codigoPedido,
         "totalDePuntos": totalDePuntos
       };
-      alert(JSON.stringify(informacion));
+      // alert(JSON.stringify(informacion));
       if (informacion.totalDePuntos != 0) {
         this.dataBase.crear('encuestas', informacion).then(res => {
           this.pedidoActual.estadoEncuesta = "enviada";
