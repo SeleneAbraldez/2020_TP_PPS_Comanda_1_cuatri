@@ -95,16 +95,18 @@
 <p-dialog header="Pedir Factura" [(visible)]="mostrarDialogPedirFactura" [modal]="true" [style]="{width: '90%'}"
   [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
   <div class="centrado">
-    <p>Gracias por venir a "La Comandita" esperamos que halla tenido una linda experiencia.</p>
-    <img src="../../../assets/images/Logo-Comandita.png" style="max-width: 10px;">
+    <p>¡Gracias por venir a "La Comandita"! Esperamos que haya tenido una linda experiencia.</p>
+    <div style="background-color: black; border-radius: 100%;">
+      <img src="../../../assets/images/Logo-Comandita.png" style="max-width: 10px;">
+    </div>
   </div>
   <p><b>¿Quiere pedir la factura?</b></p>
-  <p>Grado de satisfaccion(propina {{propina}}%)</p>
+  <p>Grado de satisfacción (propina {{propina}}%)</p>
   <br>
   <p-slider [(ngModel)]="propina" [min]="0" [max]="50"></p-slider>
   <br>
   <!-- si NO aplica el descuento -->
-  <p *ngIf="(pedidoActual && toggleDescuento && !propina)">descuento: {{pedidoActual.descuento}}% (de los juegos)</p>
+  <p *ngIf="(pedidoActual && toggleDescuento && !propina)">-Descuento: {{pedidoActual.descuento}}% (de los juegos)</p>
   <p *ngIf="(pedidoActual && toggleDescuento && !propina)">Total con descuento:
     {{pedidoActual.facturacion-((pedidoActual.facturacion/100)*pedidoActual.descuento)|precio}}</p>
   <p *ngIf="(pedidoActual && propina && !toggleDescuento)">Propina: {{(pedidoActual.facturacion/100)*propina|precio}}

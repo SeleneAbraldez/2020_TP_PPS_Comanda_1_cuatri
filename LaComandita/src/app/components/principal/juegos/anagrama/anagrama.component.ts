@@ -12,7 +12,7 @@ export class AnagramaComponent implements OnInit {
   @Input() usuarioActual;
   puntaje: number = 0;
   @Input() palabra: string;
-  @Input() vidas: number = 5;
+  @Input() vidas: number = 3;
   arrayPalabra: string[];
   mostrarPalabraSecreta: boolean = false;
   mostrar: boolean = false;
@@ -40,7 +40,7 @@ export class AnagramaComponent implements OnInit {
 
   comenzar() {
 
-    this.vidas = 5;
+    this.vidas = 3;
     this.puntaje = 0;
     this.empesarPartida = !this.empesarPartida;
     this.cambiarPalabra();
@@ -78,16 +78,19 @@ export class AnagramaComponent implements OnInit {
   terminarPartida() {
     this.empesarPartida = false;
     let descuento = 0;
-    if (this.puntaje == 1) {
-      descuento = 5;
-    } else if (this.puntaje == 2) {
+    // if (this.puntaje == 1) {
+    //   descuento = 5;
+    // } else if (this.puntaje == 2) {
+      // descuento = 10;
+    // }
+    // else if (this.puntaje > 2) {
+    //   descuento = 15;
+    // }
+    if(this.puntaje == 0){
+    // else {
+      this.toast.presentToast("Intenta nuevamente para obtener un descuento de 10%",2000,"warning","Juego terminado");
+    }else{
       descuento = 10;
-    }
-    else if (this.puntaje > 2) {
-      descuento = 15;
-    }
-    else {
-      this.toast.presentToast("intenta denuevo para obtener mejores descuentos, hata un 15%",2000,"warning","Juego terminado")
     }
     this.guardarDescuentoEnPedido(descuento);
 

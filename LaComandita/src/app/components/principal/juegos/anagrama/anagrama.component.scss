@@ -20,6 +20,11 @@
 ion-button{
     --border-radius:10px;
 }
+
+ion-content{
+  --background: #fff url('https://previews.123rf.com/images/sandrahutter/sandrahutter1909/sandrahutter190900464/130446366-seamless-vector-background-colorful-balloons-on-a-white-background-pattern-for-celebration-holiday-b.jpg');
+}
+
 @keyframes trancicion-colores-border{
   from{
     border:solid rgba(255, 0, 0, 0.288) 3px;
