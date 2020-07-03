@@ -59,19 +59,17 @@ Haciendo ciertos puntos nos dimos cuenta que habíamos tenido inconvenientes con
 
 <b>🖥 Cuarta Semana: </b> <br>
 ------
-- [ ] Logica de Cliente - Consultas Selene
-- [ ] Diseñar home Selene
-- [ ] Arreglar mensaje Mozo consulta Selene
+- [x] Logica de Cliente - Consultas Selene
+- [x] Diseñar home Selene
+- [x] Arreglar mensaje Mozo consulta Selene
 - [x] Ajustar Entrevista Selene
 - [x] Logica de Bartender - Recibir Selene
 - [x] Logica de Cocinero - Recibir Selene
 - [x] Logica de Bartender -  Enviar Jonathan
 - [x] Logica de Cocinero -  Enviar Jonathan
 - [x] Dejar preparado el toast para los cambios para als push - Selene
-- [ ] Configurar notificaciones - Jonathan
-- [ ] Juego 1 -  Jonathan
-- [ ] Juego 2 -  Selene
-- [ ] Juego 3 -  
+- [x] Configurar notificaciones - Jonathan
+- [x] Juego Anagrama - Jonathan
 
 ![Captura](https://user-images.githubusercontent.com/40859246/85925086-8d033d80-b86c-11ea-8202-79effc9d2d4f.png)
 

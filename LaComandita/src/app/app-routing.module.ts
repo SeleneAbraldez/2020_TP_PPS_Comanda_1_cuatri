@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { AnagramaComponent } from './components/principal/juegos/anagrama/anagrama.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,10 @@ const routes: Routes = [
   {
     path: 'cocinero',
     loadChildren: () => import('./paginas/cocinero/cocinero.module').then(m => m.CocineroPageModule)
+  },
+
+  {
+    path: 'anagrama', component: AnagramaComponent,
   },
 
 

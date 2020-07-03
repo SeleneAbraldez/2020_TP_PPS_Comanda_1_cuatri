@@ -1,28 +1,34 @@
-<ion-header>
-
+<!-- <ion-header>
     <div class="topnav">
         <img [routerLink]="['/login']" id="btnIngreso" src="../../../assets/images/ingresar.png" alt="Ingresar">
-        <ion-button [routerLink]="['/alta-cliente']">Registrarse</ion-button>
-        <!-- <ion-button  [routerLink]="['/admin']" >Admin area</ion-button> -->
-        <ion-button [routerLink]="['/login']">Ingresar</ion-button>
+        <ion-button [routerLink]="['/alta-cliente']">Registrarse</ion-button> -->
+<!-- <ion-button  [routerLink]="['/admin']" >Admin area</ion-button> -->
+<!-- <ion-button [routerLink]="['/login']">Ingresar</ion-button>
         <ion-button [routerLink]="['/principal']">principal</ion-button>
         <ion-button [routerLink]="['/testeo']">TESTEO</ion-button>
     </div>
-</ion-header>
+</ion-header> -->
 
-<ion-content [fullscreen]="true">
-    <div class="pantalla">
-        <ion-card>
-            <ion-card-header>
-              <ion-card-title>¡Bienvenido!</ion-card-title>
-            </ion-card-header>
+<ion-content>
+    <br>
+    <br>
+    <div class="pantalla" style="text-align: center; max-width: 100%;position:absolute;bottom:0; width:100%;">
+        <ion-card style="--background: rgb(145, 125, 100); --color: black;">
+            <br>
+            <div style="background-color: black; border-radius: 100%;">
+                <img src="../../../../assets/images/Logo-Comandita.png" alt="Logo laComandita" style="  max-height: 50%;
+            max-width: 50%;">
+            </div>
             <ion-card-content>
-              <img src="../../../../assets/images/Logo-Comandita.png" alt="Logo laComandita">
-              Le damos la bienvenida a la Comandita, el mejor lugar para comer de la ciudad. 
-              Puede elegir entre registrarse utilizando un perfil anónimo,  o volverse parte de nuestra clientela habitual.
+                Le damos la bienvenida a la Comandita, el mejor lugar para comer de la ciudad.
+                Puede elegir entre registrarse utilizando un perfil anónimo, o volverse parte de nuestra clientela
+                habitual para deleitarse con nuestro asombrosos platos.
             </ion-card-content>
-          </ion-card>
-        <div class="calesita">
+        </ion-card>
+        <br>
+        <ion-button expand="full" color="dark" [routerLink]="['/alta-cliente']">Registrarse</ion-button>
+        <ion-button expand="full" color="dark" [routerLink]="['/login']">Ingresar</ion-button>
+        <div class="calesita" style="height: fit-content; position:absolute; bottom:0; width:100%;">
             <ion-slides pager="true" [options]="slideOpts">
                 <ion-slide>
                     <img src="../../../assets/images/comidas/milanesa de ternera.png"><br>
