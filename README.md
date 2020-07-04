@@ -75,7 +75,7 @@ Haciendo ciertos puntos nos dimos cuenta que habíamos tenido inconvenientes con
 - [x] Graficos funcionales - Jonathan
 
 ![Captura](https://user-images.githubusercontent.com/40859246/85925086-8d033d80-b86c-11ea-8202-79effc9d2d4f.png)
-
+![Captura](https://user-images.githubusercontent.com/40859246/86511567-dd305180-bdd0-11ea-8834-cf0f209a2b34.png)
 
 
 
