@@ -20,7 +20,7 @@ export class AppComponent {
   }
 
   initializeApp() {
-    // this.splash=true;
+    this.splash=true;
     setTimeout(() => {
      this.splash=false;
    }, 5000);
