@@ -69,7 +69,10 @@ Haciendo ciertos puntos nos dimos cuenta que habíamos tenido inconvenientes con
 - [x] Logica de Cocinero -  Enviar Jonathan
 - [x] Dejar preparado el toast para los cambios para als push - Selene
 - [x] Configurar notificaciones - Jonathan
-- [x] Juego Anagrama - Jonathan
+- [x] Juego Anagrama Logica - Jonathan
+- [x] Juego Anagrama Armado - Selene
+- [x] Retoques alerts, tildes, gramatica - Selene
+- [x] Graficos funcionales - Jonathan
 
 ![Captura](https://user-images.githubusercontent.com/40859246/85925086-8d033d80-b86c-11ea-8202-79effc9d2d4f.png)
 
