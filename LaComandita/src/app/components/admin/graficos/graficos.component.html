@@ -1,1 +1,31 @@
-<p-chart type="{{tipoDeGrafico}}" [data]="data"></p-chart>
+<ion-item>
+    <ion-label>Filtro</ion-label>
+    <ion-select placeholder="Selecciona uno" #C value="listaPlatos" (ionChange)="actualizarLista(C.value)">
+        <ion-select-option value="listaPlatos">Platos</ion-select-option>
+        <ion-select-option value="listaPostres">Postres</ion-select-option>
+        <ion-select-option value="listaBebidas">Bebidas</ion-select-option>
+        <ion-select-option value="listaTodos">Todos</ion-select-option>
+    </ion-select>
+</ion-item>
+<p-chart type="{{tipoDeGrafico}}" [data]="data" (onDataSelect)="selectData($event)"></p-chart>
+
+<ion-card id="cardProductoSeleccionado" *ngIf="productoSeleccionado">
+    <ion-card-header class="centrado">
+            <i class="pi pi-times-circle" (click)="productoSeleccionado=''"></i>
+        <ion-card-title>{{productoSeleccionado.tipo| singular| uppercase}}</ion-card-title>
+        <ion-slides pager="false" [options]="slideOpts">
+            <ion-slide *ngFor="let imagen of productoSeleccionado.imagenes">
+                <img src="{{imagen.link}}">
+            </ion-slide>
+        </ion-slides>
+    </ion-card-header>
+
+    <ion-card-content>
+        <p><b>Cantidad Vendida: </b> {{productoSeleccionado.cantidadVendida}}</p>
+        <p><b>Codigo de producto: </b> {{productoSeleccionado.codigoDeProducto}}</p>
+        <p><b>Descripcion: </b> {{productoSeleccionado.descripcion}}</p>
+        <p><b>Nombre: </b> {{productoSeleccionado.nombre}}</p>
+        <p><b>Tiempo de elaboracion: </b> {{productoSeleccionado.tiempo}}</p>
+        <p><b>precio: </b> {{productoSeleccionado.precio| precio}}</p>
+    </ion-card-content>
+</ion-card>

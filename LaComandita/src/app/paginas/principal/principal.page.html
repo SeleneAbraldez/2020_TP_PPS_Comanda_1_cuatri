@@ -18,6 +18,7 @@
   <!-- LEFT MENU -->
   <p-sidebar [(visible)]="leftMenu" [modal]=false [baseZIndex]="10000">
     <h1 style="font-weight:normal">Acciones usuario</h1>
+    <h4 *ngIf="user && user.mesa">Mesa asignada: {{user.mesa.codigo}}</h4>
     <ion-button class="btnPropio" (click)="scanCode()" (click)="leftMenu = false">
       Escanear
       <img style="max-width: 30px;" src="../../../../assets/images/qr.png" alt="imagen logo QR">
@@ -42,11 +43,11 @@
       class=" btnPropio" (click)="leftMenu = false" (click)="mostrarDetallesDelPedidoActual=true">
       Detalle pedido <img style="max-width: 30px;" src="../../../../assets/images/detallePedido.png">
     </ion-button>
-    <ion-button
+   <!-- <ion-button
       *ngIf="(pedidoActual && pedidoActual.estadoEncuesta!='enviada' && pedidoActual.estado=='recibido' && habilitarJuegoYEncuesta)"
       (click)="mostrarEncuestaDeSatisfaccion=true" (click)="leftMenu = false">Responder
       encuesta
-    </ion-button>
+    </ion-button> -->
     <ion-button
       *ngIf="(pedidoActual && pedidoActual.estadoEncuesta!='enviada' && pedidoActual.estado=='recibido' && habilitarJuegoYEncuesta)"
       (click)="leftMenu = false" (click)="quieroJugar=true">Quiero jugar

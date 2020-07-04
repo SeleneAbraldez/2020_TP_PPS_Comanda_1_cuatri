@@ -1,4 +1,7 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DatabaseService } from 'src/app/services/database.service';
+import { InformacionCompartidaService } from 'src/app/services/informacion-compartida.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-graficos',
@@ -6,10 +9,32 @@ import { Component, OnInit,Input } from '@angular/core';
   styleUrls: ['./graficos.component.scss'],
 })
 export class GraficosComponent implements OnInit {
-
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400
+  };
+  @Input() filtro = "listaPlatos";
+  productoSeleccionado: any;
   data: any;
+  lista: any;
+  platos$: Observable<any[]>;
+  bebidas$: Observable<any[]>;
+  postres$: Observable<any[]>;
+  listaPlatos = [];
+  listaPostres = [];
+  listaBebidas = [];
+  listaTodos = [];
+  listaDeColores = ['lightblue', 'lightcoral', 'lightseagreen', 'magenta', 'midnightblue', 'orange', 'plum', 'royalblue', 'turquoise', 'yellowgreen',
+    'red', 'rebeccapurple', 'saddlebrown', 'seashell', 'teal', 'blue'];
+
   @Input() tipoDeGrafico: any = 'bar';
-  constructor() {
+  constructor(
+    private infoService: InformacionCompartidaService
+  ) {
+
+  }
+
+  ngOnInit() {
     switch (this.tipoDeGrafico) {
       case 'bar':
         this.graficoBarras();
@@ -21,75 +46,143 @@ export class GraficosComponent implements OnInit {
         this.graficoPolarArea();
         break;
     }
-  }
+    this.platos$ = this.infoService.obtenerPlatos$();
+    this.platos$.subscribe(platos => {
+      this.listaPlatos = platos;
+      this.actualizarListaTodos();
+    });
+    this.infoService.actualizarListaDePlatos();
 
-  ngOnInit() { }
-  graficoPolarArea() {
-    this.data = {
-      datasets: [{
-        data: [
-          11,
-          16,
-          7,
-          3,
-          14
-        ],
-        backgroundColor: [
-          "#FF6384",
-          "#4BC0C0",
-          "#FFCE56",
-          "#E7E9ED",
-          "#36A2EB"
-        ],
-        label: 'My dataset'
-      }],
-      labels: [
-        "Red",
-        "Green",
-        "Yellow",
-        "Grey",
-        "Blue"
-      ]
-    }
+    this.bebidas$ = this.infoService.obtenerBebidas$();
+    this.bebidas$.subscribe(bebidas => {
+      this.listaBebidas = bebidas;
+      this.actualizarListaTodos();
+    });
+    this.infoService.actualizarListaDeBebidas();
+
+    this.postres$ = this.infoService.obtenerPostres$();
+    this.postres$.subscribe(postres => {
+      this.listaPostres = postres;
+      this.actualizarListaTodos();
+    });
+    this.infoService.actualizarListaDePostres();
+
+    setTimeout(() => {
+      console.log(this.lista);
+
+    }, 1500);
+  }
+  actualizarListaTodos() {
+    this.listaTodos = [];
+    this.listaPlatos.forEach(plato => {
+      this.listaTodos.push(plato);
+    });
+    this.listaPostres.forEach(postre => {
+      this.listaTodos.push(postre);
+    });
+    this.listaBebidas.forEach(bebida => {
+      this.listaTodos.push(bebida);
+    });
   }
   graficoTorta() {
-    this.data = {
-      labels: ['A', 'B', 'C'],
-      datasets: [
-        {
-          data: [300, 50, 100],
-          backgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56"
-          ],
-          hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56"
-          ]
-        }]
-    };
+    setTimeout(() => {
+      this.lista = this[this.filtro];
+      let labels = this.lista.map((element) => {
+        return element.nombre;
+      });
+      let data = this.lista.map((element) => {
+        return element.cantidadVendida;
+      });
+      this.data = {
+        labels: labels,
+        datasets: [
+          {
+            data: data,
+            backgroundColor: this.listaDeColores,
+            hoverBackgroundColor: this.listaDeColores
+          }]
+      };
+    }, 750);
   }
+  graficoPolarArea() {
+    setTimeout(() => {
+
+      this.lista = this[this.filtro];
+      let labels = this.lista.map((element) => {
+        return element.nombre;
+      });
+      let data = this.lista.map((element) => {
+        return element.cantidadVendida;
+      });
+      this.data = {
+        datasets: [{
+          data: data,
+          backgroundColor: this.listaDeColores,
+          label: 'My dataset'
+        }],
+        labels: labels
+      }
+    }, 750);
+  }
+
   graficoBarras() {
-    this.data = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label: 'My First dataset',
-          backgroundColor: '#42A5F5',
-          borderColor: '#1E88E5',
-          data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-          label: 'My Second dataset',
-          backgroundColor: '#9CCC65',
-          borderColor: '#7CB342',
-          data: [28, 48, 40, 19, 86, 27, 90]
+    setTimeout(() => {
+
+      this.lista = this[this.filtro];
+      let datasets = this.lista.map((element) => {
+        let color = this.listaDeColores[Math.floor(Math.random() * (this.listaDeColores.length - 0)) + 0];
+        let auxiliar = {
+          label: element.nombre,
+          backgroundColor: color,
+          borderColor: color,
+          data: [element.cantidadVendida]
         }
-      ]
+        return auxiliar;
+      });
+      this.data = {
+        labels: ['Cantidad vendida'],
+        datasets: datasets
+      }
+    }, 750);
+  }
+
+  actualizarLista(filtro) {
+    this.filtro = filtro;
+    switch (this.tipoDeGrafico) {
+      case 'bar':
+        this.graficoBarras();
+        break;
+      case 'pie':
+        this.graficoTorta();
+        break;
+      case 'polarArea':
+        this.graficoPolarArea();
+        break;
+      case 'todos':
+        this.graficoPolarArea();
+        break;
     }
   }
+  buscarProductoPorNombre(nombre) {
+    this.listaTodos.forEach(producto => {
+      if (producto.nombre == nombre) {
+        this.productoSeleccionado = producto;
+      }
+    })
+  }
+  selectData(e: any) {
+    let nombreProductoSeleccionado;
+    switch (this.tipoDeGrafico) {
+      case 'bar':
+        console.log(e.element._view.datasetLabel);
+        nombreProductoSeleccionado = e.element._view.datasetLabel;
+        break;
+      case 'pie':
+      case 'polarArea':
+        nombreProductoSeleccionado = e.element._view.label;
+        break;
+    }
+    this.buscarProductoPorNombre(nombreProductoSeleccionado);
 
-
+  }
 }

@@ -8,6 +8,8 @@ import { SidebarModule } from 'primeng/sidebar';
 import { FormAltaComponent } from 'src/app/components/admin/form-alta/form-alta.component';
 import {GraficosComponent } from 'src/app/components/admin/graficos/graficos.component';
 import {ChartModule} from 'primeng/chart';
+import {PrecioPipe} from 'src/app/pipes/precio.pipe';
+import {SingularPipe} from 'src/app/pipes/singular.pipe';
 import { ListaDeUsuariosAVerificarComponent} from 'src/app/components/admin/lista-de-usuarios-averificar/lista-de-usuarios-averificar.component';
 let primeNgModules = [
   SidebarModule,
@@ -28,6 +30,8 @@ let primeNgModules = [
     FormAltaComponent,
     ListaDeUsuariosAVerificarComponent,
     GraficosComponent,
+    PrecioPipe,
+    SingularPipe
   ]
 })
 export class AdminPageModule { }
